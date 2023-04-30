@@ -1,0 +1,21 @@
+---
+title: Sleep Function
+language: TypeScript
+description: Pause execution for a given number of seconds
+tags:
+  - typescript
+  - promise
+backgroundType: '3'
+createdAt: 2023-01-09 13:22:23-08:00
+updatedAt: 2023-01-12 04:33:36-08:00
+---
+
+### <i className='twa twa-information'></i> Work for both Node.js and browser environments
+
+```typescript:wait.ts
+export const sleep = (seconds: number) => {
+  return new Promise(resolve => {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+```

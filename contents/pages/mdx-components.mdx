@@ -1,0 +1,200 @@
+---
+title: MDX Components
+description: MDX components used for the pages and posts in this site.
+createdAt: 2023-01-09 13:20:44-08:00
+updatedAt: 2023-01-09 13:20:44-08:00
+wip: true
+---
+
+## Headings
+
+To create a heading, add number signs in front of a word or phrase.
+
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+#### Heading 4
+
+##### Heading 5
+
+###### Heading 6
+
+The number of number signs you use should correspond to the heading level.
+
+## Paragraphs
+
+This is a paragraph.
+
+This is another paragraph.
+
+## Emphasis
+
+You can add emphasis by making text bold or italic.
+
+### Bold
+
+**This text will be bold**
+
+### Italic
+
+_This text will be italic_
+
+### Strikethrough
+
+~~This text will be strikethrough~~
+
+### Bold and Nested Italic
+
+**All this text will be bold and _this text will be italic_**
+
+### All Bold and Italic
+
+**_All this text will be bold and italic_**
+
+## Blockquotes
+
+> The is a blockquote
+>
+> Human beings face ever more complex and urgent problems, and their effectiveness in dealing with these problems is a matter that is critical to the stability and continued progress of society.
+>
+> This is another blockquote
+>
+> > This is a _nested blockquote_
+> >
+> > This is a _nested blockquote_
+> >
+> > > This is a **nested nested blockquote**
+> > >
+> > > This is a **nested nested blockquote**
+> > >
+> > > This is a **nested nested blockquote**
+> >
+> > This is a _nested blockquote_
+
+This is a paragraph.
+
+## Lists
+
+### Unordered
+
+- Item 1
+- item 2
+  - Item 2a
+  - Item 2b
+    - Item 2b1
+    - Item 2b2
+
+### Ordered
+
+1. Item 1
+2. Item 2
+   1. Item 2a
+   2. Item 2b
+      1. Item 2b1
+      2. Item 2b2
+
+## Images
+
+### Remote Image
+
+![Space](https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2344&q=80)
+
+![Engelbart](https://history-computer.com/ModernComputer/Basis/images/Engelbart.jpg)
+
+### Local Image
+
+![Space|600](1.webp)
+
+## Link
+
+This site was built using [Next.js](https://nextjs.org/),
+[MUI](https://mui.com/), and [MDX](https://mdxjs.com/).
+
+## Callout
+
+:::note
+This is a Note Callout.
+
+Some **content** with _Markdown_ `syntax`.
+:::
+
+:::info
+This is a Info Callout.
+
+Some **content** with _Markdown_ `syntax`.
+:::
+
+:::tip
+This is a Tip Callout.
+
+Some **content** with _Markdown_ `syntax`.
+:::
+
+:::important
+This is a Hint Callout.
+
+Some **content** with _Markdown_ `syntax`.
+:::
+
+:::warning
+This is a Warning Callout.
+
+Some **content** with _Markdown_ `syntax`.
+:::
+
+:::attention
+This is a Attention Callout.
+
+Some **content** with _Markdown_ `syntax`.
+:::
+
+## Inline Code
+
+Use `git status` to list all new or modified files that haven't yet been committed.
+
+## Code Blocks
+
+```js:index.js {6-8}
+console.log("hello world")
+
+/**
+ * Some comments
+ */
+function sayHi(name) {
+    var message = `hi ${name}`
+    return message;
+}
+```
+
+```diff-js:index.js showLineNumbers=99
+  const whoAmI = () => {
+- console.log('I am a code block');
+
++ console.log('I am another code block');
+};
+```
+
+```typescript:test.ts
+const wait = (seconds: number) => {
+  return new Promise(resolve => {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+// The Maximum is Exclusive and the Minimum is Inclusive
+const getRandomInt = (min: number, max: number) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min);
+};
+
+// The Maximum is Inclusive and the Minimum is Inclusive
+const getRandomInt = (min: number, max: number) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+```

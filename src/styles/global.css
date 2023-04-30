@@ -1,0 +1,15 @@
+::selection {
+  background-color: var(--palette-primary-emphasis);
+  color: var(--palette-primary-main);
+}
+
+body {
+  transition: all 0.5s ease 0s;
+  word-wrap: break-word;
+}
+
+@supports (font: -apple-system-body) and (-webkit-appearance: none) {
+  img[loading='lazy'] {
+    clip-path: inset(0.6px);
+  }
+}

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://arlenx.io/</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/about</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/mdx-components</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/posts</loc>
+  </url>
+
+  <url>
+    <loc
+      >https://arlenx.io/posts/deploy-flask-application-on-aws-ec2-and-postgresql</loc
+    >
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/posts/deploy-flask-application-on-heroku</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/projects</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/resume</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/snippets</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/snippets/cloud-run-script</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/snippets/wait-function</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/tags</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/tags/aws</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/tags/cloud-run</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/tags/deployment</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/tags/flask</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/tags/gcp</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/tags/heroku</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/tags/postman</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/tags/promise</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/tags/python</loc>
+  </url>
+
+  <url>
+    <loc>https://arlenx.io/tags/typescript</loc>
+  </url>
+</urlset>

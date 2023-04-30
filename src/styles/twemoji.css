@@ -1,0 +1,147 @@
+.twa {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  margin: 0 0.1em;
+  /* margin: 0 0.05em 0 0.1em; */
+  vertical-align: -0.1em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 1em 1em;
+}
+
+.twa-middle {
+  vertical-align: middle !important;
+}
+
+.twa-lg {
+  height: 1.33em;
+  width: 1.33em;
+  margin: 0 0.266em 0 0.133em;
+  /* margin: 0 0.0665em 0 0.133em; */
+  /* vertical-align: -0.133em; */
+  vertical-align: -0.3em;
+  background-size: 1.33em 1.33em;
+}
+
+.twa-2x {
+  height: 2em;
+  width: 2em;
+  margin: 0 0 0.2em;
+  /* margin: 0 0.1em 0 0.2em; */
+  vertical-align: -0.2em;
+  background-size: 2em 2em;
+}
+
+.twa-3x {
+  height: 3em;
+  width: 3em;
+  margin: 0 0 0.3em;
+  /* margin: 0 0.15em 0 0.3em; */
+  vertical-align: -0.3em;
+  background-size: 3em 3em;
+}
+
+.twa-4x {
+  height: 4em;
+  width: 4em;
+  margin: 0 0.4em;
+  /* margin: 0 0.2em 0 0.4em; */
+  vertical-align: -0.4em;
+  background-size: 4em 4em;
+}
+
+.twa-5x {
+  height: 5em;
+  width: 5em;
+  margin: 0 0.5em;
+  /* margin: 0 0.25em 0 0.5em; */
+  vertical-align: -0.5em;
+  background-size: 5em 5em;
+}
+
+/* End preamble; begin emoji classes */
+
+.twa-waving-hand {
+  background-image: url('/images/twemoji/1f44b.svg');
+}
+
+.twa-flag-china {
+  background-image: url('/images/twemoji/1f1e8-1f1f3.svg');
+}
+
+.twa-flag-canada {
+  background-image: url('/images/twemoji/1f1e8-1f1e6.svg');
+}
+
+.twa-hammer-and-wrench {
+  background-image: url('/images/twemoji/1f6e0.svg');
+}
+
+.twa-memo {
+  background-image: url('/images/twemoji/1f4dd.svg');
+}
+
+.twa-robot {
+  background-image: url('/images/twemoji/1f916.svg');
+}
+
+.twa-briefcase {
+  background-image: url('/images/twemoji/1f4bc.svg');
+}
+
+.twa-face-with-monocle {
+  background-image: url('/images/twemoji/1f9d0.svg');
+}
+
+.twa-clinking-beer-mugs {
+  background-image: url('/images/twemoji/1f37b.svg');
+}
+
+.twa-snowboarder {
+  background-image: url('/images/twemoji/1f3c2.svg');
+}
+
+.twa-globe-with-meridians {
+  background-image: url('/images/twemoji/1f310.svg');
+}
+
+.twa-guitar {
+  background-image: url('/images/twemoji/1f3b8.svg');
+}
+
+.twa-artist-palette {
+  background-image: url('/images/twemoji/1f3a8.svg');
+}
+
+.twa-boy {
+  background-image: url('/images/twemoji/1f466.svg');
+}
+
+.twa-postbox {
+  background-image: url('/images/twemoji/1f4ee.svg');
+}
+
+.twa-compass {
+  background-image: url('/images/twemoji/1f9ed.svg');
+}
+
+.twa-backhand-index-pointing-down {
+  background-image: url('/images/twemoji/1f447.svg');
+}
+
+.twa-bar-chart {
+  background-image: url('/images/twemoji/1f4ca.svg');
+}
+
+.twa-paperclip {
+  background-image: url('/images/twemoji/1f4ce.svg');
+}
+
+.twa-folded-hands {
+  background-image: url('/images/twemoji/1f64f.svg');
+}
+
+.twa-information {
+  background-image: url('/images/twemoji/2139.svg');
+}

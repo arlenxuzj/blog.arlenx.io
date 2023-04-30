@@ -1,0 +1,711 @@
+---
+title: Deploy Flask Application on AWS EC2 and PostgreSQL
+description: A step-by-step guide to deploy a Flask application on Heroku
+tags:
+  - python
+  - flask
+  - aws
+  - deployment
+backgroundType: '1'
+createdAt: 2022-11-18 13:28:42-08:00
+updatedAt: 2022-12-02 20:40:15-08:00
+---
+
+## Introduction
+
+This tutorial will show you how to deploy a simple Python Flask Application on AWS EC2 step by step.
+
+Here is the link to the repository of the final project: https://github.com/arlenxuzj/flask-todos
+
+This tutorial assumes that you have:
+
+- A **NEW** [AWS](https://aws.amazon.com/) Account or An AWS Account **CAN** use Free Tier services - See [Free Tier FAQs](https://aws.amazon.com/free/free-tier-faqs/?nc1=h_ls) for more information.
+- Git installed locally – See the installation guides for [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+- Python version 3.7+ (Recommend 3.10+) installed locally – See the installation guides for [OS X](https://docs.python-guide.org/starting/install3/osx/), [Windows](https://docs.python-guide.org/starting/install3/win/), and [Linux](https://docs.python-guide.org/starting/install3/linux/).
+
+This tutorial assumes that you know:
+
+- Basic knowledge of Python.
+- Basic knowledge of Flask.
+
+## Get Started
+
+### Download the Source Code
+
+First, we need to download the source code from GitHub. Open Terminal and run the next line command:
+
+```shell
+$ git clone git@github.com:arlenxuzj/flask-todos.git
+```
+
+### Open the Project Directory
+
+```shell
+$ cd flask-todos
+```
+
+### Create Virtual Environment
+
+Use the following commands to create and activate the virtual environment:
+
+```shell
+# Create a Python Virtual Environment called flask-app
+$ python -m venv venv
+
+# Activate flask-app Virtual Environment
+$ source venv/bin/activate
+
+# upgrade pip
+$ pip install --upgrade pip
+```
+
+### Install the Dependencies
+
+```shell
+$ pip install -r requirements.txt
+```
+
+### Install PostgreSQL
+
+For Windows users, you can check the download options [here](https://www.postgresql.org/download/windows/).
+
+For Mac users, you can check the download options [here](https://www.postgresql.org/download/macosx/).
+
+We will use the [Interactive installer by EDB](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads), which is mentioned in the PostgreSQL Download Page
+to install PostgreSQL (works for both Windows and Mac users).
+
+:::attention
+
+1. In the EDB download page, please download the **PostgreSQL 14.x** installer for Windows or Mac.
+2. In the installation process, please use the default settings.
+3. Please remember the password you set for the **postgres** user.
+4. You can ignore Application Stack Builder Installer Window.
+
+:::
+
+## Run Application on Local Machine
+
+### Create Local PostgreSQL Database and Table
+
+1. Open the pgAdmin 4 application downloaded with the PostgreSQL installer.
+
+   :::attention
+   The master password you set for **pgAdmin 4** is different from the password you set for the **postgres** user.
+   :::
+
+2. Right Click `Databases` - Select `Create` - Click `Database...`.
+
+   ![create-postgresql-database-1](create-postgresql-database-1.png)
+
+3. Create a new database called **flask-todos** and `Save`.
+
+   ![create-postgresql-database-2](create-postgresql-database-2.png)
+
+4. Right Click `flask-todos` - Click `Generate ERD`.
+
+   ![create-postgresql-database-3](create-postgresql-database-3.png)
+
+5. You can design the ERD diagram and generate the SQL script for the database in
+   this ERD Panel. Now click `Load Project` to load the ERD diagram from the
+   `flask-todos/model/todos.pgerd` file.
+
+   ![create-postgresql-database-4](create-postgresql-database-4.png)
+
+6. Click `Generate SQL` and click `Execute/Refresh` to create the `todos` table in the new Query Panel.
+
+   ![create-postgresql-database-5](create-postgresql-database-5.png)
+
+   ![create-postgresql-database-6](create-postgresql-database-6.png)
+
+7. Clear the content in the Query Panel, copy and paste the following SQL, and execute the SQL to insert some sample data:
+
+   ```SQL
+   INSERT INTO "public"."todos" ("id", "title", "completed") VALUES
+   (1, 'delectus aut autem', 'f'),
+   (2, 'quis ut nam facilis et officia qui', 'f'),
+   (3, 'fugiat veniam minus', 'f'),
+   (4, 'et porro tempora', 'f'),
+   (5, 'illo expedita consequatur quia in', 'f');
+   ```
+
+   ![create-postgresql-database-7](create-postgresql-database-7.png)
+
+8. Go to `flask-todos - Schemas - public - Tables` - Right Click `todos` - Select `View/Edit Data` - Click `All Rows` to view the data inserted.
+
+   ![create-postgresql-database-8](create-postgresql-database-8.png)
+
+   ![create-postgresql-database-9](create-postgresql-database-9.png)
+
+### Connect Database in Flask Application
+
+1. Open `flask-todos` in your favorite IDE, and open the `.env` file.
+2. Open Terminal and run the following command to generate a Flask Secret key:
+
+   ```shell
+   $ python -c 'import secrets; print(secrets.token_hex())'
+   ```
+
+3. Copy the generated key and replace the `FLASK_SECRET_KEY` field with it in the `.env` file.
+4. Replace the `DB_PASSWORD` fields in the `.env` file with your PostgreSQL **postgres** user password (**NOT pgAdmin 4 master password**).
+
+   ![create-postgresql-database-10](create-postgresql-database-10.png)
+
+   :::attention
+   You must **NOT** share `.env` file with others, and you must **NOT** commit `.env` file to GitHub.
+   :::
+
+5. Run Application by the following command in the Terminal:
+
+   ```shell
+   $ python src/app.py
+   ```
+
+## Configure AWS EC2 Server
+
+:::info
+AWS Free Tier with Amazon EC2 offers:
+
+- **750 hours** per month of Linux, RHEL, or SLES t2.micro or t3.micro instance dependent on region
+- **750 hours** per month of Windows t2.micro or t3.micro instance dependent on region
+
+Please check [Amazon EC2](https://aws.amazon.com/ec2/) for more details.
+:::
+
+### Create Server
+
+1. In the AWS Home Page, type `EC2` in the search bar and click `Instances` in the `EC2` area to enter the EC2 Instances Dashboard.
+
+   ![create-server-1](create-server-1.png)
+
+2. Click `Launch Instance` to create a new EC2 Instance.
+
+   ![create-server-2](create-server-2.png)
+
+3. Type `flask-todos` in the Name field. Select **Ubuntu Server 22.04 LTS (HVM), SSD Volume Type** in the Application Machine Images (AMI) field. Select **t2.micro** in the Instance type field. Click.
+
+   :::attention
+
+   1. Please choose Free Tier eligible Image and Instance Type!!!
+   2. Please choose Free Tier eligible Image and Instance Type!!!
+   3. Please choose Free Tier eligible Image and Instance Type!!!
+
+   :::
+
+   ![create-server-3](create-server-3.png)
+
+4. Click `Create new key pair` to create a new key pair. Type `flask-todos` in the Key pair name field. Click `Create Key Pair` to download the key pair file `flask-todos.pem`.
+
+   ![create-server-4](create-server-4.png)
+
+   ![create-server-5](create-server-5.png)
+
+5. In `Network settings`, select `Create new security group`. Check `Allow SSH traffic` and **ONLY** allow SSH traffic from your IP address. Check `Allow HTTP traffic` and `Allow HTTPS traffic`.
+
+   ![create-server-6](create-server-6.png)
+
+6. Click `Launch instance` on the right side of the page.
+
+### Connect to Server
+
+1. Go back to the EC2 Instances Dashboard and Click the Instance ID to enter the Instance Details Page.
+
+2. Copy the `Public IPv4 DNS` address.
+
+   ![connect-to-server-1](connect-to-server-1.png)
+
+:::important
+
+1. The following **two** commands are **ONLY** for Mac users, more details is in [Connect to your Linux instance using SSH](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html)
+2. For Windows users, please check [Connect to your Linux instance from Windows using PuTTY](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html)
+
+:::
+
+3. Run command in the Terminal to change the permission of the key pair file:
+
+   ```shell
+   $ chmod 400 path_to_key_pair/flask-todos.pem
+   ```
+
+4. Run command in the Terminal to connect to the server:
+
+   ```shell
+   $ ssh -i path_to_key_pair/flask-todos.pem ubuntu@your-instance-public-ipv4-dns-address
+   ```
+
+### Install Packages
+
+Run the following commands step by step in the server:
+
+```shell
+$ sudo apt update
+
+# Type `y` and press `Enter` to continue
+$ sudo apt upgrade
+```
+
+:::note
+There will be a prompt to ask you whether to install the updates. Type `y` and press `Enter` to continue. When the upgrade is finished, There may be two windows showing the upgrade information. Press `Enter` to close the windows.
+:::
+
+After the update and upgrade, **[reboot your instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-reboot.html)** and **reconnect** to the server.
+
+Next, run the following commands to install some packages:
+
+```shell
+# Type `y` and press `Enter` to continue
+sudo apt install python3-pip python3-venv python3-dev libpq-dev
+
+# Set python3 as default python
+sudo ln -s /usr/bin/python3 /usr/local/bin/python
+
+# Set pip3 as default pip
+sudo ln -s /usr/bin/pip3 /usr/local/bin/pip
+```
+
+Check the location of python and pip:
+
+```shell
+$ which python
+/usr/local/bin/python
+
+$ which pip
+/usr/local/bin/pip
+
+$ python --version
+Python 3.10.x # Python version should be 3.10+
+```
+
+## Configure AWS PostgreSQL Server
+
+:::info
+AWS Free Tier with Amazon RDS offers:
+
+- **750 hours** of Amazon RDS Single-AZ db.t2.micro, db.t3.micro, and db.t4g.micro Instances usage running MySQL, MariaDB, PostgreSQL databases each month. If running more than one instance, usage is aggregated across instance classes.
+- **750 hours** of Amazon RDS Single-AZ db.t2.micro Instance usage running SQL Server (running SQL Server Express Edition) each month.
+- **20 GB** of General Purpose (SSD) DB Storage\*
+- **20 GB** of backup storage for your automated database backups and any user-initiated DB Snapshots\*
+
+Please check [Amazon RDS Free Tier](https://aws.amazon.com/rds/free/) for more details.
+:::
+
+### Create Database
+
+1. In the AWS Home Page, type `RDS` in the search bar and click `Databases` in the `RDS` area to enter the RDS Databases Dashboard.
+
+   ![create-database-1](create-database-1.png)
+
+2. Click `Create database` to create a new RDS Database.
+
+   ![create-database-2](create-database-2.png)
+
+3. Select `Standard create`. Select `PostgreSQL` in the engine type field. Select `PostgreSQL 14.5-R1` in the engine version field. Select `Free tier` in the Templates field.
+
+   :::attention
+
+   1. Please choose Free Tier eligible Image and Instance Type!!!
+   2. Please choose Free Tier eligible Image and Instance Type!!!
+   3. Please choose Free Tier eligible Image and Instance Type!!!
+
+   :::
+
+   ![create-database-3](create-database-3.png)
+
+4. Type `flask-todos` in the DB instance identifier field. Keep the default value in the Master username field. Enter a password in the Master password field.
+
+   ![create-database-4](create-database-4.png)
+
+5. Select `General Purpose SSD (gp2)` in the Storage type field. Modify the storage size to `20` GB. Uncheck `Enable storage autoscaling`.
+
+   ![create-database-5](create-database-5.png)
+
+6. Select `Connect to an EC2 compute resource` in the Connectivity Section. Select `flask-todos` EC2 Instance you created in the previous step in the EC2 instance field. Select `IPv4` in the Network type field.
+
+   ![create-database-6](create-database-6.png)
+
+7. If you want to **disable automated backups**, uncheck `Enable automatic backups` in the `Additional configuration` section.
+
+8. Scroll down to the bottom of the page and click `Create database`.
+
+### Create AWS PostgreSQL Database and Table
+
+1. Go back to the RDS Databases Dashboard and click the DB identifier to enter the Database Instance Details Page. In the `Connectivity & security` section, copy the `Endpoint` address.
+
+   ![create-aws-postgresql-database-and-table-1](create-aws-postgresql-database-and-table-1.png)
+
+2. Open pgAdmin, Right Click `Servers` - Select `Register` - Click `Server...`.
+
+   ![create-aws-postgresql-database-and-table-2](create-aws-postgresql-database-and-table-2.png)
+
+3. In the popup window, type `aws` in the Name field in General tab.
+
+   ![create-aws-postgresql-database-and-table-3](create-aws-postgresql-database-and-table-3.png)
+
+4. Copy and paste your database instance `Endpoint` address in the Host name/address field in Connection tab. Type the password you set for AWS database in the Password field in Connection tab.
+
+   ![create-aws-postgresql-database-and-table-4](create-aws-postgresql-database-and-table-4.png)
+
+5. Copy and paste your AWS EC2 `Public IPv4 DNS` address in the Tunnel host field in SSH Tunnel tab. Type `ubuntu` in the Tunnel username field. Select `Identity file` in the Authentication field. Click `Browse` to select the key pair file `flask-todos.pem`.
+
+   ![create-aws-postgresql-database-and-table-5](create-aws-postgresql-database-and-table-5.png)
+
+6. Click `Save`.
+
+7. Follow the instructions in [Create Local PostgreSQL Database and Table](#create-local-postgresql-database-and-table) section to create database `flask-todos` and table `todos`, and insert some sample dataset.
+
+   ![create-aws-postgresql-database-and-table-6](create-aws-postgresql-database-and-table-6.png)
+
+## Run Application on Server
+
+### Connect Server via VS Code
+
+:::important
+It is absolutely not a good practice to deploy a production application on a server by this way.
+
+The recommended way is to use VCS (Version Control System) like [Git](https://git-scm.com/) to manage the code and use [CI/CD](https://en.wikipedia.org/wiki/CI/CD) (Continuous Integration/Continuous Deployment) tools like [CircleCI](https://circleci.com/), [Jenkins](https://www.jenkins.io/) to deploy the application.
+
+AWS also has some services and tools like [CodeCommit](https://aws.amazon.com/codecommit/), [CodeBuild](https://aws.amazon.com/codebuild/), [CodeDeploy](https://aws.amazon.com/codedeploy/), [CodePipeline](https://aws.amazon.com/codepipeline/) to help you manage the code and deploy the application automatically, but they are a little complicated to use for beginners and not free. So for simplicity, we will use VS Code to connect to the server and deploy the application manually.
+:::
+
+:::important
+Before we connect to the server via VS Code, you need to install the [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh) extension.
+:::
+
+1. Open VS Code and click the `Remote Explorer` icon on the left side of the page.
+
+2. Click `+` to add a new SSH target.
+
+3. Type `ssh -i path_to_key_pair/flask-todos.pem ubuntu@your-instance-public-ipv4-dns-address` in the `SSH Command` field. Press `Enter` to connect to the server.
+
+4. Press `Enter` to save the SSH target to the default SSH Configuration file.
+
+   ![connect-server-via-vs-code-1](connect-server-via-vs-code-1.png)
+
+5. Refresh the `Remote Explorer` and you will see the AWS EC2 server and click`->` to connect to the server. Select `Linux` as the platform of the server.
+
+   ![connect-server-via-vs-code-2](connect-server-via-vs-code-2.png)
+
+6. Click `Open Folder` in the Side Bar and click `OK` to open the path `/home/ubuntu`.
+
+   ![connect-server-via-vs-code-3](connect-server-via-vs-code-3.png)
+
+7. **Drag and Drop** the `flask-todos` folder to the Side Bar of VS Code and confirm **Copy Folder** to upload the folder to the server.
+
+   ![connect-server-via-vs-code-4](connect-server-via-vs-code-4.png)
+
+### Create Virtual Environment on Server
+
+Use the follow commands to create and activate the virtual environment:
+
+```shell
+# Open folder
+$ cd flask-todos
+
+# Create a Python Virtual Environment called flask-app
+$ python3 -m venv venv
+
+# Activate flask-app Virtual Environment
+$ source venv/bin/activate
+
+# upgrade pip
+$ pip install --upgrade pip
+```
+
+![create-virtual-environment-on-server-1](create-virtual-environment-on-server-1.png)
+
+### Install the Dependencies
+
+```shell
+$ pip install -r requirements.txt
+```
+
+### Edit `.env` File
+
+1. Open the `.env` file in VS Code.
+2. Replace the `DB_HOST` value with your AWS database instance `Endpoint` address.
+3. Replace the `DB_PASSWORD` value with the password you set for AWS database.
+4. (Optional) Replace the `FLASK_SECRET_KEY` value if you like.
+
+### Run Application on Server in VS Code
+
+Run command `python src/app.py` in the integrated terminal in VS Code to start the application. Then,
+you will see a popup window in the bottom-right corner of the VS Code. Click `Open in Browser` to open the application in the browser.
+
+![run-application-on-server-in-vs-code-1](run-application-on-server-in-vs-code-1.png)
+
+Or you can click `PORTS` tab in the integrated terminal and click `Open in Browser` icon to open the application in the browser.
+
+![run-application-on-server-in-vs-code-2](run-application-on-server-in-vs-code-2.png)
+
+## Build a Nginx Web Server
+
+### Install Nginx
+
+Run the following command to install Nginx:
+
+```shell
+# Type `y` and press `Enter` to continue
+sudo apt-get install nginx
+```
+
+### Nginx Configure
+
+:::important
+Before we start, we need to install a VS Code extension called [Save as Root in Remote - SSH](https://marketplace.visualstudio.com/items?itemName=yy0931.save-as-root) **on the server**.
+:::
+
+![build-a-nginx-web-server-1](build-a-nginx-web-server-1.png)
+
+Then, run the following commands in the integrated terminal in VS Code:
+
+```shell
+# Create a new file called flask-todos
+$ sudo touch /etc/nginx/sites-available/flask-todos
+
+# Link the file to the sites-enabled directory
+$ sudo ln -s /etc/nginx/sites-available/flask-todos /etc/nginx/sites-enabled
+
+# Open the flask-todos file
+$ code /etc/nginx/sites-available/flask-todos
+```
+
+Copy and paste the following content to the `flask-todos` file, replace the `server_name` value with your AWS EC2 `Public IPv4 DNS` address:
+
+```nginx
+server {
+	listen 80;
+	listen [::];
+
+	server_name xyz.compute-1.amazonaws.com;
+
+	location / {
+		proxy_pass http://127.0.0.1:8000;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_set_header X-Forwarded-Host $host;
+		proxy_set_header X-Forwarded-Prefix /;
+		proxy_redirect off;
+	}
+}
+```
+
+This configuration file tells Nginx to listen on port 80 and forward all the requests to the localhost and port 8000. This is called [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy).
+
+Then, open Command Palette by `Shift+Command+P` (Mac) / `Ctrl+Shift+P` (Windows/Linux) and type `Save as Root` to save the file as root
+
+![nginx-configure-1](nginx-configure-1.png)
+
+:::note
+Due to the permission issue, you must use this extension to save **ANY** file as root if
+see this popup window when you save the file.
+
+![nginx-configure-2](nginx-configure-2.png)
+:::
+
+Next, run the following commands in the integrated terminal in VS Code to enable and restart the Nginx service:
+
+```shell
+# Make sure the configuration file is correct
+$ sudo nginx -t
+
+# Restart Nginx service
+$ sudo systemctl restart nginx
+
+# Check the status of Nginx service
+$ sudo systemctl status nginx # should be active (running)
+
+# Enable Nginx service to start up at boot
+$ sudo systemctl enable nginx
+```
+
+:::info
+Here is some useful commands for Nginx (Syntax is the same for other services):
+
+```shell
+# Start Nginx service
+$ sudo systemctl start nginx
+# Stop Nginx service
+$ sudo systemctl stop nginx
+# Disable Nginx service to start up at boot
+$ sudo systemctl disable nginx
+```
+
+:::
+
+### Test the Connection
+
+Run the command next line to start the Flask application:
+
+```shell
+# --workers 1: 1 worker process for handling requests
+# --bind 127.0.0.1:8000: listen on localhost and port 8000
+# You can simply use gunicorn wsgi:app to start the application
+# gunicon will use the default number of workers and listen on localhost and port 8000
+$ gunicorn wsgi:app --workers 1 --bind 127.0.0.1:8000
+```
+
+**Make Sure** you activate the virtual environment before you run the command.
+
+`Gunicore` is a Python WSGI HTTP Server for UNIX. You can check [here](https://docs.gunicorn.org/en/latest/) for more information.
+
+`wsgi` is the python file in the `flask-todos` folder, you can view the content of the file by clicking the `wsgi.py` file in the Side Bar of VS Code. The reason we use `wsgi.py` instead of `src/app.py` is that we don't want to change the `debug` value in the `src/app.py` file to `False` every time we want to run the application in production.
+
+Then, open the browser and copy and paste the `Public IPv4 DNS` address of your AWS EC2 instance into the address bar. You will see the application is running.
+
+:::attention
+You **CAN NOT** click `open address` in the AWS EC2 Instance Dashboard to access your application directly because it will try to connect to server by HTTPS Protocol (Port 443) but the Nginx server is listening on Port 80 (HTTP Protocol).
+
+If you cannot access the application in the browser, **Double-Click** the address bar in the browser. It should be `http://your-instance-public-ipv4-dns-address`. **Not** `https://your-instance-public-ipv4-dns-address`.
+:::
+
+## Persist the Application
+
+Now, we need to make sure the application will be running even if we close the terminal. We can use `systemd` to manage the application.
+
+First, run the next line command to deactivate the virtual environment:
+
+```shell
+$ deactivate
+```
+
+Then, run the following commands to create a new service file:
+
+```shell
+# Create a new file called flask-todos.service
+$ sudo touch /etc/systemd/system/flask-todos.service
+
+# Open the flask-todos.service file
+$ code /etc/systemd/system/flask-todos.service
+```
+
+:::info
+There are two ways to communicate between the Nginx and the Flask application.
+
+One is to use **TCP/IP Sockets**. We need to provide the `Hostname` and `Port` information to the Nginx server. This is the easier way to set up the reverse proxy.
+
+The other way is to use **Unix Sockets**. We need to provide the `socket` file path to the Nginx server. This is the more secure way to set up the reverse proxy. Also this way has higher performance.
+:::
+
+### Option 1: TCP/IP Socket (Easier)
+
+Copy and paste the following content to the `flask-todos.service` file:
+
+```ini
+[Unit]
+Description=Flask Todos Web Application
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/flask-todos
+Environment="PATH=/home/ubuntu/flask-todos/venv/bin"
+ExecStart=/home/ubuntu/flask-todos/venv/bin/gunicorn --workers 1 --bind 127.0.0.1:8000 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Then, run the following commands to start and enable the service:
+
+```shell
+# Start the service
+$ sudo systemctl start flask-todos
+
+# Check the status of the service
+$ sudo systemctl status flask-todos # should be active (running)
+
+# Enable the service to start up at boot
+$ sudo systemctl enable flask-todos
+```
+
+That's it! Now, you can close the terminal, and the application will still be running.
+
+### Option 2: Unix Socket (More Secure and Higher Performance)
+
+Copy and paste the following content to the `flask-todos.service` file:
+
+```ini
+[Unit]
+Description=Flask Todos Web Application
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/flask-todos
+Environment="PATH=/home/ubuntu/flask-todos/venv/bin"
+ExecStart=/home/ubuntu/flask-todos/venv/bin/gunicorn --workers 1 --bind unix:flask-todos.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Then, run the following commands to start and enable the service:
+
+```shell
+# Start the service
+$ sudo systemctl start flask-todos
+
+# Check the status of the service
+$ sudo systemctl status flask-todos # should be active (running)
+
+# Enable the service to start up at boot
+$ sudo systemctl enable flask-todos
+
+```
+
+:::tip
+If you do the TCP/IP Socket method first, and then switch to the Unix Socket method, you need to
+run the following commands to reload the service:
+
+```shell
+# Reload the service configuration file
+$ sudo systemctl daemon-reload
+
+# Restart the service
+$ sudo systemctl restart flask-todos
+
+# Check the status of the service
+$ sudo systemctl status flask-todos # should be active (running)
+```
+
+:::
+
+Next, open the `flask-todos` file in the `sites-available` directory and
+change the `proxy_pass` value to `unix:/home/ubuntu/flask-todos/flask-todos.sock;`:
+
+```nginx
+server {
+	listen 80;
+	listen [::];
+
+	server_name xyz.compute-1.amazonaws.com;
+
+	location / {
+		proxy_pass http://unix:/home/ubuntu/flask-todos/flask-todos.sock;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Forwarded-Proto $scheme;
+		proxy_set_header X-Forwarded-Host $host;
+		proxy_set_header X-Forwarded-Prefix /;
+		proxy_redirect off;
+	}
+}
+```
+
+Next, run the command `code /etc/nginx/nginx.conf` to open the `nginx.conf` file and
+replace the user value to `ubuntu` in Line 1.
+
+![persist-the-application-1](persist-the-application-1.png)
+
+Finally, run the following commands to restart the Nginx service:
+
+```shell
+# Make sure the configuration file is correct
+$ sudo nginx -t
+
+# Restart Nginx service
+$ sudo systemctl restart nginx
+
+# Check the status of Nginx service
+$ sudo systemctl status nginx # should be active (running)
+```
+
+Now, you can close the terminal, and the application will still be running.

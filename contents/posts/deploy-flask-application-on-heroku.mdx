@@ -1,0 +1,280 @@
+---
+title: Deploy Flask Application on Heroku
+description: A step-by-step guide to deploy a Flask application on Heroku
+tags:
+  - python
+  - flask
+  - heroku
+  - deployment
+backgroundType: '2'
+createdAt: 2022-11-01 04:26:07-08:00
+updatedAt: 2022-11-10 06:56:05-08:00
+---
+
+:::warning
+Heroku will not offer free service after November 28, 2022. The notification can be found here [Getting Started on Heroku with Python | Heroku Dev Center](https://devcenter.heroku.com/articles/getting-started-with-python?singlepage=true#:~:text=Starting%20November%2028,for%20more%20info.).
+
+However, Students can apply for platform credits through their new [Heroku for GitHub Students program](https://blog.heroku.com/github-student-developer-program). They offer students a credit of $13 USD per month for 12 months. The cost of Heroku **Hobby** server is max of $7 per month. So, we can use it for free for 12 months. However, you need to provide your credit card information when you are registering the Heroku account. If you don't want to, you can still deploy the application on Heroku before November 28, 2022, for free.
+:::
+
+## Introduction
+
+This tutorial will show you how to deploy a simple Python Flask Application on Heroku step by step.
+
+Here is a demo of what we are going to build: https://flask-app-arlenx.herokuapp.com/.
+
+Here is the link to the repository of the final project: https://github.com/arlenxuzj/flask-app.
+
+This tutorial assumes that you have:
+
+- A [GitHub](https://github.com/) Account.
+- A [Heroku](https://www.heroku.com/) Account.
+- Git installed locally – See the installation guides for [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
+- Python version 3+ (Recommend 3.10+) installed locally – See the installation guides for [OS X](https://docs.python-guide.org/starting/install3/osx/), [Windows](https://docs.python-guide.org/starting/install3/win/), and [Linux](https://docs.python-guide.org/starting/install3/linux/).
+
+Check Git and Python installed by run command in Terminal below:
+
+```shell
+# Check Git version
+$ git version
+git version 2.32.1 (Apple Git-133)
+
+# Check Python version
+$ python --version # or python3 --version
+Python 3.10.3
+
+# Check pip version
+$ pip --version # or pip3 --version
+pip 22.2.2
+```
+
+## Get Started
+
+### Create Application Directory
+
+```shell
+# Create Directory and move into
+mkdir flask-app && cd flask-app
+```
+
+### Create Virtual Environment
+
+Use the follow commands to create and activate the virtual environment:
+
+```shell
+# Create a Python Virtual Environment called flask-app
+$ python3 -m venv venv
+
+# Activate flask-app Virtual Environment
+$ source venv/bin/activate
+```
+
+Then, you can list the installed python libraries by command:
+
+```shell
+$ pip list
+pip        22.0.4
+setuptools 58.1.0
+```
+
+Since it is a new virtual environment, there is no library installed yet except `pip` itself and `setuptools`.
+
+:::tip
+You can use `deactivate` command to deactivate the virtual environment.
+:::
+
+### Install Flask and Gunicorn
+
+Within the **activated** environment, use the following command to install Flask and Gunicorn:
+
+```shell
+$ pip install Flask gunicorn
+```
+
+Finally, deactivate and reactivate the virtual environment:
+
+```shell
+$ deactivate && source venv/bin/activate
+```
+
+## Simple Flask Application
+
+### Hello World!
+
+First, we need to create an entry file of our Flask Application.
+
+```shell
+mkdir src && touch src/app.py && code .
+```
+
+The command above will create a file called `app.py` in the `src` directory and open the entire directory `flask-app` in VS Code.
+
+If you see something like `command not found: code` in the Terminal, open VS Code normally and access its Command Palette by `Shift+Command+P` (Mac) / `Ctrl+Shift+P` (Windows/Linux). Next, type `shell`, choose `Shell Command: Install 'code' command in PATH`, and hit `ENTER`.
+
+![hello-world-1](hello-world-1.png)
+
+Then, go back to Terminal and run command `code .` again.
+
+Next, copy and paste the following code to `src/app.py` file.
+
+```python:src/app.py
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello_world():
+    return "Hello, World!"
+```
+
+To run the flask application, use the `flask` command. The path of our application entry file need to be provided with the `--app` option:
+
+```shell
+$ flask --app src.app run
+ * Serving Flask app 'src.app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+```
+
+Then you can copy the URL `http://127.0.0.1:5000` to your favorite browser, and you can see the text `Hello, World!` in the browser screen.
+
+If you find a wave line under the `flask` in the line 1 in VS Code,
+
+![hello-world-2](hello-world-2.png)
+
+you can
+
+1. Click Area 1 in the footer of the VS Code.
+2. Click `Python 3.x.x ('flask-app')` in Area 2 to choose the python interpreter of the virtual environment.
+
+   ![hello-world-3](hello-world-3.png)
+
+### Prepare to Deploy
+
+At the end of this section, your folder structure should be like this:
+
+```txt
+/flask-app
+  /src
+    app.py
+  .gitignore
+  Procfile
+  Requirements.txt
+```
+
+1. Run the command to freeze the python libraries in order to let Heroku know which need to be installed in the build step after deploy the application:
+
+   ```shell
+   pip freeze > requirements.txt
+   ```
+
+2. Create a new file `Procfile` in the project root directory (`flask-app`). Copy and paste following line to this file:
+
+   ```config
+   web: gunicorn src.app:app
+   ```
+
+   Heroku will run the command `gunicorn src.app:app` after the application build successfully.
+
+3. Create a new file `.gitignore` in the project root directory (`flask-app`) and copy and paste the entire file from [here](https://github.com/github/gitignore/blob/main/Python.gitignore).
+
+:::info
+You can find more detail about `Procfile` [here](https://devcenter.heroku.com/articles/procfile), and `.gitignore` [here](https://git-scm.com/docs/gitignore).
+:::
+
+### Push Code to GitHub
+
+Before push your code to GitHub, you should
+
+1. [Create a repo](https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository) called `flask-app`.
+   - **DO NOT** select Initialize this repository with a README, it will be easy for later steps.
+2. [Connecting to GitHub with SSH](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).
+
+After you create a repository in GitHub, you will see some instruction in the screen. If you config the SSH setting correctly, run the following commands one by one in the Terminal (**inside project directory**):
+
+```shell
+git init
+git add -A
+git commit -m 'first commit'
+```
+
+If you never use `Git` before, you cannot commit before you config your Git name/email. Run the following commands in the Terminal:
+
+```shell
+git config --global user.name "YOUR_NAME"
+git config --global user.email "YOUR_EMAIL"
+```
+
+Then, commit again and push your code from the local machine to the remote repository:
+
+```shell
+git commit -m 'first commit'
+git branch -M master
+# Find your username in GitHub
+git remote add origin git@github.com:username/flask-app.git
+git push -u origin master
+```
+
+### Deploy Application on Heroku
+
+1. Create a new app in [Heroku](https://dashboard.heroku.com/apps).
+
+   ![deploy-application-on-heroku-1](deploy-application-on-heroku-1.png)
+
+2. Go to Deploy Tab.
+3. Choose GitHub Deployment method.
+4. Type `flask-app` to search for a repository to connect. (You need to connect your GitHub account in the first time).
+5. Click Connect.
+
+   ![deploy-application-on-heroku-2](deploy-application-on-heroku-2.png)
+
+6. Click Enable Automatic Deploys.
+7. Click Deploy Branch.
+
+   ![deploy-application-on-heroku-3](deploy-application-on-heroku-3.png)
+
+8. Wait for the building and click Open app after build successfully. You can find the build status in the Activity Tab.
+
+   ![deploy-application-on-heroku-4](deploy-application-on-heroku-4.png)
+
+You can see the text `Hello, World!` in the browser screen. Now, your application appears on the Internet and everyone can access this application by the URL show in the browser!
+
+## Second Router
+
+### Dynamic Router
+
+Let us add a new router call `hello` with a specific URL path syntax. This is called [Dynamic Router](https://flask.palletsprojects.com/en/2.2.x/quickstart/#variable-rules). If you go to `http://127.0.0.1:5000/stranger`, you will see `Hello, stranger!`. If you go to `http://127.0.0.1:5000/arlenx`, you will see `Hello, arlenx!`.
+
+```diff-python:src/app.py
+  from flask import Flask
++ from markupsafe import escape
+
+  app = Flask(__name__)
+
+  @app.route("/")
+  def hello_world():
+      return "Hello, World!"
+
++ @app.route("/<name>")
++ def hello(name):
++     return f"Hello, {escape(name)}!"
+```
+
+:::info
+The function `escape` in line 13 is used for encoding the text object to mitigate some injection attacks like [Cross-site scripting](https://developer.mozilla.org/en-US/docs/Web/Security/Types_of_attacks#cross-site_scripting_xss).
+:::
+
+### Deploy Again
+
+Now, push our new code to GitHub by following command:
+
+```shell
+git add -A
+git commit -m 'dynamic router'
+git push origin master
+```
+
+In Heroku dashboard, you can find that a new deployment ran automatically. Click Open the app to check the new change of the application.
+
+![furthermore-1](furthermore-1.png)

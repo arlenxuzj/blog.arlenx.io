@@ -1,0 +1,151 @@
+---
+title: Cloud Run Script
+language: Postman
+description: Pre-request script for generating Google Cloud Run ID Token
+tags:
+  - postman
+  - gcp
+  - cloud-run
+backgroundType: '4'
+createdAt: 2023-02-12 01:37:02-05:00
+updatedAt: 2023-02-12 01:37:02-05:00
+---
+
+## Prepare
+
+1. Generate and download a service account JSON key file.
+2. Copy and paste the contents of the JSON key file into the `serviceAccountKey` environment variable in a Postman environment.
+3. Set the `baseUrl` collection variable in a Postman collection to the URL of your Cloud Run service.
+4. Set the type of Authorization to `Bearer Token` and the value to `{{idToken}}` in the **Authorization** tab of the Postman collection or request.
+5. Copy and paste the contents of the `pre-request-script.js` file into the **Pre-request Script** tab of a Postman collection or request.
+
+```javascript:pre-request-script.js
+const ENV_SERVICE_ACCOUNT_KEY = 'serviceAccountKey';
+const ENV_JS_RSA_SIGN = 'jsrsasign';
+const ENV_TOKEN_EXPIRES_AT = 'tokenExpiresAt';
+const ENV_ID_TOKEN = 'idToken';
+
+const VAR_SERVICE_URL = 'baseUrl'
+
+const JS_RSA_SIGN_SRC = 'https://kjur.github.io/jsrsasign/jsrsasign-latest-all-min.js';
+const GOOGLE_OAUTH = 'https://www.googleapis.com/oauth2/v4/token';
+
+const EXPIRES_MARGIN = 300; // seconds before expiration
+
+const getEnv = name =>
+  pm.environment.get(name);
+
+const setEnv = (name, value) =>
+  pm.environment.set(name, value);
+
+const getJWS = callback => {
+  // workaround for compatibility with jsrsasign
+  const navigator = {};
+  const window = {};
+
+  let jsrsasign = getEnv(ENV_JS_RSA_SIGN);
+  if (jsrsasign) {
+      eval(jsrsasign);
+      return callback(null, KJUR.jws.JWS);
+  }
+
+  pm.sendRequest(JS_RSA_SIGN_SRC, (err, res) => {
+      if (err) return callback(err);
+
+      jsrsasign = res.text();
+      setEnv(ENV_JS_RSA_SIGN, jsrsasign);
+      eval(jsrsasign);
+      callback(null, KJUR.jws.JWS);
+  });
+};
+
+const getJwt = ({ client_email, private_key }, serviceURL, iat, callback) => {
+  getJWS((err, JWS) => {
+      if (err) return callback(err);
+
+      const header = {
+          typ: 'JWT',
+          alg: 'RS256',
+      };
+
+      const exp = iat + 3600;
+      const payload = {
+          aud: GOOGLE_OAUTH,
+          iss: client_email,
+          sub: client_email,
+          iat,
+          exp,
+          target_audience: serviceURL
+      };
+
+      const jwt = JWS.sign(null, header, payload, private_key);
+      callback(null, jwt, exp);
+  });
+};
+
+const getToken = (serviceAccountKey, serviceURL, callback) => {
+  const now = Math.floor(Date.now() / 1000);
+  if (now + EXPIRES_MARGIN < pm.collectionVariables.get(ENV_TOKEN_EXPIRES_AT)) {
+      return callback();
+  }
+
+  getJwt(serviceAccountKey, serviceURL, now, (err, jwt, exp) => {
+      if (err) return callback(err);
+
+      const req = {
+          url: GOOGLE_OAUTH,
+          method: 'POST',
+          header: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: {
+            mode: 'urlencoded',
+            urlencoded: [{
+                key: 'grant_type',
+                value: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+            },{
+                key: 'assertion',
+                value: jwt,
+            }],
+          },
+      };
+
+      pm.sendRequest(req, (err, res) => {
+          if (err) return callback(err);
+
+          const idToken = res.json().id_token;
+          pm.collectionVariables.set(ENV_ID_TOKEN, idToken);
+          pm.collectionVariables.set(ENV_TOKEN_EXPIRES_AT, exp);
+          callback();
+      });
+  });
+};
+
+const getServiceAccountKey = callback => {
+  try {
+      const keyMaterial = getEnv(ENV_SERVICE_ACCOUNT_KEY);
+      const serviceAccountKey = JSON.parse(keyMaterial);
+      const serviceURL = pm.collectionVariables.get(VAR_SERVICE_URL);
+      callback(null, serviceAccountKey, serviceURL);
+  } catch (err) {
+      callback(err);
+  }
+};
+
+getServiceAccountKey((err, serviceAccountKey, serviceURL) => {
+  if (err) throw err;
+
+  getToken(serviceAccountKey, serviceURL, err => {
+      if (err) throw err;
+  });
+});
+```
+
+## Usage
+
+Send the request and the `idToken` and `tokenExpiresAt` collection variables will automatically generated and cached in the collection. The `idToken` will re-generate when it expires.
+
+## References
+
+- [Auto-generate Google Access and ID tokens from a Service Account key and save it in Postman · GitHub](https://gist.github.com/dinvlad/425a072c8d23c1895e9d345b67909af0?permalink_comment_id=3733051)
+- [Authenticating service-to-service | Cloud Run Documentation | Google Cloud](https://cloud.google.com/run/docs/authenticating/service-to-service)
