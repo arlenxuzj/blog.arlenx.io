@@ -20,8 +20,14 @@ const siteMeta = {
       dark: '/favicons/favicon-dark.svg'
     },
     png: {
-      light: '/favicons/favicon-light.png',
-      dark: '/favicons/favicon-dark.png'
+      '16': {
+        light: '/favicons/favicon-light-16x16.png',
+        dark: '/favicons/favicon-dark-16x16.png'
+      },
+      '32': {
+        light: '/favicons/favicon-light-32x32.png',
+        dark: '/favicons/favicon-dark-32x32.png'
+      }
     },
     appleTouchIcon: '/favicons/apple-touch-icon.png',
     maskIcon: '/favicons/safari-pinned-tab.svg'

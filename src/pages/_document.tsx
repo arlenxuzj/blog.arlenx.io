@@ -34,16 +34,43 @@ export default class MyDocument extends Document {
           />
           <link
             rel='icon'
-            className='js-site-favicon'
             type='image/svg+xml'
             href={siteMeta.favicons.svg.light}
+            media='(prefers-color-scheme: light)'
           />
           <link
-            rel='alternate icon'
-            className='js-site-favicon'
+            rel='icon'
+            sizes='16x16'
+            type='image/png'
+            href={siteMeta.favicons.png[16].light}
+            media='(prefers-color-scheme: light)'
+          />
+          <link
+            rel='icon'
             sizes='32x32'
             type='image/png'
-            href={siteMeta.favicons.png.light}
+            href={siteMeta.favicons.png[32].light}
+            media='(prefers-color-scheme: light)'
+          />
+          <link
+            rel='icon'
+            type='image/svg+xml'
+            href={siteMeta.favicons.svg.dark}
+            media='(prefers-color-scheme: dark)'
+          />
+          <link
+            rel='icon'
+            sizes='16x16'
+            type='image/png'
+            href={siteMeta.favicons.png[16].dark}
+            media='(prefers-color-scheme: dark)'
+          />
+          <link
+            rel='icon'
+            sizes='32x32'
+            type='image/png'
+            href={siteMeta.favicons.png[32].dark}
+            media='(prefers-color-scheme: dark)'
           />
           <link
             rel='apple-touch-icon'
