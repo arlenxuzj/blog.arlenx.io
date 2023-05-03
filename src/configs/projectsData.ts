@@ -17,7 +17,9 @@ const projectsData: Project[] = [
       'My personal website hosted on Vercel. Portfolio, posts, snippets, etc.',
     techStack: ['Next.js', 'React', 'MUI', 'Prisma', 'TypeScript'],
     repo: 'arlenxuzj/arlenx.io',
-    imageDarkUrl: '/projects/personal-website/images/personal-website.png'
+    imageLightUrl:
+      '/projects/personal-website/images/personal-website-light.png',
+    imageDarkUrl: '/projects/personal-website/images/personal-website-dark.png'
   },
   {
     type: 'side',
@@ -26,7 +28,10 @@ const projectsData: Project[] = [
       'The front-end of a simple e-commerce website finished on the school course.',
     techStack: ['React', 'MUI', 'TypeScript'],
     repo: 'Yami-Market/yami-market-client',
-    imageDarkUrl: '/projects/yami-market-client/images/yami-market-client.png'
+    imageLightUrl:
+      '/projects/yami-market-client/images/yami-market-client-light.png',
+    imageDarkUrl:
+      '/projects/yami-market-client/images/yami-market-client-dark.png'
   },
   {
     type: 'side',
