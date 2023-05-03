@@ -5,7 +5,14 @@ import { useState } from 'react';
 import Image from 'next/image';
 
 import CloseIcon from '@mui/icons-material/Close';
-import { Box, Card, CardContent, Modal, Stack } from '@mui/material';
+import {
+  Box,
+  Card,
+  CardContent,
+  Modal,
+  Stack,
+  useColorScheme
+} from '@mui/material';
 
 import { Project } from '@/configs/projectsData';
 import { DEFAULT_CONTENT_WIDTH } from '@/constants';
@@ -21,9 +28,11 @@ export type ProjectCardProps = {
 };
 
 const ProjectCard = ({ project, repo }: ProjectCardProps) => {
-  const { title, description, techStack, imageUrl, url } = project;
+  const { title, description, techStack, imageLightUrl, imageDarkUrl, url } =
+    project;
   const href = repo?.html_url || url;
   const [open, setOpen] = useState(false);
+  const { mode } = useColorScheme();
 
   const handleClick = () => {
     setOpen(true);
@@ -54,7 +63,11 @@ const ProjectCard = ({ project, repo }: ProjectCardProps) => {
           onClick={handleClick}
         >
           <Image
-            src={imageUrl || '/images/project-default-image.png'}
+            src={
+              mode === 'dark'
+                ? imageDarkUrl || '/images/project-default-image.png'
+                : imageLightUrl || '/images/project-default-image.png'
+            }
             alt={title}
             fill
             priority
@@ -175,7 +188,11 @@ const ProjectCard = ({ project, repo }: ProjectCardProps) => {
             </Box>
           </Box>
           <img
-            src={imageUrl || '/images/project-default-image.png'}
+            src={
+              mode === 'dark'
+                ? imageDarkUrl || '/images/project-default-image.png'
+                : imageLightUrl || '/images/project-default-image.png'
+            }
             alt={title}
             style={{
               maxWidth: '80vw',
