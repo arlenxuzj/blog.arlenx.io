@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 
-import { Box } from '@mui/material';
+import { Box, Divider } from '@mui/material';
 
 import { Text } from '@/components/Typography';
 
@@ -18,13 +18,34 @@ export type ProjectsPageProps = {
 };
 
 const ProjectsPage: NextPageWithLayout<ProjectsPageProps> = ({ repos }) => {
-  const projects = projectsData.filter(project => project.type === 'side');
+  const workProjects = projectsData.filter(project => project.type === 'work');
+  const sideProjects = projectsData.filter(project => project.type === 'side');
   return (
     <Box
       sx={{
         width: '100%'
       }}
     >
+      <Text component='h2' fontWeight={700} fontSize={30} sx={{ mb: 4 }}>
+        Work
+      </Text>
+      <Box
+        sx={{
+          display: 'grid',
+          justifyItems: 'center',
+          gridTemplateColumns: { xs: '1fr', md: 'repeat(2, 1fr)' },
+          gap: 4
+        }}
+      >
+        {workProjects.map(project => (
+          <ProjectCard
+            key={project.title}
+            project={project}
+            repo={project.repo === undefined ? undefined : repos[project.repo]}
+          />
+        ))}
+      </Box>
+      <Divider sx={{ my: 6 }} />
       <Text component='h2' fontWeight={700} fontSize={30} sx={{ mb: 4 }}>
         Side Projects
       </Text>
@@ -36,7 +57,7 @@ const ProjectsPage: NextPageWithLayout<ProjectsPageProps> = ({ repos }) => {
           gap: 4
         }}
       >
-        {projects.map(project => (
+        {sideProjects.map(project => (
           <ProjectCard
             key={project.title}
             project={project}

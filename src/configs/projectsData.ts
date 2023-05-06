@@ -11,6 +11,17 @@ export type Project = {
 
 const projectsData: Project[] = [
   {
+    type: 'work',
+    title: 'Wave Independent Film Festival',
+    description: 'Official Website for Wave Independent Film Festival',
+    techStack: ['Next.js', 'React', 'Chakra UI', 'Prisma', 'TypeScript'],
+    url: 'https://www.wavefilmfestival.org',
+    imageLightUrl:
+      '/projects/wave-film-festival/images/wave-film-festival-light.png',
+    imageDarkUrl:
+      '/projects/wave-film-festival/images/wave-film-festival-dark.png'
+  },
+  {
     type: 'side',
     title: 'Personal Website',
     description:
