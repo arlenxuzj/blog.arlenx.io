@@ -74,12 +74,12 @@ const Description = () => {
         <InlineCode>C++</InlineCode> in university.
         <br />
         {'I play in '}
-        <InlineCode>.tsx?</InlineCode>, <InlineCode>.jx?</InlineCode>,{' '}
+        <InlineCode>.tsx?</InlineCode>, <InlineCode>.jsx?</InlineCode>,{' '}
         <InlineCode>.css</InlineCode>
         {' every day.'}
         <br />
         {'I like JavaScript ecosystem and currently learning '}
-        <InlineCode>Next.js</InlineCode>
+        <InlineCode>Three.js</InlineCode>
         {' Framework.'}
       </Text>
 
