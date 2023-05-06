@@ -75,7 +75,7 @@ const lightPalette: PaletteOptions = {
   indigo: indigo,
   border: {
     color: alpha(blue[500], 0.05),
-    snippet: grey[200]
+    card: grey[200]
   },
   divider: alpha(blue[500], 0.05),
   colors: {

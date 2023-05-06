@@ -46,12 +46,16 @@ const ProjectCard = ({ project, repo }: ProjectCardProps) => {
     <>
       <Card
         variant='outlined'
-        sx={{
+        sx={theme => ({
           display: 'flex',
           flexDirection: 'column',
           maxWidth: DEFAULT_CONTENT_WIDTH / 2,
-          backgroundColor: 'background.default'
-        }}
+          backgroundColor: 'background.default',
+          borderColor: theme.vars.palette.border.card,
+          '&:hover': {
+            borderColor: theme.vars.palette.text.secondary
+          }
+        })}
       >
         <Box
           sx={{

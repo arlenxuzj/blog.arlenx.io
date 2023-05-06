@@ -21,7 +21,7 @@ const SnippetCard = ({ snippet }: SnippetCardProps) => {
           margin: 'auto',
           maxWidth: DEFAULT_CONTENT_WIDTH / 2,
           backgroundColor: 'background.default',
-          borderColor: theme.vars.palette.border.snippet,
+          borderColor: theme.vars.palette.border.card,
           '&:hover': {
             borderColor: theme.vars.palette.text.secondary
           }

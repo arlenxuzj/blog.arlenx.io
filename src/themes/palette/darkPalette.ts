@@ -75,7 +75,7 @@ const darkPalette: PaletteOptions = {
   indigo: indigo,
   border: {
     color: grey[800],
-    snippet: grey[700]
+    card: grey[700]
   },
   divider: grey[800],
   colors: {

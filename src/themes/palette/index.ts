@@ -69,7 +69,7 @@ declare module '@mui/material/styles' {
     indigo: ColorPartial;
     border: {
       color: string;
-      snippet: string;
+      card: string;
     };
     colors: {
       foreground: string;
