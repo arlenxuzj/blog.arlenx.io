@@ -1,7 +1,5 @@
 import { Box, Stack } from '@mui/material';
 
-import { umamiEventClass } from '@/utils/umami';
-
 import { TypedDescription, WavingHand } from '../Animation';
 import { InlineCode } from '../Code';
 import { InternalLink } from '../Link';
@@ -90,12 +88,10 @@ const Description = () => {
           underline='hover'
           fontSize={18}
         >
-          <span className={umamiEventClass(`home-posts-link`)}>
-            <i className='twa twa-lg twa-memo'></i>
-            <Box component='span' sx={{ ml: 1 }}>
-              My writings
-            </Box>
-          </span>
+          <i className='twa twa-lg twa-memo'></i>
+          <Box component='span' sx={{ ml: 1 }}>
+            My writings
+          </Box>
         </InternalLink>
         <InternalLink
           href='/projects'
@@ -103,12 +99,10 @@ const Description = () => {
           underline='hover'
           fontSize={18}
         >
-          <span className={umamiEventClass(`home-projects-link`)}>
-            <i className='twa twa-lg twa-hammer-and-wrench'></i>
-            <Box component='span' sx={{ ml: 1 }}>
-              What have I built?
-            </Box>
-          </span>
+          <i className='twa twa-lg twa-hammer-and-wrench'></i>
+          <Box component='span' sx={{ ml: 1 }}>
+            What have I built?
+          </Box>
         </InternalLink>
         <InternalLink
           href='/snippets'
@@ -116,12 +110,10 @@ const Description = () => {
           underline='hover'
           fontSize={18}
         >
-          <span className={umamiEventClass(`home-snippets-link`)}>
-            <i className='twa twa-lg twa-robot'></i>
-            <Box component='span' sx={{ ml: 1 }}>
-              Useful snippets collected by me
-            </Box>
-          </span>
+          <i className='twa twa-lg twa-robot'></i>
+          <Box component='span' sx={{ ml: 1 }}>
+            Useful snippets collected by me
+          </Box>
         </InternalLink>
         <InternalLink
           href='/resume'
@@ -129,12 +121,10 @@ const Description = () => {
           underline='hover'
           fontSize={18}
         >
-          <span className={umamiEventClass(`home-resume-link`)}>
-            <i className='twa twa-lg twa-briefcase'></i>
-            <Box component='span' sx={{ ml: 1 }}>
-              My resume
-            </Box>
-          </span>
+          <i className='twa twa-lg twa-briefcase'></i>
+          <Box component='span' sx={{ ml: 1 }}>
+            My resume
+          </Box>
         </InternalLink>
         <InternalLink
           href='/about'
@@ -142,12 +132,10 @@ const Description = () => {
           underline='hover'
           fontSize={18}
         >
-          <span className={umamiEventClass(`home-about-link`)}>
-            <i className='twa twa-lg twa-face-with-monocle'></i>
-            <Box component='span' sx={{ ml: 1 }}>
-              More about me and this site
-            </Box>
-          </span>
+          <i className='twa twa-lg twa-face-with-monocle'></i>
+          <Box component='span' sx={{ ml: 1 }}>
+            More about me and this site
+          </Box>
         </InternalLink>
       </Stack>
 

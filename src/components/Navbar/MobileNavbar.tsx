@@ -4,10 +4,8 @@ import { useRouter } from 'next/router';
 
 import { Box, Stack } from '@mui/material';
 import { AnimatePresence, motion } from 'framer-motion';
-import { slug } from 'github-slugger';
 
 import navLinks from '@/configs/navLinks';
-import { umamiEventClass } from '@/utils/umami';
 
 import { ButtonLink } from '../Link';
 
@@ -85,13 +83,7 @@ const MobileNavbar = ({ open, setOpen }: MobileNavbarProps) => {
                   }}
                 >
                   <ButtonLink href={nav.href} onClick={handleClick}>
-                    <span
-                      className={umamiEventClass(
-                        `nav-mobile-${slug(nav.label)}`
-                      )}
-                    >
-                      {nav.label}
-                    </span>
+                    {nav.label}
                   </ButtonLink>
                 </Box>
               ))}

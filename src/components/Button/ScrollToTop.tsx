@@ -5,8 +5,6 @@ import { Box, Fab } from '@mui/material';
 import Slide from '@mui/material/Slide';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 
-import { umamiEventClass } from '@/utils/umami';
-
 const ScrollToTop = () => {
   const trigger = useScrollTrigger({
     disableHysteresis: true,
@@ -37,7 +35,6 @@ const ScrollToTop = () => {
         }}
       >
         <Fab
-          className={umamiEventClass('scroll-to-top-button')}
           size='small'
           disableRipple
           sx={theme => ({

@@ -1,8 +1,6 @@
 import { Stack } from '@mui/material';
-import { slug } from 'github-slugger';
 
 import navLinks from '@/configs/navLinks';
-import { umamiEventClass } from '@/utils/umami';
 
 import { ButtonLink } from '../Link';
 
@@ -29,9 +27,7 @@ const Navbar = () => {
               lineHeight: 1.2
             }}
           >
-            <span className={umamiEventClass(`nav-${slug(nav.label)}`)}>
-              {nav.label}
-            </span>
+            {nav.label}
           </ButtonLink>
         ))}
     </Stack>

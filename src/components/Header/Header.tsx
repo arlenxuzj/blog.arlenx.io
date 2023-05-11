@@ -7,7 +7,6 @@ import { motion } from 'framer-motion';
 import { useWindowScroll } from 'react-use';
 
 import { NAV_HEIGHT } from '@/constants';
-import { umamiEventClass } from '@/utils/umami';
 
 import { BurgerMenu, ModeSwitcher } from '../Button';
 import { InternalLink } from '../Link';
@@ -75,9 +74,7 @@ const Header = ({ showProgressBar }: HeaderProps) => {
                 sx={{ height: logoSize }}
                 onClick={handleClick}
               >
-                <span className={umamiEventClass('nav-logo')}>
-                  <Logo width={logoSize} height={logoSize} />
-                </span>
+                <Logo width={logoSize} height={logoSize} />
               </InternalLink>
             </Stack>
             <Stack direction='row' alignItems='center' gap={2}>
