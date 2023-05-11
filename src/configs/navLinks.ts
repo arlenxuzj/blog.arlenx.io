@@ -13,12 +13,12 @@ const navLinks: NavLink[] = [
     href: '/posts'
   },
   {
-    label: 'Tags',
-    href: '/tags'
-  },
-  {
     label: 'Snippets',
     href: '/snippets'
+  },
+  {
+    label: 'Tags',
+    href: '/tags'
   },
   {
     label: 'Projects',
