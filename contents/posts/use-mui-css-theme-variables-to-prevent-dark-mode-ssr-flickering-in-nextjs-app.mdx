@@ -1,0 +1,38 @@
+---
+title: Use MUI CSS theme variables to prevent dark-mode SSR flickering in Next.js App
+description: A Step-by-Step Guide to Implementing Dark Mode with MUI and Next.js Without Flickering Issues
+tags:
+  - React
+  - Next.js
+  - MUI
+backgroundType: '3'
+createdAt: 2023-05-06 04:31:31-04:00
+updatedAt: 2023-05-06 04:31:31-04:00
+wip: true
+---
+
+## Introduction
+
+When building modern web applications, dark mode has become a popular feature that many users appreciate. However, implementing dark mode in a [Next.js](https://nextjs.org) app with [Material UI](https://mui.com) (MUI) can sometimes lead to flickering issues during Server-Side Rendering (SSR). In this blog post, we'll explore how to use MUI [CSS theme variables](https://mui.com/material-ui/experimental-api/css-theme-variables/overview) to prevent dark-mode SSR flickering in your Next.js application.
+
+## MUI CSS Theme Variables
+
+[CSS variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties), or custom properties, are a powerful feature of CSS that allows developers to define reusable values for styling properties. By defining a value once and using it in multiple places throughout a stylesheet, developers can create consistent styling across an application, as well as make global changes to styling elements.\_action_1n6lm_13
+
+MUI CSS theme variables is an experimental feature that allows developers to define custom properties and use them in MUI components. One of the advantages of using MUI CSS theme variables is that they can be used to define a dark mode theme for your application and prevent flickering issues during SSR.
+
+## Implementing Dark Mode with Next.js and MUI
+
+### Set up Next.js and MUI
+
+To get started, let's create a new Next.js app and install MUI:
+
+```bash
+npx create-next-app nextjs-mui-dark-mode
+
+cd nextjs-mui-dark-mode
+
+yarn add @mui/material @emotion/react @emotion/styled
+```
+
+Next, let's create a `_app.js` file in the `pages` directory and add the following code:
