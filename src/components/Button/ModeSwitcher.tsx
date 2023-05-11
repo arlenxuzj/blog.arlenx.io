@@ -9,7 +9,7 @@ import { useColorScheme } from '@mui/material';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 
 import useTheme from '@/hooks/useTheme';
-import umami from '@/utils/umami';
+import analytics from '@/utils/analytics';
 
 import { StyledButton } from './Button.styles';
 
@@ -51,7 +51,7 @@ const ModeSwitcher = React.forwardRef((props, ref) => {
       animate={isChecked ? 'checked' : 'unchecked'}
       transition={{ duration }}
       onClick={() => {
-        umami.trackEvent('nav-theme-switcher');
+        analytics.trackEvent('nav-theme-switcher');
         toggleTheme();
       }}
       sx={{

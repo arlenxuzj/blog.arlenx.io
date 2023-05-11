@@ -4,7 +4,7 @@ https://github.com/imzxj/next-blog-starter/blob/main/src/components/BurgerMenu.t
  */
 import { motion } from 'framer-motion';
 
-import umami from '@/utils/umami';
+import analytics from '@/utils/analytics';
 
 import { StyledButton } from './Button.styles';
 
@@ -62,7 +62,7 @@ const BurgerMenu = ({ open, toggleOpen }: BurgerMenuProps) => {
       animate={open ? 'open' : 'closed'}
       transition={{ duration }}
       onClick={() => {
-        umami.trackEvent('nav-mobile-toggle');
+        analytics.trackEvent('nav-mobile-toggle');
         toggleOpen();
       }}
       sx={{

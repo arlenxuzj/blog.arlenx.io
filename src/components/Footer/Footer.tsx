@@ -2,7 +2,7 @@ import { Box, Divider, Stack } from '@mui/material';
 
 import navLinks from '@/configs/navLinks';
 import siteMeta from '@/configs/siteMeta';
-import umami from '@/utils/umami';
+import analytics from '@/utils/analytics';
 
 import { DevSvgIcon } from '../Icon';
 import { ExternalLink, InternalLink } from '../Link';
@@ -123,7 +123,7 @@ const Footer = () => {
                   >
                     <span
                       onClick={() => {
-                        umami.trackEvent('footer-view-source');
+                        analytics.trackEvent('footer-view-source');
                       }}
                     >
                       View Source
