@@ -9,7 +9,6 @@
   "trailingComma": "none",
   "bracketSpacing": true,
   "bracketSameLine": false,
-  "jsxBracketSameLine": false,
   "arrowParens": "avoid",
   "requirePragma": false,
   "insertPragma": false,
