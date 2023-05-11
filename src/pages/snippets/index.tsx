@@ -34,7 +34,13 @@ const SnippetsPage: NextPageWithLayout<SnippetsPageProps> = ({ snippets }) => {
 
 export const getStaticProps: GetStaticProps<SnippetsPageProps> = async () => {
   const snippets = allSnippets
-    .filter(snippet => !snippet.wip)
+    .filter(snippet => {
+      if (process.env.NODE_ENV === 'production') {
+        return !snippet.wip;
+      } else {
+        return true;
+      }
+    })
     .sort((a, b) => compareDesc(new Date(a.createdAt), new Date(b.createdAt)));
 
   return {

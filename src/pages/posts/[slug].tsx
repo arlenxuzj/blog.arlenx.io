@@ -42,11 +42,19 @@ const PostPage: NextPage<PostPageProps> = ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: allPosts.map(post => ({
-      params: {
-        slug: post.slug
-      }
-    })),
+    paths: allPosts
+      .filter(post => {
+        if (process.env.NODE_ENV === 'production') {
+          return !post.wip;
+        } else {
+          return true;
+        }
+      })
+      .map(post => ({
+        params: {
+          slug: post.slug
+        }
+      })),
     fallback: false
   };
 };

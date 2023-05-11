@@ -44,11 +44,19 @@ const SnippetPage: NextPage<SnippetPageProps> = ({
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: allSnippets.map(snippet => ({
-      params: {
-        slug: snippet.slug
-      }
-    })),
+    paths: allSnippets
+      .filter(snippet => {
+        if (process.env.NODE_ENV === 'production') {
+          return !snippet.wip;
+        } else {
+          return true;
+        }
+      })
+      .map(snippet => ({
+        params: {
+          slug: snippet.slug
+        }
+      })),
     fallback: false
   };
 };

@@ -104,7 +104,13 @@ const PostsPage: NextPageWithLayout<PostsPageProps> = ({ posts }) => {
 
 export const getStaticProps: GetStaticProps<PostsPageProps> = async () => {
   const posts = allPosts
-    .filter(post => !post.wip)
+    .filter(post => {
+      if (process.env.NODE_ENV === 'production') {
+        return !post.wip;
+      } else {
+        return true;
+      }
+    })
     .sort((a, b) => compareDesc(new Date(a.createdAt), new Date(b.createdAt)));
 
   return {
