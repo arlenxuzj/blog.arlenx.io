@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { ArticleJsonLd, NextSeo } from 'next-seo';
 
 import siteMeta from '@/configs/siteMeta';
+import { truncate } from '@/utils/string';
 
 export type SeoProps = {
   title?: string;
@@ -74,10 +75,13 @@ const Seo = ({
         <meta name='googlebot' content='index,follow' />
         <meta name='author' content={siteMeta.author} />
         {tags && <meta name='keywords' content={tags.join(',')} />}
-        <meta name='twitter:title' content={seo.title} />
-        <meta name='twitter:description' content={seo.description} />
+        <meta name='twitter:title' content={truncate(seo.title, 70)} />
+        <meta
+          name='twitter:description'
+          content={truncate(seo.description, 200)}
+        />
         <meta name='twitter:image' content={seo.imageUrl} />
-        <meta name='twitter:image:alt' content={seo.title} />
+        <meta name='twitter:image:alt' content={truncate(seo.title, 70)} />
       </Head>
       <ArticleJsonLd
         type='BlogPosting'
