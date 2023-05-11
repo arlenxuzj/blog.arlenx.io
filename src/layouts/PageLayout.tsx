@@ -14,6 +14,7 @@ export type PageLayoutProps = {
   description: string;
   path: string;
   updatedAt?: string;
+  updateDateAtBuildTime?: boolean;
   wip?: boolean;
   contentWidth?: number;
   children: React.ReactNode;
@@ -25,10 +26,12 @@ export const PageLayout = ({
   description,
   path,
   updatedAt,
+  updateDateAtBuildTime,
   wip,
   contentWidth,
   children
 }: PageLayoutProps) => {
+  console.log(updatedAt);
   return (
     <>
       <Seo title={headTitle} description={description} path={path} />
@@ -60,9 +63,16 @@ export const PageLayout = ({
               })}
             />
             <Stack direction='row' gap={1} flexWrap='wrap'>
-              {updatedAt && (
-                <Pill>{`Last Updated ${formatDate(parseISO(updatedAt))}`}</Pill>
+              {updateDateAtBuildTime ? (
+                <Pill>{`Last Updated ${formatDate(new Date())}`}</Pill>
+              ) : (
+                updatedAt && (
+                  <Pill>{`Last Updated ${formatDate(
+                    parseISO(updatedAt)
+                  )}`}</Pill>
+                )
               )}
+
               {wip && <Pill variant='warning'>Working In Progress</Pill>}
             </Stack>
           </Box>

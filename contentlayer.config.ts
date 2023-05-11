@@ -176,6 +176,12 @@ export const Page = defineDocumentType(() => ({
       description: 'Date when the post was updated',
       required: false
     },
+    updateDateAtBuildTime: {
+      type: 'boolean',
+      description:
+        'Whether the updatedAt field should be set to the build time',
+      required: false
+    },
     wip: {
       type: 'boolean',
       description: 'Whether the page is a work in progress',

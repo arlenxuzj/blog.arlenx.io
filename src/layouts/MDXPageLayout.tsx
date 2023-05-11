@@ -23,6 +23,7 @@ const MDXPageLayout = ({
       description={page.description}
       path={path}
       updatedAt={page.updatedAt}
+      updateDateAtBuildTime={page.updateDateAtBuildTime}
       wip={page.wip}
       contentWidth={contentWidth}
     >
