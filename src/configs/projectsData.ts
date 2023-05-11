@@ -1,4 +1,5 @@
 export type Project = {
+  id: string;
   type: string;
   title: string;
   description: string;
@@ -11,6 +12,7 @@ export type Project = {
 
 const projectsData: Project[] = [
   {
+    id: 'wave-independent-film-festival',
     type: 'work',
     title: 'Wave Independent Film Festival',
     description: 'Official Website for Wave Independent Film Festival',
@@ -22,6 +24,7 @@ const projectsData: Project[] = [
       '/projects/wave-film-festival/images/wave-film-festival-dark.png'
   },
   {
+    id: 'personal-website',
     type: 'side',
     title: 'Personal Website',
     description:
@@ -33,6 +36,7 @@ const projectsData: Project[] = [
     imageDarkUrl: '/projects/personal-website/images/personal-website-dark.png'
   },
   {
+    id: 'yami-market-client',
     type: 'side',
     title: 'Yami Market Client',
     description:
@@ -45,6 +49,7 @@ const projectsData: Project[] = [
       '/projects/yami-market-client/images/yami-market-client-dark.png'
   },
   {
+    id: 'yami-market-server',
     type: 'side',
     title: 'Yami Market Server',
     description:

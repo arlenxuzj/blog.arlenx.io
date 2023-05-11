@@ -6,14 +6,14 @@ import umami from './umami';
 
 const trackEvent = (
   eventName: string,
-  data: Record<string, string | number | boolean | null> | undefined = undefined
+  data?: Record<string, string | number | boolean | null>
 ) => {
   if (analyticsConfig.umami) {
     umami.trackEvent(eventName, data);
   }
 
   if (analyticsConfig.vercel) {
-    va.track(eventName, data);
+    data ? va.track(eventName, data) : va.track(eventName);
   }
 };
 

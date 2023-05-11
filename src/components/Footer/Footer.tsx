@@ -260,7 +260,13 @@ const Footer = () => {
                       }
                     }}
                   >
-                    Email
+                    <span
+                      onClick={() => {
+                        analytics.trackEvent('footer-email');
+                      }}
+                    >
+                      Email
+                    </span>
                   </Text>
                   <Text
                     component={ExternalLink}
@@ -275,7 +281,13 @@ const Footer = () => {
                       }
                     }}
                   >
-                    Github
+                    <span
+                      onClick={() => {
+                        analytics.trackEvent('footer-github');
+                      }}
+                    >
+                      Github
+                    </span>
                   </Text>
                   <Text
                     component={ExternalLink}
@@ -290,7 +302,13 @@ const Footer = () => {
                       }
                     }}
                   >
-                    Linkedin
+                    <span
+                      onClick={() => {
+                        analytics.trackEvent('footer-linkedin');
+                      }}
+                    >
+                      Linkedin
+                    </span>
                   </Text>
                 </Stack>
               </Box>

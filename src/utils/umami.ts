@@ -1,6 +1,6 @@
 const trackEvent = (
   eventName: string,
-  data: Record<string, string | number | boolean | null> | undefined = undefined
+  data?: Record<string, string | number | boolean | null>
 ) => {
   // @ts-ignore
   const umami = window.umami;

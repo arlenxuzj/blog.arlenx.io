@@ -17,6 +17,7 @@ import {
 import { Project } from '@/configs/projectsData';
 import { DEFAULT_CONTENT_WIDTH } from '@/constants';
 import { GithubRepo as GithubRepoType } from '@/services/github';
+import analytics from '@/utils/analytics';
 
 import { ExternalLink } from '../Link';
 import { Text } from '../Typography';
@@ -28,13 +29,21 @@ export type ProjectCardProps = {
 };
 
 const ProjectCard = ({ project, repo }: ProjectCardProps) => {
-  const { title, description, techStack, imageLightUrl, imageDarkUrl, url } =
-    project;
+  const {
+    id,
+    title,
+    description,
+    techStack,
+    imageLightUrl,
+    imageDarkUrl,
+    url
+  } = project;
   const href = repo?.html_url || url;
   const [open, setOpen] = useState(false);
   const { mode } = useColorScheme();
 
   const handleClick = () => {
+    analytics.trackEvent(`project-${id}-image`);
     setOpen(true);
   };
 
@@ -107,7 +116,13 @@ const ProjectCard = ({ project, repo }: ProjectCardProps) => {
                     fontWeight: 600
                   }}
                 >
-                  {title}
+                  <span
+                    onClick={() => {
+                      analytics.trackEvent(`project-${id}-title`);
+                    }}
+                  >
+                    {title}
+                  </span>
                 </ExternalLink>
               ) : (
                 title
@@ -155,7 +170,13 @@ const ProjectCard = ({ project, repo }: ProjectCardProps) => {
                     }
                   }}
                 >
-                  Learn More
+                  <span
+                    onClick={() => {
+                      analytics.trackEvent(`project-${id}-learn-more`);
+                    }}
+                  >
+                    Learn More
+                  </span>
                 </ExternalLink>
               </Stack>
             )}
