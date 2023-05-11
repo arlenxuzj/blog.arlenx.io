@@ -31,7 +31,6 @@ export const PageLayout = ({
   contentWidth,
   children
 }: PageLayoutProps) => {
-  console.log(updatedAt);
   return (
     <>
       <Seo title={headTitle} description={description} path={path} />
