@@ -36,10 +36,10 @@ const Seo = ({
 
   const createdDate = seo.createdAt
     ? new Date(seo.createdAt).toISOString()
-    : '';
+    : new Date().toISOString();
   const updatedDate = seo.updatedAt
     ? new Date(seo.updatedAt).toISOString()
-    : '';
+    : new Date().toISOString();
 
   return (
     <>
