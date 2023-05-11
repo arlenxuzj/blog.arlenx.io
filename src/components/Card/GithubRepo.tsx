@@ -80,7 +80,7 @@ const GithubRepo = ({ repo }: GithubRepoProps) => {
           >
             <span
               onClick={() => {
-                analytics.trackEvent(`project-github-${repo.name}-homepage}`);
+                analytics.trackEvent(`project-github-${repo.name}-homepage`);
               }}
             >
               <svg
@@ -114,7 +114,7 @@ const GithubRepo = ({ repo }: GithubRepoProps) => {
         >
           <span
             onClick={() => {
-              analytics.trackEvent(`project-github-${repo.name}-url}`);
+              analytics.trackEvent(`project-github-${repo.name}-url`);
             }}
           >
             <svg
