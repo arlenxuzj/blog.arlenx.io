@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { ArticleJsonLd, DefaultSeo as NextDefaultSeo } from 'next-seo';
 
 import siteMeta from '@/configs/siteMeta';
-import { truncate } from '@/utils/string';
 
 export type DefaultSEOProps = {
   title?: string;
@@ -45,25 +44,16 @@ const DefaultSeo = ({ title }: DefaultSEOProps) => {
         <meta name='keywords' content={siteMeta.keywords.join(',')} />
         <meta
           name='twitter:title'
-          content={truncate(
-            title ? `${title} | ${siteMeta.title}` : `${siteMeta.title}`,
-            70
-          )}
+          content={title ? `${title} | ${siteMeta.title}` : `${siteMeta.title}`}
         />
-        <meta
-          name='twitter:description'
-          content={truncate(siteMeta.description, 200)}
-        />
+        <meta name='twitter:description' content={siteMeta.description} />
         <meta
           name='twitter:image'
           content={`${siteMeta.url}${siteMeta.image}`}
         />
         <meta
           name='twitter:image:alt'
-          content={truncate(
-            title ? `${title} | ${siteMeta.title}` : `${siteMeta.title}`,
-            70
-          )}
+          content={title ? `${title} | ${siteMeta.title}` : `${siteMeta.title}`}
         />
       </Head>
       <ArticleJsonLd
@@ -74,7 +64,11 @@ const DefaultSeo = ({ title }: DefaultSEOProps) => {
         images={[`${siteMeta.url}${siteMeta.image}`]}
         datePublished={new Date().toISOString()}
         dateModified={new Date().toISOString()}
-        authorName={siteMeta.author}
+        authorName={{
+          '@type': 'Person',
+          name: siteMeta.author,
+          url: siteMeta.url
+        }}
       />
     </>
   );
