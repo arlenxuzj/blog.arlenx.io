@@ -5,7 +5,7 @@ const trackEvent = (
   // @ts-ignore
   const umami = window.umami;
   if (umami) {
-    data ? umami(eventName, data) : umami(eventName);
+    data ? umami.track(eventName, data) : umami.track(eventName);
   }
 };
 
