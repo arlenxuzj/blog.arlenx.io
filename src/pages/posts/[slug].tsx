@@ -30,7 +30,6 @@ const PostPage: NextPage<PostPageProps> = ({
 }) => {
   const { body } = post;
   const MDXContent = useMDXComponent(body.code);
-  // const [mount, setMount] = useState(false);
   useHashFragment(-1 * SCROLL_OFFSET);
 
   return (
@@ -41,6 +40,15 @@ const PostPage: NextPage<PostPageProps> = ({
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  console.log(
+    allPosts.filter(post => {
+      if (process.env.NODE_ENV === 'production') {
+        return !post.wip;
+      } else {
+        return true;
+      }
+    })
+  );
   return {
     paths: allPosts
       .filter(post => {
