@@ -26,19 +26,23 @@ const ModeSwitcher = React.forwardRef((props, ref) => {
 
   const moonVariants = {
     checked: {
-      scale: 1
+      scale: 1,
+      pathLength: 1
     },
     unchecked: {
-      scale: 0
+      scale: 0,
+      pathLength: 0
     }
   };
 
   const sunVariants = {
     checked: {
-      scale: 0
+      scale: 0,
+      pathLength: 0
     },
     unchecked: {
-      scale: 1
+      scale: 1,
+      pathLength: 1
     }
   };
 
@@ -47,9 +51,6 @@ const ModeSwitcher = React.forwardRef((props, ref) => {
       component={motion.div}
       {...props}
       ref={ref}
-      initial={false}
-      animate={isChecked ? 'checked' : 'unchecked'}
-      transition={{ duration }}
       onClick={() => {
         analytics.trackEvent('nav-theme-switcher');
         toggleTheme();
@@ -64,6 +65,9 @@ const ModeSwitcher = React.forwardRef((props, ref) => {
         viewBox='0 0 25 25'
         fill='none'
         xmlns='http://www.w3.org/2000/svg'
+        initial='unchecked'
+        animate={isChecked ? 'checked' : 'unchecked'}
+        transition={{ duration }}
       >
         <motion.path
           d='M12.4058 17.7625C15.1672 17.7625 17.4058 15.5239 17.4058 12.7625C17.4058 10.0011 15.1672 7.76251 12.4058 7.76251C9.64434 7.76251 7.40576 10.0011 7.40576 12.7625C7.40576 15.5239 9.64434 17.7625 12.4058 17.7625Z'
@@ -71,6 +75,7 @@ const ModeSwitcher = React.forwardRef((props, ref) => {
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
+          strokeDasharray='0 1'
           variants={sunVariants}
           custom={isChecked}
           transition={{ duration }}
@@ -85,6 +90,7 @@ const ModeSwitcher = React.forwardRef((props, ref) => {
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
+          strokeDasharray='0 1'
           variants={sunVariants}
           custom={isChecked}
           transition={{ duration }}
@@ -99,6 +105,7 @@ const ModeSwitcher = React.forwardRef((props, ref) => {
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
+          strokeDasharray='0 1'
           variants={sunVariants}
           custom={isChecked}
           transition={{ duration }}
@@ -113,6 +120,7 @@ const ModeSwitcher = React.forwardRef((props, ref) => {
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
+          strokeDasharray='0 1'
           variants={sunVariants}
           custom={isChecked}
           transition={{ duration }}
@@ -127,6 +135,7 @@ const ModeSwitcher = React.forwardRef((props, ref) => {
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
+          strokeDasharray='0 1'
           variants={sunVariants}
           custom={isChecked}
           transition={{ duration }}
@@ -141,6 +150,7 @@ const ModeSwitcher = React.forwardRef((props, ref) => {
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
+          strokeDasharray='0 1'
           variants={sunVariants}
           custom={isChecked}
           transition={{ duration }}
@@ -155,6 +165,7 @@ const ModeSwitcher = React.forwardRef((props, ref) => {
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
+          strokeDasharray='0 1'
           variants={sunVariants}
           custom={isChecked}
           transition={{ duration }}
@@ -169,6 +180,7 @@ const ModeSwitcher = React.forwardRef((props, ref) => {
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
+          strokeDasharray='0 1'
           variants={sunVariants}
           custom={isChecked}
           transition={{ duration }}
@@ -183,6 +195,7 @@ const ModeSwitcher = React.forwardRef((props, ref) => {
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
+          strokeDasharray='0 1'
           variants={sunVariants}
           custom={isChecked}
           transition={{ duration }}
@@ -197,6 +210,7 @@ const ModeSwitcher = React.forwardRef((props, ref) => {
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
+          strokeDasharray='0 1'
           transition={{ duration }}
           variants={moonVariants}
           custom={isChecked}
