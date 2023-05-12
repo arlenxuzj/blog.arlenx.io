@@ -56,11 +56,10 @@ const paths = _.uniq([
 
 const urlTags = paths
   .map(path => {
-    return `
-    <url>
+    return `<url>
       <loc>${`${siteMeta.url}${path}`}</loc>
     </url>
-  `;
+    `;
   })
   .join('');
 
