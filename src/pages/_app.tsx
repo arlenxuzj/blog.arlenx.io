@@ -26,7 +26,7 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   showHeaderProgressBar?: boolean;
 };
 
-type AppPropsWithLayout = AppProps & {
+export type MyAppProps = AppProps & {
   Component: NextPageWithLayout;
   emotionCache?: EmotionCache;
 };
@@ -34,7 +34,7 @@ type AppPropsWithLayout = AppProps & {
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
-const App = (props: AppPropsWithLayout) => {
+const App = (props: MyAppProps) => {
   const { Component, pageProps, emotionCache = clientSideEmotionCache } = props;
 
   const getLayout = Component.getLayout ?? (page => page);

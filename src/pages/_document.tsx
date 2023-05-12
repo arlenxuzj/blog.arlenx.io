@@ -1,4 +1,12 @@
-import Document, { Head, Html, Main, NextScript } from 'next/document';
+import { AppType } from 'next/app';
+import Document, {
+  DocumentContext,
+  DocumentProps,
+  Head,
+  Html,
+  Main,
+  NextScript
+} from 'next/document';
 
 import createEmotionServer from '@emotion/server/create-instance';
 import { getInitColorSchemeScript } from '@mui/material/styles';
@@ -6,109 +14,113 @@ import { getInitColorSchemeScript } from '@mui/material/styles';
 import siteMeta from '@/configs/siteMeta';
 import createEmotionCache from '@/utils/emotion';
 
-export default class MyDocument extends Document {
-  render() {
-    return (
-      <Html lang='en'>
-        <Head>
-          <link
-            rel='preload'
-            href='/fonts/inter-var-latin.woff2'
-            as='font'
-            type='font/woff2'
-            crossOrigin='anonymous'
-          />
-          <link
-            rel='preload'
-            href='/fonts/inter-var-latin-italic.woff2'
-            as='font'
-            type='font/woff2'
-            crossOrigin='anonymous'
-          />
-          <link
-            rel='preload'
-            href='/fonts/fira-code.woff2'
-            as='font'
-            type='font/woff2'
-            crossOrigin='anonymous'
-          />
-          <link
-            rel='icon'
-            type='image/svg+xml'
-            href={siteMeta.favicons.svg.light}
-            media='(prefers-color-scheme: light)'
-          />
-          <link
-            rel='icon'
-            sizes='16x16'
-            type='image/png'
-            href={siteMeta.favicons.png[16].light}
-            media='(prefers-color-scheme: light)'
-          />
-          <link
-            rel='icon'
-            sizes='32x32'
-            type='image/png'
-            href={siteMeta.favicons.png[32].light}
-            media='(prefers-color-scheme: light)'
-          />
-          <link
-            rel='icon'
-            type='image/svg+xml'
-            href={siteMeta.favicons.svg.dark}
-            media='(prefers-color-scheme: dark)'
-          />
-          <link
-            rel='icon'
-            sizes='16x16'
-            type='image/png'
-            href={siteMeta.favicons.png[16].dark}
-            media='(prefers-color-scheme: dark)'
-          />
-          <link
-            rel='icon'
-            sizes='32x32'
-            type='image/png'
-            href={siteMeta.favicons.png[32].dark}
-            media='(prefers-color-scheme: dark)'
-          />
-          <link
-            rel='apple-touch-icon'
-            sizes='180x180'
-            href={siteMeta.favicons.appleTouchIcon}
-          />
-          <link
-            rel='mask-icon'
-            href={siteMeta.favicons.maskIcon}
-            color='#000000'
-          />
-          <link
-            rel='manifest'
-            href='/manifest.json'
-            crossOrigin='use-credentials'
-          />
-          <meta name='emotion-insertion-point' content='' />
-          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-          {(this.props as any).emotionStyleTags}
-        </Head>
-        <body>
-          {getInitColorSchemeScript({
-            defaultMode: 'dark',
-            modeStorageKey: 'mode',
-            colorSchemeStorageKey: 'color-scheme',
-            attribute: 'color-scheme'
-          })}
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
+import { MyAppProps } from './_app';
+
+interface MyDocumentProps extends DocumentProps {
+  emotionStyleTags: JSX.Element[];
 }
+
+const MyDocument = ({ emotionStyleTags }: MyDocumentProps) => {
+  return (
+    <Html lang='en'>
+      <Head>
+        <link
+          rel='preload'
+          href='/fonts/inter-var-latin.woff2'
+          as='font'
+          type='font/woff2'
+          crossOrigin='anonymous'
+        />
+        <link
+          rel='preload'
+          href='/fonts/inter-var-latin-italic.woff2'
+          as='font'
+          type='font/woff2'
+          crossOrigin='anonymous'
+        />
+        <link
+          rel='preload'
+          href='/fonts/fira-code.woff2'
+          as='font'
+          type='font/woff2'
+          crossOrigin='anonymous'
+        />
+        <link
+          rel='icon'
+          type='image/svg+xml'
+          href={siteMeta.favicons.svg.light}
+          media='(prefers-color-scheme: light)'
+        />
+        <link
+          rel='icon'
+          sizes='16x16'
+          type='image/png'
+          href={siteMeta.favicons.png[16].light}
+          media='(prefers-color-scheme: light)'
+        />
+        <link
+          rel='icon'
+          sizes='32x32'
+          type='image/png'
+          href={siteMeta.favicons.png[32].light}
+          media='(prefers-color-scheme: light)'
+        />
+        <link
+          rel='icon'
+          type='image/svg+xml'
+          href={siteMeta.favicons.svg.dark}
+          media='(prefers-color-scheme: dark)'
+        />
+        <link
+          rel='icon'
+          sizes='16x16'
+          type='image/png'
+          href={siteMeta.favicons.png[16].dark}
+          media='(prefers-color-scheme: dark)'
+        />
+        <link
+          rel='icon'
+          sizes='32x32'
+          type='image/png'
+          href={siteMeta.favicons.png[32].dark}
+          media='(prefers-color-scheme: dark)'
+        />
+        <link
+          rel='apple-touch-icon'
+          sizes='180x180'
+          href={siteMeta.favicons.appleTouchIcon}
+        />
+        <link
+          rel='mask-icon'
+          href={siteMeta.favicons.maskIcon}
+          color='#000000'
+        />
+        <link
+          rel='manifest'
+          href='/manifest.json'
+          crossOrigin='use-credentials'
+        />
+        <meta name='emotion-insertion-point' content='' />
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        {emotionStyleTags}
+      </Head>
+      <body>
+        {getInitColorSchemeScript({
+          defaultMode: 'dark',
+          modeStorageKey: 'mode',
+          colorSchemeStorageKey: 'color-scheme',
+          attribute: 'color-scheme'
+        })}
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
+};
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with static-site generation (SSG).
-MyDocument.getInitialProps = async ctx => {
+MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   // Resolution order
   //
   // On the server:
@@ -140,8 +152,9 @@ MyDocument.getInitialProps = async ctx => {
 
   ctx.renderPage = () =>
     originalRenderPage({
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      enhanceApp: (App: any) =>
+      enhanceApp: (
+        App: React.ComponentType<React.ComponentProps<AppType> & MyAppProps>
+      ) =>
         function EnhanceApp(props) {
           return <App emotionCache={cache} {...props} />;
         }
@@ -165,3 +178,5 @@ MyDocument.getInitialProps = async ctx => {
     emotionStyleTags
   };
 };
+
+export default MyDocument;
