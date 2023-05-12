@@ -10,6 +10,9 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push --skip-generate",
     "commit": "cz",
+    "sitemap": "tsx scripts/sitemap.ts",
+    "og-image": "tsx scripts/og-image.ts",
+    "scripts": "npm run sitemap && npm run og-image",
     "lint-staged": "lint-staged -v",
     "prepare": "is-ci || husky install"
   },
