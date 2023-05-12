@@ -12,7 +12,6 @@ export type GithubRepoProps = {
 };
 
 const GithubRepo = ({ repo }: GithubRepoProps) => {
-  console.log(repo);
   return (
     <Stack
       direction='row'
