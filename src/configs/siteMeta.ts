@@ -11,8 +11,8 @@ const siteMeta = {
     'Web',
     'Blog'
   ],
-  url: 'https://arlenx.io',
-  repo: 'https://github.com/arlenxuzj/arlenx.io',
+  url: 'https://blog.arlenx.io',
+  repo: 'https://github.com/arlenxuzj/blog.arlenx.io',
   image: '/images/og-default-image.png',
   favicons: {
     svg: {
