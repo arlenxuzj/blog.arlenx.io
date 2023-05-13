@@ -1,5 +1,6 @@
 import Aws from '@/icons/Aws.svg';
 import Bootstrap from '@/icons/Bootstrap.svg';
+import ChakraUI from '@/icons/ChakraUI.svg';
 import Css from '@/icons/Css.svg';
 import DataGrip from '@/icons/DataGrip.svg';
 import DigitalOcean from '@/icons/DigitalOcean.svg';
@@ -36,6 +37,7 @@ import PyCharm from '@/icons/PyCharm.svg';
 import Python from '@/icons/Python.svg';
 import R from '@/icons/R.svg';
 import RStudio from '@/icons/RStudio.svg';
+import Railway from '@/icons/Railway.svg';
 import React from '@/icons/React.svg';
 import ReactQuery from '@/icons/ReactQuery.svg';
 import ReactRedux from '@/icons/ReactRedux.svg';
@@ -53,6 +55,24 @@ import WebStorm from '@/icons/WebStorm.svg';
 import Webpack from '@/icons/Webpack.svg';
 
 export const DevIcons = {
+  Railway: {
+    icon: Railway,
+    name: 'Railway',
+    label: 'Railway',
+    href: 'https://railway.app'
+  },
+  ExpressJs: {
+    icon: ExpressJs,
+    name: 'ExpressJs',
+    label: 'Express.js',
+    href: 'https://expressjs.com'
+  },
+  ChakraUI: {
+    icon: ChakraUI,
+    name: 'ChakraUI',
+    label: 'Chakra UI',
+    href: 'https://chakra-ui.com'
+  },
   Postman: {
     icon: Postman,
     name: 'Postman',
