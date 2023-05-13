@@ -6,7 +6,7 @@ export const TocWrapper = styled(Box)<BoxProps>(({ theme }) => ({
   position: 'sticky',
   display: 'flex',
   maxWidth: 250,
-  height: '60vh',
+  height: 'auto',
   maxHeight: 500,
   top: NAV_HEIGHT * 3,
   marginLeft: theme.spacing(4),
