@@ -373,12 +373,6 @@ export const DevIcons = {
     label: 'Node.js',
     href: 'https://nodejs.org'
   },
-  ExpressJs: {
-    icon: ExpressJs,
-    name: 'ExpressJs',
-    label: 'Express.js',
-    href: 'https://expressjs.com'
-  },
   TailwindCss: {
     icon: TailwindCss,
     name: 'TailwindCss',
