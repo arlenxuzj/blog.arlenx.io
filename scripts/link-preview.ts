@@ -17,9 +17,9 @@ type LinkPreview = {
   url: string;
   title: string;
   description: string;
-  image: string;
   hostname: string;
-  imageUrl: string;
+  image?: string;
+  imageUrl?: string;
 };
 
 const REFRESH = false;
@@ -89,30 +89,38 @@ const main = async () => {
     const metadata = await metascraper({ html, url });
     const metadataUrl = new URL(metadata.url);
 
-    console.log(`Downloading ${metadata.image}`);
-    const imageUrl = new URL(metadata.image);
-    const imageFolderPath = Buffer.from(path.dirname(metadata.image)).toString(
-      'base64'
-    );
-    const outputFolderPath = path.resolve(
-      LINK_PREVIEW_IMAGE_FOLDER_PATH,
-      imageFolderPath
-    );
-    const fileName = path.basename(imageUrl.pathname);
-    const outputFileName =
-      fileName.split('.').length === 1 ? `${fileName}.jpg` : fileName;
+    if (metadata.image) {
+      console.log(`Downloading ${metadata.image}`);
+      const imageUrl = new URL(metadata.image);
+      const imageFolderPath = Buffer.from(
+        path.dirname(metadata.image)
+      ).toString('base64');
+      const outputFolderPath = path.resolve(
+        LINK_PREVIEW_IMAGE_FOLDER_PATH,
+        imageFolderPath
+      );
+      const fileName = path.basename(imageUrl.pathname);
+      const outputFileName =
+        fileName.split('.').length === 1 ? `${fileName}.jpg` : fileName;
 
-    if (!fs.existsSync(outputFolderPath)) {
-      fs.mkdirSync(outputFolderPath, { recursive: true });
+      if (!fs.existsSync(outputFolderPath)) {
+        fs.mkdirSync(outputFolderPath, { recursive: true });
+      }
+
+      await downloadImage(metadata.image, outputFolderPath, outputFileName);
+
+      linkPreviewJSON.push({
+        ...metadata,
+        hostname: metadataUrl.hostname,
+        link,
+        imageUrl: `/images/link-preview/${imageFolderPath}/${outputFileName}`
+      });
     }
-
-    await downloadImage(metadata.image, outputFolderPath, outputFileName);
 
     linkPreviewJSON.push({
       ...metadata,
       hostname: metadataUrl.hostname,
-      link,
-      imageUrl: `/images/link-preview/${imageFolderPath}/${outputFileName}`
+      link
     });
   }
 

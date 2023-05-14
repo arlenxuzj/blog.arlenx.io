@@ -71,12 +71,14 @@ const MDXLinkPreview = ({ link }: MDXLinkPreviewProps) => {
           {linkPreview.hostname}
         </Text>
       </Box>
-      <CardMedia
-        component='img'
-        sx={{ width: 150 }}
-        image={linkPreview.imageUrl}
-        alt='image'
-      />
+      {linkPreview.imageUrl && (
+        <CardMedia
+          component='img'
+          sx={{ width: 150 }}
+          image={linkPreview.imageUrl}
+          alt='image'
+        />
+      )}
     </Card>
   );
 };
