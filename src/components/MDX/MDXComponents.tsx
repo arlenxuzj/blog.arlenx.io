@@ -30,6 +30,7 @@ import {
 } from './Common/MDXTable';
 import MDXDevIconSet, { MDXDevIcon } from './Widgets/MDXDevIconSet';
 import MDXFindMe from './Widgets/MDXFindMe';
+import MDXLinkPreview from './Widgets/MDXLinkPreview';
 
 const MDXComponents: Components = {
   h1: MDXHeading1,
@@ -58,7 +59,8 @@ const MDXComponents: Components = {
   MDXParagraph,
   MDXDevIconSet,
   MDXDevIcon,
-  MDXFindMe
+  MDXFindMe,
+  MDXLinkPreview
 };
 
 export default MDXComponents;
