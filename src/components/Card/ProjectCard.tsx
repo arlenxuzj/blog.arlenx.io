@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 
@@ -28,6 +28,9 @@ export type ProjectCardProps = {
   repo?: GithubRepoType;
 };
 
+const TRANSPARENT_BASE_64 =
+  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAcIAAAD6CAQAAACYT4+6AAACD0lEQVR42u3TMQ0AAAzDsJU/6cFoDxtCpOSAqkgAJgQTAiYEEwImBBMCJgQTAiYEEwImBBMCJgQTAiYEEwImBBMCJgQTAiYEEwImBBMCJgQTAiYEEwImBBMCJgQTAiYEEwImBBMCJgQTAiYEEwImBBMCJgQTAiYEEwImBBMCJgQTAiYEEwImBBMCJgQTAiYEEwImBBMCJgQTAiYEE4IJAROCCQETggkBE4IJAROCCQETggkBE4IJAROCCQETggkBE4IJAROCCQETggkBE4IJAROCCQETggkBE4IJAROCCQETggkBE4IJAROCCQETggkBE4IJAROCCQETggkBE4IJAROCCQETggkBE4IJAROCCQETggkBE4IJAROCCQETggnBhIAJwYSACcGEgAnBhIAJwYSACcGEgAnBhIAJwYSACcGEgAnBhIAJwYSACcGEgAnBhIAJwYSACcGEgAnBhIAJwYSACcGEgAnBhIAJwYSACcGEgAnBhIAJwYSACcGEgAnBhIAJwYSACcGEgAnBhIAJwYSACcGEgAnBhIAJwYSACcGEYELAhGBCwIRgQsCEYELAhGBCwIRgQsCEYELAhGBCwIRgQsCEYELAhGBCwIRgQsCEYELAhGBCwIRgQsCEYELAhGBCwIRgQsCEYELAhGBCwIRgQsCEYELAhGBCwIRgQsCEYELAhGBCwIRgQsCEsOcB4psA+xRasv8AAAAASUVORK5CYII=';
+
 const ProjectCard = ({ project, repo }: ProjectCardProps) => {
   const {
     id,
@@ -41,6 +44,7 @@ const ProjectCard = ({ project, repo }: ProjectCardProps) => {
   const href = repo?.html_url || url;
   const [open, setOpen] = useState(false);
   const { mode } = useColorScheme();
+  const [imageUrl, setImageUrl] = useState(TRANSPARENT_BASE_64);
 
   const handleClick = () => {
     analytics.trackEvent(`project-${id}-image`);
@@ -50,6 +54,14 @@ const ProjectCard = ({ project, repo }: ProjectCardProps) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    if (mode === 'dark') {
+      setImageUrl(imageDarkUrl || '/images/project-default-image-dark.png');
+    } else {
+      setImageUrl(imageLightUrl || '/images/project-default-image-light.png');
+    }
+  }, [mode]);
 
   return (
     <>
@@ -76,11 +88,7 @@ const ProjectCard = ({ project, repo }: ProjectCardProps) => {
           onClick={handleClick}
         >
           <Image
-            src={
-              mode === 'dark'
-                ? imageDarkUrl || '/images/project-default-image.png'
-                : imageLightUrl || '/images/project-default-image.png'
-            }
+            src={imageUrl}
             alt={title}
             fill
             priority
@@ -215,8 +223,8 @@ const ProjectCard = ({ project, repo }: ProjectCardProps) => {
           <img
             src={
               mode === 'dark'
-                ? imageDarkUrl || '/images/project-default-image.png'
-                : imageLightUrl || '/images/project-default-image.png'
+                ? imageDarkUrl || '/images/project-default-image-dark.png'
+                : imageLightUrl || '/images/project-default-image-light.png'
             }
             alt={title}
             style={{
