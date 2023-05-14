@@ -13,6 +13,7 @@
     "sitemap": "tsx scripts/sitemap.ts",
     "og-image": "tsx scripts/og-image.ts",
     "scripts": "npm run sitemap && npm run og-image",
+    "link-preview": "tsx scripts/link-preview.ts",
     "lint-staged": "lint-staged -v",
     "prepare": "is-ci || husky install"
   },
