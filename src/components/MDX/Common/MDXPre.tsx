@@ -69,7 +69,7 @@ const MDXPre = (props: MDXPreProps) => {
           </StyledButton>
         </StyledMDXCodeBlockTitle>
       )}
-      <StyledMDXPre className={className} ref={codeContentRef}>
+      <StyledMDXPre className={className} ref={codeContentRef} title={title}>
         {children}
       </StyledMDXPre>
     </StyledMDXCodeBlock>

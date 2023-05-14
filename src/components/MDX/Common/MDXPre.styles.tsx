@@ -19,11 +19,15 @@ export const StyledMDXCodeBlockTitle = styled(Stack)(({ theme }) => ({
   backgroundColor: theme.vars.palette.background['code-block']
 })) as typeof Stack;
 
-export const StyledMDXPre = styled('pre')(({ theme }) => ({
+export const StyledMDXPre = styled('pre', {
+  shouldForwardProp: prop => prop !== 'title'
+})(({ theme, title }) => ({
   fontFamily: '"Fira Code", monospace',
   margin: 0,
   overflowX: 'auto',
   padding: theme.spacing(1, 0),
+  borderTopLeftRadius: title ? undefined : theme.vars.shape['borderRadius-lg'],
+  borderTopRightRadius: title ? undefined : theme.vars.shape['borderRadius-lg'],
   borderBottomLeftRadius: theme.vars.shape['borderRadius-lg'],
   borderBottomRightRadius: theme.vars.shape['borderRadius-lg'],
   backgroundColor: theme.vars.palette.background['code-block'],
