@@ -49,7 +49,7 @@ npm run dev
 
 ### Add Custom Theme
 
-Then in the project, create a new file called `theme.ts` in the `src` directory and add the following code:
+Then in the project, replace the contents of `src/theme.ts` with the following code:
 
 ```ts:src/theme.ts
 import { purple } from '@mui/material/colors';
@@ -310,9 +310,9 @@ In Next.js dev mode, the page may still flicker. When you build your app in prod
 
 1. Toggle dark mode in your application.
 2. Open DevTools and set the [CPU throttling](https://developer.chrome.com/docs/devtools/performance/#simulate_a_mobile_cpu) to the lowest value (don't close the DevTools).
-3. Refresh the page. You should see the all components in dark mode at first glance.
+3. Refresh the page. You should see all the components in dark mode at first glance.
 
-Also, you can see some content will change after the page is loaded. This is because the `mode` is always `undefined` on the server. So some content of page must be updated on the client.
+Also, you can see some contents will change after the page is loaded. This is because the `mode` is always `undefined` on the server. So some contents of page must be updated on the client.
 
 To avoid this, you can add following code to `pages/index.tsx`:
 
@@ -362,4 +362,4 @@ export default function Home() {
 }
 ```
 
-However, it will make you website SEO unfriendly. If you are building a blog website and only has a mode icon in the header, it is not a problem.
+However, it will make your website SEO unfriendly. If you are building a blog website and only have a mode icon in the header, it is not a problem.
