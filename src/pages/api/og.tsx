@@ -55,8 +55,6 @@ const handler = async (req: NextRequest) => {
 
     const { searchParams } = new URL(req.url);
 
-    console.log(searchParams.toString());
-
     const hasTitle = searchParams.has('title');
     const title = hasTitle
       ? searchParams.get('title')!.length < 80
@@ -110,8 +108,6 @@ const handler = async (req: NextRequest) => {
           searchParams.get('backgroundType')! as keyof typeof backgroundType
         ] || backgroundType.default
       : backgroundType.default;
-
-    console.log(title, targetBackgroundType);
 
     return new ImageResponse(
       (
