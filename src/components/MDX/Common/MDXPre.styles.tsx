@@ -87,7 +87,7 @@ export const StyledMDXPre = styled('pre', {
     '&:not(.line-number)': {
       paddingLeft: theme.spacing(2)
     },
-    '& .token.parameter,.token.imports,.token.plain,.token.comment,.token.prolog,.token.doctype,.token.cdata':
+    '& .token.parameter,.token.plain,.token.comment,.token.prolog,.token.doctype,.token.cdata':
       {
         color: theme.vars.palette.tokens.comment
       },
@@ -108,9 +108,10 @@ export const StyledMDXPre = styled('pre', {
     '& .token.atrule,.token.attr-value,.token.keyword': {
       color: theme.vars.palette.tokens.keyword
     },
-    '& .token.function,.token.maybe-class-name,.token.class-name': {
-      color: theme.vars.palette.tokens.function
-    },
+    '& .token.function,.token.maybe-class-name,.token.class-name,.token.imports':
+      {
+        color: theme.vars.palette.tokens.function
+      },
     '& .token.regex,.token.important,.token.variable': {
       color: theme.vars.palette.tokens.operator
     }
