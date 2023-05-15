@@ -18,6 +18,11 @@
     <loc>https://blog.arlenx.io/posts/deploy-flask-application-on-heroku</loc>
   </url>
   <url>
+    <loc
+      >https://blog.arlenx.io/posts/use-mui-css-theme-variables-to-prevent-dark-mode-ssr-flickering-in-nextjs-app</loc
+    >
+  </url>
+  <url>
     <loc>https://blog.arlenx.io/projects</loc>
   </url>
   <url>
@@ -42,6 +47,9 @@
     <loc>https://blog.arlenx.io/tags/cloud-run</loc>
   </url>
   <url>
+    <loc>https://blog.arlenx.io/tags/css</loc>
+  </url>
+  <url>
     <loc>https://blog.arlenx.io/tags/deployment</loc>
   </url>
   <url>
@@ -54,6 +62,12 @@
     <loc>https://blog.arlenx.io/tags/heroku</loc>
   </url>
   <url>
+    <loc>https://blog.arlenx.io/tags/mui</loc>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/tags/next.js</loc>
+  </url>
+  <url>
     <loc>https://blog.arlenx.io/tags/postman</loc>
   </url>
   <url>
@@ -61,6 +75,9 @@
   </url>
   <url>
     <loc>https://blog.arlenx.io/tags/python</loc>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/tags/react</loc>
   </url>
   <url>
     <loc>https://blog.arlenx.io/tags/typescript</loc>
