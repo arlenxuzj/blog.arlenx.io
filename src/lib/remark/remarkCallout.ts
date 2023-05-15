@@ -27,6 +27,10 @@ export type Options = {
 
 export const defaultOptions: Options = {
   aliases: {
+    notice: {
+      type: 'note',
+      title: 'Notice'
+    },
     hint: {
       type: 'tip',
       title: 'Hint'
