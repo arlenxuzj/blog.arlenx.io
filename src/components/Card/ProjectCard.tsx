@@ -61,6 +61,7 @@ const ProjectCard = ({ project, repo }: ProjectCardProps) => {
     } else {
       setImageUrl(imageLightUrl || '/images/project-default-image-light.png');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode]);
 
   return (
