@@ -13,7 +13,7 @@ const font = fetch(
 ).then(res => res.arrayBuffer());
 
 const darkTextColor = 'hsl(239, 84%, 95%)';
-const lightTextColor = 'hsl(239, 84%, 10%);';
+const lightTextColor = 'hsl(239, 84%, 10%)';
 
 const backgroundType = {
   default: { backgroundColor: 'hsl(223, 15%, 10%)', textColor: darkTextColor },
@@ -54,6 +54,8 @@ const handler = async (req: NextRequest) => {
     const fontData = await font;
 
     const { searchParams } = new URL(req.url);
+
+    console.log(searchParams.toString());
 
     const hasTitle = searchParams.has('title');
     const title = hasTitle
@@ -108,6 +110,8 @@ const handler = async (req: NextRequest) => {
           searchParams.get('backgroundType')! as keyof typeof backgroundType
         ] || backgroundType.default
       : backgroundType.default;
+
+    console.log(title, targetBackgroundType);
 
     return new ImageResponse(
       (

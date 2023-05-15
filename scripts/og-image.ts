@@ -4,8 +4,6 @@ import axios from 'axios';
 import { globbySync } from 'globby';
 import matter from 'gray-matter';
 
-import siteMeta from '@/configs/siteMeta';
-
 console.log('Generating open graph images...');
 
 const blogContent = globbySync(['contents/**/*.mdx', '!contents/pages'], {
@@ -34,10 +32,15 @@ blogContent.forEach(async content => {
   const ogImagePath = `public/images/og/${slug}.png`;
   const backgroundType = data.backgroundType || 'default';
 
+  if (fs.existsSync(ogImagePath)) {
+    console.log(`Skipped ${slug}.png in public/images/og`);
+    return;
+  }
+
   const writer = fs.createWriteStream(ogImagePath);
 
   try {
-    const response = await axios.get(`${siteMeta.url}/api/og`, {
+    const response = await axios.get(`http://localhost:3000/api/og`, {
       params: {
         title: data.title,
         backgroundType
