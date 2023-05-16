@@ -36,7 +36,7 @@ const pagePaths = globbySync(
     lastModified: getLastModifiedDateFromGit(path)
   }));
 
-console.log(pagePaths);
+// console.log(pagePaths);
 
 const pageUrls = pagePaths.map(pagePath => ({
   ...pagePath,
@@ -46,7 +46,7 @@ const pageUrls = pagePaths.map(pagePath => ({
     .replace('.tsx', '')
 }));
 
-console.log(pageUrls);
+// console.log(pageUrls);
 
 const blogContentPaths = globbySync(['contents/**/*.mdx'], {
   gitignore: true
@@ -70,13 +70,13 @@ const blogContentUrls = blogContentPaths.map(contentPath => {
   };
 });
 
-console.log(blogContentUrls);
+// console.log(blogContentUrls);
 
 const pathUrlsWithoutMDX = pageUrls.filter(pageUrl => {
   return !blogContentUrls.find(item => item.url === pageUrl.url);
 });
 
-console.log(pathUrlsWithoutMDX);
+// console.log(pathUrlsWithoutMDX);
 
 const tagsUrls = _.uniqBy(
   _.orderBy(
@@ -100,7 +100,7 @@ const tagsUrls = _.uniqBy(
   'url'
 );
 
-console.log(tagsUrls);
+// console.log(tagsUrls);
 
 const urlData: { url: string; path?: string; lastModified: string }[] = [
   ...pathUrlsWithoutMDX,
@@ -108,7 +108,7 @@ const urlData: { url: string; path?: string; lastModified: string }[] = [
   ...tagsUrls
 ];
 
-console.log(urlData);
+// console.log(urlData);
 
 const urlTags = urlData
   .map(data => {
