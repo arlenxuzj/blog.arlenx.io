@@ -56,8 +56,8 @@ const TagPage: NextPage<TagPageProps> = ({ tag, posts, snippets }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const tags: string[] = [];
-  const posts = allPosts.filter(post => !post.wip);
-  const snippets = allSnippets.filter(snippet => !snippet.wip);
+  const posts = allPosts.filter(post => !post.ignore);
+  const snippets = allSnippets.filter(snippet => !snippet.ignore);
 
   posts.map(post => {
     post.tags.map(tag => {
@@ -94,12 +94,12 @@ export const getStaticProps: GetStaticProps<
   const tag = params!.slug;
 
   const posts = allPosts
-    .filter(post => !post.wip)
+    .filter(post => !post.ignore)
     .filter(post => post.tags.includes(tag))
     .sort((a, b) => compareDesc(new Date(a.createdAt), new Date(b.createdAt)));
 
   const snippets = allSnippets
-    .filter(snippet => !snippet.wip)
+    .filter(snippet => !snippet.ignore)
     .filter(snippet => snippet.tags.includes(tag))
     .sort((a, b) => compareDesc(new Date(a.createdAt), new Date(b.createdAt)));
 

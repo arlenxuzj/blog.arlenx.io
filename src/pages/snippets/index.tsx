@@ -36,7 +36,7 @@ export const getStaticProps: GetStaticProps<SnippetsPageProps> = async () => {
   const snippets = allSnippets
     .filter(snippet => {
       if (process.env.NODE_ENV === 'production') {
-        return !snippet.wip;
+        return !snippet.ignore;
       } else {
         return true;
       }

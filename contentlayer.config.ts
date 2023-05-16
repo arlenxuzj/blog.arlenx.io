@@ -58,6 +58,11 @@ export const Post = defineDocumentType(() => ({
       description: 'Whether the post is a work in progress',
       required: false
     },
+    ignore: {
+      type: 'boolean',
+      description: 'Whether the post should be ignored',
+      required: false
+    },
     backgroundType: {
       type: 'string',
       description: 'Open Graph background type',
@@ -125,6 +130,11 @@ export const Snippet = defineDocumentType(() => ({
       description: 'Whether the snippet is a work in progress',
       required: false
     },
+    ignore: {
+      type: 'boolean',
+      description: 'Whether the post should be ignored',
+      required: false
+    },
     backgroundType: {
       type: 'string',
       description: 'Open Graph background type',
@@ -185,6 +195,11 @@ export const Page = defineDocumentType(() => ({
     wip: {
       type: 'boolean',
       description: 'Whether the page is a work in progress',
+      required: false
+    },
+    ignore: {
+      type: 'boolean',
+      description: 'Whether the post should be ignored',
       required: false
     }
   },

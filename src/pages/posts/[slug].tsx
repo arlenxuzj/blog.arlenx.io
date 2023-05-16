@@ -44,7 +44,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: allPosts
       .filter(post => {
         if (process.env.NODE_ENV === 'production') {
-          return !post.wip;
+          return !post.ignore;
         } else {
           return true;
         }

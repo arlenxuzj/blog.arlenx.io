@@ -106,7 +106,7 @@ export const getStaticProps: GetStaticProps<PostsPageProps> = async () => {
   const posts = allPosts
     .filter(post => {
       if (process.env.NODE_ENV === 'production') {
-        return !post.wip;
+        return !post.ignore;
       } else {
         return true;
       }

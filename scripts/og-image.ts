@@ -12,7 +12,7 @@ const blogContent = globbySync(['contents/**/*.mdx', '!contents/pages'], {
   const file = fs.readFileSync(content, 'utf-8');
   const { data } = matter(file);
 
-  return !data.wip;
+  return !data.ignore;
 });
 
 if (!fs.existsSync('public/images/og')) {

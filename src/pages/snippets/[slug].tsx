@@ -47,7 +47,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: allSnippets
       .filter(snippet => {
         if (process.env.NODE_ENV === 'production') {
-          return !snippet.wip;
+          return !snippet.ignore;
         } else {
           return true;
         }

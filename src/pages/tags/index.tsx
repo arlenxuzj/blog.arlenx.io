@@ -86,8 +86,8 @@ const TagsPage: NextPageWithLayout<TagsPageProps> = ({ tags }) => {
 
 export const getStaticProps: GetStaticProps<TagsPageProps> = async () => {
   const tags: Tag[] = [];
-  const posts = allPosts.filter(post => !post.wip);
-  const snippets = allSnippets.filter(snippet => !snippet.wip);
+  const posts = allPosts.filter(post => !post.ignore);
+  const snippets = allSnippets.filter(snippet => !snippet.ignore);
 
   posts.map(post => {
     post.tags.map(tag => {
