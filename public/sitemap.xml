@@ -1,85 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://blog.arlenx.io/</loc>
+    <loc>https://blog.arlenx.io</loc>
+    <lastmod>2023-04-30</lastmod>
   </url>
   <url>
-    <loc>https://blog.arlenx.io/about</loc>
+    <loc>https://blog.arlenx.io/projects</loc>
+    <lastmod>2023-05-06</lastmod>
   </url>
   <url>
     <loc>https://blog.arlenx.io/posts</loc>
+    <lastmod>2023-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/snippets</loc>
+    <lastmod>2023-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/tags</loc>
+    <lastmod>2023-05-15</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/about</loc>
+    <lastmod>2023-01-09</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/mdx-components</loc>
+    <lastmod>2023-01-09</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/resume</loc>
+    <lastmod>2023-05-11</lastmod>
   </url>
   <url>
     <loc
       >https://blog.arlenx.io/posts/deploy-flask-application-on-aws-ec2-and-postgresql</loc
     >
+    <lastmod>2022-12-02</lastmod>
   </url>
   <url>
     <loc>https://blog.arlenx.io/posts/deploy-flask-application-on-heroku</loc>
+    <lastmod>2022-11-10</lastmod>
   </url>
   <url>
     <loc
       >https://blog.arlenx.io/posts/use-mui-css-theme-variables-to-prevent-dark-mode-ssr-flickering-in-nextjs-app</loc
     >
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/projects</loc>
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/resume</loc>
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/snippets</loc>
+    <lastmod>2023-05-06</lastmod>
   </url>
   <url>
     <loc>https://blog.arlenx.io/snippets/cloud-run-script</loc>
+    <lastmod>2023-02-12</lastmod>
   </url>
   <url>
     <loc>https://blog.arlenx.io/snippets/wait-function</loc>
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/tags</loc>
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/tags/aws</loc>
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/tags/cloud-run</loc>
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/tags/css</loc>
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/tags/deployment</loc>
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/tags/flask</loc>
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/tags/gcp</loc>
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/tags/heroku</loc>
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/tags/mui</loc>
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/tags/next.js</loc>
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/tags/postman</loc>
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/tags/promise</loc>
-  </url>
-  <url>
-    <loc>https://blog.arlenx.io/tags/python</loc>
+    <lastmod>2023-01-12</lastmod>
   </url>
   <url>
     <loc>https://blog.arlenx.io/tags/react</loc>
+    <lastmod>2023-05-06</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/tags/next.js</loc>
+    <lastmod>2023-05-06</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/tags/mui</loc>
+    <lastmod>2023-05-06</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/tags/css</loc>
+    <lastmod>2023-05-06</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/tags/postman</loc>
+    <lastmod>2023-02-12</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/tags/gcp</loc>
+    <lastmod>2023-02-12</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/tags/cloud-run</loc>
+    <lastmod>2023-02-12</lastmod>
   </url>
   <url>
     <loc>https://blog.arlenx.io/tags/typescript</loc>
+    <lastmod>2023-01-12</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/tags/promise</loc>
+    <lastmod>2023-01-12</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/tags/python</loc>
+    <lastmod>2022-12-02</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/tags/flask</loc>
+    <lastmod>2022-12-02</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/tags/aws</loc>
+    <lastmod>2022-12-02</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/tags/deployment</loc>
+    <lastmod>2022-12-02</lastmod>
+  </url>
+  <url>
+    <loc>https://blog.arlenx.io/tags/heroku</loc>
+    <lastmod>2022-11-10</lastmod>
   </url>
 </urlset>
