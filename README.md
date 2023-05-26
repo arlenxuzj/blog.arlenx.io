@@ -1,4 +1,4 @@
-# arlenx.io
+# blog.arlenx.io
 
 My personal blog.
 
