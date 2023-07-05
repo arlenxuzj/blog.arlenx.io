@@ -30,7 +30,7 @@ const projectsData: Project[] = [
     description:
       'My personal website hosted on Vercel. Portfolio, posts, snippets, etc.',
     techStack: ['Next.js', 'React', 'MUI', 'Prisma', 'TypeScript'],
-    repo: 'arlenxuzj/arlenx.io',
+    repo: 'arlenxuzj/blog.arlenx.io',
     imageLightUrl:
       '/projects/personal-website/images/personal-website-light.png',
     imageDarkUrl: '/projects/personal-website/images/personal-website-dark.png'
