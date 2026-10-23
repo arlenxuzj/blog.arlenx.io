@@ -1,7 +1,5 @@
 import va from '@vercel/analytics';
-
 import analyticsConfig from '@/configs/analyticsConfig';
-
 import umami from './umami';
 
 const trackEvent = (
@@ -13,7 +11,7 @@ const trackEvent = (
   }
 
   if (analyticsConfig.vercel) {
-    data ? va.track(eventName, data) : va.track(eventName);
+    va.track(eventName, data);
   }
 };
 

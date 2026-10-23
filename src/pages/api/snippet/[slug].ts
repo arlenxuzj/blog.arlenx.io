@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-
 import { prisma } from '@/database';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -29,8 +28,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     } else {
       res.status(405).json({ message: 'Method not allowed' });
     }
-  } catch (err) {
-    res.status(500).json({ message: (err as Error).message });
+  } catch {
+    res
+      .status(500)
+      .json({ message: 'Unable to load or update the view count.' });
   }
 };
 

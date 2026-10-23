@@ -1,17 +1,15 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-
-import { Post, allPosts } from 'contentlayer/generated';
-import { useMDXComponent } from 'next-contentlayer/hooks';
 import rehypeStringify from 'rehype-stringify';
 import remarkGfm from 'remark-gfm';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
-
 import { MDXComponents } from '@/components/MDX';
 import { Heading } from '@/components/TableOfContent/TableOfContent';
 import { CommentConfig } from '@/configs/commentConfig';
 import { SCROLL_OFFSET } from '@/constants';
+import { allPosts, Post } from '@/content/generated';
+import { useMDXComponent } from '@/content/useMDXComponent';
 import useHashFragment from '@/hooks/useHashFragment';
 import PostLayout from '@/layouts/PostLayout';
 import { getCommentConfig } from '@/lib/common/comment';

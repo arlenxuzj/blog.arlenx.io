@@ -4,7 +4,7 @@ export const verifyUrl = (urlString: string) => {
   try {
     new url.URL(urlString);
     return true;
-  } catch (e) {
+  } catch {
     return false;
   }
 };

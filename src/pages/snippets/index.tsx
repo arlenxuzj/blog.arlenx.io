@@ -1,13 +1,10 @@
 import { GetStaticProps } from 'next';
-
 import { Box, Grid } from '@mui/material';
-import { Snippet, allSnippets } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
-
 import SnippetCard from '@/components/Card/SnippetCard';
 import { DEFAULT_CONTENT_WIDTH } from '@/constants';
+import { allSnippets, Snippet } from '@/content/generated';
 import PageLayout from '@/layouts/PageLayout';
-
 import { NextPageWithLayout } from '../_app';
 
 export type SnippetsPageProps = {

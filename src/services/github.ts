@@ -25,25 +25,22 @@ export type GithubRepo = GithubRepoRaw & {
 export const githubRepoApiURL = `${GITHUB_API_URL}/repos`;
 
 export const githubRepoFetcher = async (repo: string) => {
-  const repoRaw = await fetcher<GithubRepoRaw>(`${githubRepoApiURL}/${repo}`, {
-    // @ts-ignore
-    headers: {
-      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
-    }
-  });
-
-  const repoLanguages = await fetcher<GithubRepoLanguages>(
-    `${githubRepoApiURL}/${repo}/languages`,
-    {
-      // @ts-ignore
-      headers: {
-        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
-      }
-    }
-  );
-
-  return {
-    ...repoRaw,
-    languages: repoLanguages
+  const token = process.env.GITHUB_TOKEN;
+  const config = {
+    timeout: 10000,
+    ...(token ? { headers: { Authorization: `Bearer ${token}` } } : {})
   };
+  try {
+    const [repoRaw, repoLanguages] = await Promise.all([
+      fetcher<GithubRepoRaw>(`${githubRepoApiURL}/${repo}`, config),
+      fetcher<GithubRepoLanguages>(
+        `${githubRepoApiURL}/${repo}/languages`,
+        config
+      )
+    ]);
+    return { ...repoRaw, languages: repoLanguages };
+  } catch {
+    // Do not attach the Axios error: its request headers can contain credentials.
+    throw new Error(`Unable to fetch GitHub repository metadata for ${repo}`);
+  }
 };

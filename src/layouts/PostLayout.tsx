@@ -1,7 +1,5 @@
 import { Box, Divider, Stack } from '@mui/material';
-import { Post } from 'contentlayer/generated';
 import { parseISO } from 'date-fns';
-
 import { BlogMeta, BlogTags, BlogTitle } from '@/components/Blog';
 import Comment from '@/components/Comment';
 import { BackHomeLink, ExternalLink } from '@/components/Link';
@@ -15,6 +13,7 @@ import { ContentWrapper } from '@/components/Wrapper';
 import { CommentConfig } from '@/configs/commentConfig';
 import siteMeta from '@/configs/siteMeta';
 import { POST_CONTENT_WIDTH } from '@/constants';
+import { Post } from '@/content/generated';
 import { formatDate } from '@/utils/date';
 
 export type PostLayoutProps = {

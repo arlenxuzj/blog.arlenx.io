@@ -1,16 +1,13 @@
 import { GetStaticProps } from 'next';
-
 import { Box, Stack } from '@mui/material';
-import { Post, allPosts } from 'contentlayer/generated';
 import { compareDesc, parseISO } from 'date-fns';
-
 import { InternalLink } from '@/components/Link';
 import { Tag } from '@/components/Tag';
 import { Text } from '@/components/Typography';
 import { DEFAULT_CONTENT_WIDTH } from '@/constants';
+import { allPosts, Post } from '@/content/generated';
 import PageLayout from '@/layouts/PageLayout';
 import { formatDate } from '@/utils/date';
-
 import { NextPageWithLayout } from '../_app';
 
 export type PostsPageProps = {

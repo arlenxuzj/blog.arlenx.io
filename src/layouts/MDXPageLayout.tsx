@@ -1,7 +1,5 @@
-import { Page } from 'contentlayer/generated';
-
 import { MDXStyledArticle } from '@/components/MDX';
-
+import { Page } from '@/content/generated';
 import PageLayout from './PageLayout';
 
 export type MDXPageLayoutProps = {

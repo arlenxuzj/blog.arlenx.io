@@ -2,11 +2,10 @@
 Copy and modified from
 https://github.com/hbsnow/rehype-sectionize
 */
-import type { Root, RootContent } from 'hast';
+import type { Element, Root, RootContent } from 'hast';
 import { heading } from 'hast-util-heading';
 import { headingRank } from 'hast-util-heading-rank';
 import type { Properties } from 'hastscript';
-import type { Element } from 'hastscript/lib/core';
 import { Plugin } from 'unified';
 
 export type RehypeSectionizeOptions = {
@@ -107,7 +106,12 @@ const sectionize: Plugin<[RehypeSectionizeOptions?], Root> = (
       return wrapperStack.at(-1) as Element;
     };
 
+    const declarations: RootContent[] = [];
     for (const rootContent of root.children) {
+      if (rootContent.type === 'mdxjsEsm') {
+        declarations.push(rootContent);
+        continue;
+      }
       if (heading(rootContent)) {
         const rank = headingRank(rootContent);
         if (rank == null) {
@@ -139,7 +143,10 @@ const sectionize: Plugin<[RehypeSectionizeOptions?], Root> = (
 
     return {
       ...root,
-      children: enableRootSection ? [rootWrapper] : rootWrapper.children
+      children: [
+        ...declarations,
+        ...(enableRootSection ? [rootWrapper] : rootWrapper.children)
+      ]
     };
   };
 };

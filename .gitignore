@@ -39,3 +39,7 @@ yarn-error.log*
 .idea
 .contentlayer
 test.mdx
+
+# Generated MDX content
+.generated/
+*.tsbuildinfo

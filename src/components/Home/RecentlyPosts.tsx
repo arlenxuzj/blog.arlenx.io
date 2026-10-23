@@ -1,10 +1,8 @@
 import { Box, Stack } from '@mui/material';
-import { Post } from 'contentlayer/generated';
 import { getYear, parseISO } from 'date-fns';
 import _ from 'lodash';
-
+import { Post } from '@/content/generated';
 import { formatDate } from '@/utils/date';
-
 import { InternalLink } from '../Link';
 import { Text } from '../Typography';
 
