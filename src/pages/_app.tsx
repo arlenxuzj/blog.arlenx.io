@@ -1,26 +1,21 @@
 import { ReactElement, ReactNode } from 'react';
-
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-
 import { CacheProvider, type EmotionCache } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles';
-
 import Analytics from '@/components/Analytics';
 import { DefaultSeo } from '@/components/Seo';
 import { LayoutWrapper } from '@/components/Wrapper';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { cssVariableTheme } from '@/themes';
 import createEmotionCache from '@/utils/emotion';
-
 import '@/styles/font.css';
 import '@/styles/global.css';
 import '@/styles/twemoji.css';
 import type {} from '@mui/material/themeCssVarsAugmentation';
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
   showHeaderProgressBar?: boolean;

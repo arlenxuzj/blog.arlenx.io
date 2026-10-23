@@ -143,7 +143,10 @@ const remarkCallout = (userOptions: Partial<Options> = {}) => {
       const aliasCallout = aliases[node.name];
       const calloutType = aliasCallout.type;
       const callout = callouts[calloutType];
-      const data = node.data || (node.data = {});
+      const data = (node.data || (node.data = {})) as {
+        hName?: string;
+        hProperties?: Record<string, unknown>;
+      };
       // @ts-ignore
       const { title, ...attributes } = node.attributes;
       // @ts-ignore

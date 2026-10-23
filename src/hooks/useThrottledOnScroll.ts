@@ -4,7 +4,6 @@ https://gist.github.com/iDVB/a041da210605f05e0b36ac03ed403c00
 */
 
 import { useEffect, useMemo } from 'react';
-
 import throttle from 'lodash/throttle';
 
 const useThrottledOnScroll = (callback: (() => void) | null, delay: number) => {
@@ -27,7 +26,6 @@ const useThrottledOnScroll = (callback: (() => void) | null, delay: number) => {
   }, [throttledCallback]);
 };
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
 const noop = () => {};
 
 export default useThrottledOnScroll;

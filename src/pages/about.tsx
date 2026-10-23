@@ -1,31 +1,19 @@
 import { GetStaticProps, NextPage } from 'next';
-
-import { Page, allPages } from 'contentlayer/generated';
-import { useMDXComponent } from 'next-contentlayer/hooks';
-
 import { MDXComponents } from '@/components/MDX';
 import MDXCodingStats from '@/components/MDX/Widgets/MDXCodingStats';
 import { DEFAULT_CONTENT_WIDTH, SCROLL_OFFSET } from '@/constants';
+import { allPages, Page } from '@/content/generated';
+import { useMDXComponent } from '@/content/useMDXComponent';
 import useHashFragment from '@/hooks/useHashFragment';
 import MDXPageLayout from '@/layouts/MDXPageLayout';
-import {
-  WakatimeAllTimeSinceToday,
-  allTimeSinceTodayApiURL
-} from '@/services/wakatime/all-time-since-today';
-import { WakatimeStats, statsApiURL } from '@/services/wakatime/stats';
-import { fetcher } from '@/utils/fetcher';
+import { getWakatimeData, type WakatimeData } from '@/services/wakatime';
 
 export type AboutPageProps = {
   page: Page;
-  wakatimeAllTimeSinceToday: WakatimeAllTimeSinceToday;
-  wakatimeStats: WakatimeStats;
+  wakatime: WakatimeData | null;
 };
 
-const AboutPage: NextPage<AboutPageProps> = ({
-  page,
-  wakatimeAllTimeSinceToday,
-  wakatimeStats
-}) => {
+const AboutPage: NextPage<AboutPageProps> = ({ page, wakatime }) => {
   const MDXContent = useMDXComponent(page.body.code);
   useHashFragment(-1 * SCROLL_OFFSET);
 
@@ -38,12 +26,15 @@ const AboutPage: NextPage<AboutPageProps> = ({
       <MDXContent
         components={{
           ...MDXComponents,
-          MDXCodingStats: () => (
-            <MDXCodingStats
-              wakatimeAllTimeSinceToday={wakatimeAllTimeSinceToday}
-              wakatimeStats={wakatimeStats}
-            />
-          )
+          MDXCodingStats: () =>
+            wakatime ? (
+              <MDXCodingStats
+                wakatimeAllTimeSinceToday={wakatime.allTime}
+                wakatimeStats={wakatime.stats}
+              />
+            ) : (
+              <p>Coding statistics are temporarily unavailable.</p>
+            )
         }}
       />
     </MDXPageLayout>
@@ -52,22 +43,10 @@ const AboutPage: NextPage<AboutPageProps> = ({
 
 export const getStaticProps: GetStaticProps<AboutPageProps> = async () => {
   const page = allPages.find(page => page.slug === 'about');
-  const wakatimeAllTimeSinceToday = await fetcher(allTimeSinceTodayApiURL);
-  const wakatimeStats = await fetcher(statsApiURL);
-
+  const wakatime = await getWakatimeData();
   return {
-    props: {
-      page: page!,
-      wakatimeAllTimeSinceToday,
-      wakatimeStats: {
-        data: {
-          editors: wakatimeStats.data.editors,
-          languages: wakatimeStats.data.languages,
-          operating_systems: wakatimeStats.data.operating_systems,
-          machines: wakatimeStats.data.machines
-        }
-      }
-    }
+    props: { page: page!, wakatime },
+    revalidate: 3600
   };
 };
 

@@ -1,17 +1,15 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-
-import { Snippet, allSnippets } from 'contentlayer/generated';
-import { useMDXComponent } from 'next-contentlayer/hooks';
 import rehypeStringify from 'rehype-stringify';
 import remarkGfm from 'remark-gfm';
 import remarkParse from 'remark-parse';
 import remarkRehype from 'remark-rehype';
 import { unified } from 'unified';
-
 import { MDXComponents } from '@/components/MDX';
 import { Heading } from '@/components/TableOfContent/TableOfContent';
 import { CommentConfig } from '@/configs/commentConfig';
 import { SCROLL_OFFSET } from '@/constants';
+import { allSnippets, Snippet } from '@/content/generated';
+import { useMDXComponent } from '@/content/useMDXComponent';
 import useHashFragment from '@/hooks/useHashFragment';
 import SnippetLayout from '@/layouts/SnippetLayout';
 import { getCommentConfig } from '@/lib/common/comment';

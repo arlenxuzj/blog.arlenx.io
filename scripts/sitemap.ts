@@ -1,20 +1,20 @@
 import fs from 'fs';
-
+import { execFileSync } from 'node:child_process';
 import { format as formatFn, parseISO } from 'date-fns';
 import { globbySync } from 'globby';
 import matter from 'gray-matter';
 import _ from 'lodash';
 import prettier from 'prettier';
-import { exec } from 'shelljs';
-
 import siteMeta from '@/configs/siteMeta';
 
 console.log('Generating sitemap...');
 
 const getLastModifiedDateFromGit = (filename: string) => {
-  const stdout = exec(`git log -1 --pretty="format:%cI" ${filename}`, {
-    silent: true
-  }).stdout;
+  const stdout = execFileSync(
+    'git',
+    ['log', '-1', '--pretty=format:%cI', '--', filename],
+    { encoding: 'utf8' }
+  );
 
   return formatFn(parseISO(stdout), 'yyyy-MM-dd');
 };
@@ -127,8 +127,8 @@ const sitemap = `
   </urlset>
 `;
 
-prettier.resolveConfig('./.prettierrc').then(options => {
-  const formatted = prettier.format(sitemap, {
+prettier.resolveConfig('./.prettierrc').then(async options => {
+  const formatted = await prettier.format(sitemap, {
     ...options,
     parser: 'html'
   });

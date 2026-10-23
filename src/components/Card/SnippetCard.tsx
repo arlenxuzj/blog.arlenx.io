@@ -1,8 +1,6 @@
 import { Box, Card, Stack } from '@mui/material';
-import { Snippet } from 'contentlayer/generated';
-
 import { DEFAULT_CONTENT_WIDTH } from '@/constants';
-
+import { Snippet } from '@/content/generated';
 import { DevIconName, DevSvgIcon } from '../Icon';
 import { InternalLink } from '../Link';
 import { Text } from '../Typography';

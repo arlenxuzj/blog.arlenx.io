@@ -1,13 +1,10 @@
 import { GetStaticProps } from 'next';
-
 import { Box, Stack } from '@mui/material';
-import { allPosts, allSnippets } from 'contentlayer/generated';
 import { motion } from 'framer-motion';
 import _ from 'lodash';
-
 import { Tag } from '@/components/Tag';
+import { allPosts, allSnippets } from '@/content/generated';
 import PageLayout from '@/layouts/PageLayout';
-
 import { NextPageWithLayout } from '../_app';
 
 export type Tag = {

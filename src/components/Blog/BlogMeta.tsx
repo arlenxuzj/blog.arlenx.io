@@ -1,14 +1,11 @@
 import { useEffect } from 'react';
-
 import { Stack } from '@mui/material';
 import { parseISO } from 'date-fns';
 import useSWR from 'swr';
-
 import type { Post, Snippet } from '@/database';
 import useGiscusData from '@/hooks/useGiscusData';
 import { formatDate } from '@/utils/date';
 import { fetcher } from '@/utils/fetcher';
-
 import { Text } from '../Typography';
 
 export type BlogMetaProps = {
@@ -23,9 +20,9 @@ const BlogMeta = ({ createdAt, readingTime, type, slug }: BlogMetaProps) => {
   const giscusData = useGiscusData();
 
   useEffect(() => {
-    fetch(`/api/${type}/${slug}`, {
+    void fetch(`/api/${type}/${slug}`, {
       method: 'POST'
-    });
+    }).catch(() => undefined); // View counts are optional; offline browsing must still work.
   }, [type, slug]);
 
   return (

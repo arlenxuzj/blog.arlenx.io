@@ -1,10 +1,8 @@
 import { GetStaticProps, NextPage } from 'next';
-
-import { Page, allPages } from 'contentlayer/generated';
-import { useMDXComponent } from 'next-contentlayer/hooks';
-
 import { MDXComponents } from '@/components/MDX';
 import { DEFAULT_CONTENT_WIDTH, SCROLL_OFFSET } from '@/constants';
+import { allPages, Page } from '@/content/generated';
+import { useMDXComponent } from '@/content/useMDXComponent';
 import useHashFragment from '@/hooks/useHashFragment';
 import MDXPageLayout from '@/layouts/MDXPageLayout';
 

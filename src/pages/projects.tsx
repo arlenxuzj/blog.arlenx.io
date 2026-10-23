@@ -13,7 +13,7 @@ import { NextPageWithLayout } from './_app';
 
 export type ProjectsPageProps = {
   repos: {
-    [key: string]: GithubRepo;
+    [key: string]: GithubRepo | null;
   };
 };
 
@@ -41,7 +41,11 @@ const ProjectsPage: NextPageWithLayout<ProjectsPageProps> = ({ repos }) => {
           <ProjectCard
             key={project.title}
             project={project}
-            repo={project.repo === undefined ? undefined : repos[project.repo]}
+            repo={
+              project.repo === undefined
+                ? undefined
+                : (repos[project.repo] ?? undefined)
+            }
           />
         ))}
       </Box>
@@ -61,7 +65,11 @@ const ProjectsPage: NextPageWithLayout<ProjectsPageProps> = ({ repos }) => {
           <ProjectCard
             key={project.title}
             project={project}
-            repo={project.repo === undefined ? undefined : repos[project.repo]}
+            repo={
+              project.repo === undefined
+                ? undefined
+                : (repos[project.repo] ?? undefined)
+            }
           />
         ))}
       </Box>
@@ -82,7 +90,8 @@ export const getStaticProps: GetStaticProps<ProjectsPageProps> = async () => {
     props: {
       // eslint-disable-next-line compat/compat
       repos: Object.fromEntries(repos)
-    }
+    },
+    revalidate: 3600
   };
 };
 

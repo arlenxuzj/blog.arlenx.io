@@ -1,11 +1,8 @@
 import { GetStaticProps } from 'next';
-
-import { Post, allPosts } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
-
 import { Description, RecentlyPosts } from '@/components/Home';
+import { allPosts, Post } from '@/content/generated';
 import DefaultLayout from '@/layouts/DefaultLayout';
-
 import { NextPageWithLayout } from './_app';
 
 export type IndexPageProps = {

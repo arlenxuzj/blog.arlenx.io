@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /*
 Copy and modify from
 https://github.com/Golmote/prism-treeview/blob/master/prism-treeview.js
@@ -18,7 +17,6 @@ export default function treeview(Prism) {
             alias: 'line-h'
           },
           {
-            // eslint-disable-next-line no-regex-spaces
             pattern: /\|   |│   /,
             alias: 'line-v'
           },

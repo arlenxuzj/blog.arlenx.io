@@ -7,13 +7,10 @@ import Document, {
   Main,
   NextScript
 } from 'next/document';
-
 import createEmotionServer from '@emotion/server/create-instance';
 import { getInitColorSchemeScript } from '@mui/material/styles';
-
 import siteMeta from '@/configs/siteMeta';
 import createEmotionCache from '@/utils/emotion';
-
 import { MyAppProps } from './_app';
 
 interface MyDocumentProps extends DocumentProps {
@@ -101,7 +98,7 @@ const MyDocument = ({ emotionStyleTags }: MyDocumentProps) => {
           crossOrigin='use-credentials'
         />
         <meta name='emotion-insertion-point' content='' />
-        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        {}
         {emotionStyleTags}
       </Head>
       <body>
@@ -168,7 +165,7 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
     <style
       data-emotion={`${style.key} ${style.ids.join(' ')}`}
       key={style.key}
-      // eslint-disable-next-line react/no-danger
+
       dangerouslySetInnerHTML={{ __html: style.css }}
     />
   ));

@@ -1,5 +1,4 @@
 import React, { createContext } from 'react';
-
 import { useColorScheme } from '@mui/material';
 
 export type ThemeProviderProps = {
@@ -9,7 +8,6 @@ export type ThemeProviderProps = {
 const ThemeContext = createContext<{
   toggleTheme: () => void;
 }>({
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   toggleTheme: () => {}
 });
 

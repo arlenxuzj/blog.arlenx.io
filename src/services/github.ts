@@ -24,26 +24,27 @@ export type GithubRepo = GithubRepoRaw & {
 
 export const githubRepoApiURL = `${GITHUB_API_URL}/repos`;
 
-export const githubRepoFetcher = async (repo: string) => {
-  const repoRaw = await fetcher<GithubRepoRaw>(`${githubRepoApiURL}/${repo}`, {
-    // @ts-ignore
-    headers: {
-      Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
-    }
-  });
-
-  const repoLanguages = await fetcher<GithubRepoLanguages>(
-    `${githubRepoApiURL}/${repo}/languages`,
-    {
-      // @ts-ignore
-      headers: {
-        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`
-      }
-    }
-  );
-
-  return {
-    ...repoRaw,
-    languages: repoLanguages
+export const githubRepoFetcher = async (
+  repo: string
+): Promise<GithubRepo | null> => {
+  const token = process.env.GITHUB_TOKEN;
+  const config = {
+    timeout: 10000,
+    ...(token ? { headers: { Authorization: `Bearer ${token}` } } : {})
   };
+  try {
+    const [repoRaw, repoLanguages] = await Promise.all([
+      fetcher<GithubRepoRaw>(`${githubRepoApiURL}/${repo}`, config),
+      fetcher<GithubRepoLanguages>(
+        `${githubRepoApiURL}/${repo}/languages`,
+        config
+      )
+    ]);
+    return { ...repoRaw, languages: repoLanguages };
+  } catch {
+    // Optional statistics must not prevent the projects page from rendering.
+    // Never log the Axios error: its request headers can contain credentials.
+    console.warn(`GitHub repository metadata unavailable for ${repo}`);
+    return null;
+  }
 };

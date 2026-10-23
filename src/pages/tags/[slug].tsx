@@ -1,13 +1,10 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-
 import { Box } from '@mui/material';
-import { Post, Snippet, allPosts, allSnippets } from 'contentlayer/generated';
 import { compareDesc } from 'date-fns';
-
 import { Text } from '@/components/Typography';
 import { DEFAULT_CONTENT_WIDTH } from '@/constants';
+import { allPosts, allSnippets, Post, Snippet } from '@/content/generated';
 import PageLayout from '@/layouts/PageLayout';
-
 import { default as PostPanel } from '../posts';
 import { default as SnippetPanel } from '../snippets';
 

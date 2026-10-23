@@ -55,8 +55,6 @@ declare module '@mui/material/styles' {
 
   type ColorPartial = Partial<Color>;
 
-  type PaletteColorOptions = SimplePaletteColorOptions | ColorPartial;
-
   interface PaletteOptions {
     blue: ColorPartial;
     cyan: ColorPartial;

@@ -2,6 +2,18 @@
 
 My personal blog.
 
+## Development
+
+Requires Node.js **24.22.1** and npm **11.19.1**.
+
+```sh
+npm ci
+npm run db:generate
+npm run dev
+```
+
+Run `npm run lint`, `npm run typecheck`, `npm test`, and `npm run build` to validate changes. Run `npm run content` first when type-checking a fresh checkout. See [runtime, security, environment and deployment notes](docs/security-upgrade.md), including the documented local mitigation for an unresolved upstream development-dependency advisory.
+
 ## 🎨 About This Site
 
 This site is hosted on [Vercel](https://vercel.com), built with [Next.js](https://nextjs.org), [React](https://reactjs.org), [Mui](https://mui.com), [MDX](https://mdxjs.com), and [TypeScript](https://www.typescriptlang.org).
@@ -9,7 +21,7 @@ This site is hosted on [Vercel](https://vercel.com), built with [Next.js](https:
 ## ✨ Tech Stack
 
 - [Mui CSS theme variables](https://mui.com/material-ui/experimental-api/css-theme-variables/overview)
-- Manage MDX contents and plugins by [Contentlayer](https://www.contentlayer.dev)
+- Compile repository MDX content with [MDX](https://mdxjs.com) and remark/rehype plugins
 - View count by [Prisma](https://www.prisma.io) and [MongoDB](https://www.mongodb.com)
 - Comments by [Giscus](https://giscus.app)
 - Coding stats by [Wakatime](https://wakatime.com) API

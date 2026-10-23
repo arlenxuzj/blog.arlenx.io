@@ -1,6 +1,6 @@
 import fs from 'fs';
+import { fileURLToPath } from 'node:url';
 import path from 'path';
-
 import axios from 'axios';
 // @ts-ignore
 import createBrowserless from 'browserless';
@@ -11,6 +11,8 @@ import metascraperDescription from 'metascraper-description';
 import metascraperImage from 'metascraper-image';
 import metascraperTitle from 'metascraper-title';
 import metascraperUrl from 'metascraper-url';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 type LinkPreview = {
   link: string;
@@ -39,7 +41,7 @@ const links = [
 const linkPreview = fs.readFileSync(LINK_PREVIEW_FILE_PATH, 'utf8');
 const linkPreviewJSON: LinkPreview[] = JSON.parse(linkPreview);
 
-const browserless = createBrowserless();
+const browserless = await createBrowserless();
 
 const metascraper = createMetascraper([
   metascraperUrl(),
@@ -64,7 +66,7 @@ const downloadImage = async (
 
   response.data.pipe(writer);
 
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     writer.on('finish', resolve);
     writer.on('error', reject);
   });
@@ -84,9 +86,15 @@ const main = async () => {
     }
 
     const { html, url } = await getHTML(link, {
-      getBrowserless: () => browserContext
+      getBrowserless: async () => browserContext
     });
-    const metadata = await metascraper({ html, url });
+    const scraped = await metascraper({ html, url });
+    const metadata = {
+      ...scraped,
+      url: scraped.url || link,
+      title: scraped.title || new URL(link).hostname,
+      description: scraped.description || ''
+    };
     const metadataUrl = new URL(metadata.url);
 
     if (metadata.image) {
