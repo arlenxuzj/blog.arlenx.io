@@ -33,7 +33,7 @@
     "@mui/icons-material": "5.18.0",
     "@mui/material": "5.18.0",
     "@prisma/client": "6.19.3",
-    "@vercel/analytics": "1.6.1",
+    "@vercel/analytics": "2.0.1",
     "@vercel/og": "1.0.3",
     "axios": "1.20.0",
     "browserless": "14.0.28",
