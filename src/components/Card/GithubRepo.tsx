@@ -1,9 +1,7 @@
 import { Box, Divider, Stack } from '@mui/material';
-
 import githubColor from '@/configs/githubColors';
 import { GithubRepo as GithubRepoType } from '@/services/github';
 import analytics from '@/utils/analytics';
-
 import { ExternalLink } from '../Link';
 import { Text } from '../Typography';
 
@@ -15,16 +13,28 @@ const GithubRepo = ({ repo }: GithubRepoProps) => {
   return (
     <Stack
       direction='row'
-      alignItems='center'
-      flexWrap='wrap'
-      rowGap={1.5}
-      justifyContent='space-between'
       sx={{
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        rowGap: 1.5,
+        justifyContent: 'space-between',
         width: '100%'
       }}
     >
-      <Stack direction='row' gap={1.5} alignItems='center'>
-        <Stack direction='row' gap={0.75} alignItems='center'>
+      <Stack
+        direction='row'
+        sx={{
+          gap: 1.5,
+          alignItems: 'center'
+        }}
+      >
+        <Stack
+          direction='row'
+          sx={{
+            gap: 0.75,
+            alignItems: 'center'
+          }}
+        >
           <Box
             sx={{
               width: 18,
@@ -35,9 +45,21 @@ const GithubRepo = ({ repo }: GithubRepoProps) => {
               borderRadius: '50%'
             }}
           />
-          <Text whiteSpace='nowrap'>{repo.language}</Text>
+          <Text
+            sx={{
+              whiteSpace: 'nowrap'
+            }}
+          >
+            {repo.language}
+          </Text>
         </Stack>
-        <Stack direction='row' gap={0.75} alignItems='center'>
+        <Stack
+          direction='row'
+          sx={{
+            gap: 0.75,
+            alignItems: 'center'
+          }}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 24 24'
@@ -49,7 +71,13 @@ const GithubRepo = ({ repo }: GithubRepoProps) => {
           </svg>
           <Text>{repo.stargazers_count}</Text>
         </Stack>
-        <Stack direction='row' gap={0.75} alignItems='center'>
+        <Stack
+          direction='row'
+          sx={{
+            gap: 0.75,
+            alignItems: 'center'
+          }}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 24 24'
@@ -64,14 +92,21 @@ const GithubRepo = ({ repo }: GithubRepoProps) => {
           <Text>{repo.forks_count}</Text>
         </Stack>
       </Stack>
-      <Stack direction='row' gap={1} alignItems='center'>
+      <Stack
+        direction='row'
+        sx={{
+          gap: 1,
+          alignItems: 'center'
+        }}
+      >
         {repo.homepage && (
           <ExternalLink
             noReferrer={false}
-            lineHeight={0}
-            color='text.primary'
             href={repo.homepage}
             sx={{
+              lineHeight: 0,
+              color: 'text.primary',
+
               '&:hover': {
                 color: 'primary.main'
               }
@@ -100,12 +135,21 @@ const GithubRepo = ({ repo }: GithubRepoProps) => {
             </span>
           </ExternalLink>
         )}
-        {repo.homepage && <Divider orientation='vertical' flexItem light />}
+        {repo.homepage && (
+          <Divider
+            orientation='vertical'
+            flexItem
+            sx={theme => ({
+              borderColor: theme.alpha(theme.palette.divider, 0.08)
+            })}
+          />
+        )}
         <ExternalLink
-          lineHeight={0}
-          color='text.primary'
           href={repo.html_url}
           sx={{
+            lineHeight: 0,
+            color: 'text.primary',
+
             '&:hover': {
               color: 'primary.main'
             }

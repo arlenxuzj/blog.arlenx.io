@@ -1,5 +1,4 @@
 import { Stack, Tooltip } from '@mui/material';
-
 import { DevIconName, DevIcons, DevSvgIcon } from '@/components/Icon';
 import { ExternalLink } from '@/components/Link';
 
@@ -73,7 +72,9 @@ export const MDXDevIcon = (props: MDXDevIconProps) => {
     <ExternalLink
       key={name}
       href={href || DevIcons[name].href}
-      color='text.primary'
+      sx={{
+        color: 'text.primary'
+      }}
     >
       <Tooltip title={label}>
         <span>{Icon(name)}</span>
@@ -87,10 +88,10 @@ const MDXDevIconSet = ({ names, fontSize = 24 }: MDXDevIconSetProps) => {
     return (
       <Stack
         direction='row'
-        gap={2}
-        flexWrap='wrap'
-        alignItems='center'
         sx={{
+          gap: 2,
+          flexWrap: 'wrap',
+          alignItems: 'center',
           color: 'text.primary',
           mt: 2,
           mb: 5,
@@ -118,10 +119,10 @@ const MDXDevIconSet = ({ names, fontSize = 24 }: MDXDevIconSetProps) => {
   return (
     <Stack
       direction='row'
-      gap={2}
-      flexWrap='wrap'
-      alignItems='center'
       sx={{
+        gap: 2,
+        flexWrap: 'wrap',
+        alignItems: 'center',
         color: 'text.primary',
         mt: 2,
         mb: 5,

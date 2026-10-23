@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { CacheProvider, type EmotionCache } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles';
+import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Analytics from '@/components/Analytics';
 import { DefaultSeo } from '@/components/Seo';
@@ -44,12 +44,11 @@ const App = (props: MyAppProps) => {
       <DefaultSeo />
       <Analytics />
       <SpeedInsights />
-      <CssVarsProvider
+      <MuiThemeProvider
         theme={cssVariableTheme}
         defaultMode='dark'
         modeStorageKey='mode'
         colorSchemeStorageKey='color-scheme'
-        attribute='color-scheme'
       >
         <CssBaseline />
         <ThemeProvider>
@@ -57,7 +56,7 @@ const App = (props: MyAppProps) => {
             {getLayout(<Component {...pageProps} />)}
           </LayoutWrapper>
         </ThemeProvider>
-      </CssVarsProvider>
+      </MuiThemeProvider>
     </CacheProvider>
   );
 };

@@ -20,7 +20,7 @@ const SnippetsPage: NextPageWithLayout<SnippetsPageProps> = ({ snippets }) => {
     >
       <Grid container spacing={4}>
         {snippets.map(snippet => (
-          <Grid item xs={12} md={6} key={snippet.title}>
+          <Grid size={{ xs: 12, md: 6 }} key={snippet.title}>
             <SnippetCard snippet={snippet} />
           </Grid>
         ))}

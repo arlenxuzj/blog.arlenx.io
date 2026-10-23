@@ -5,11 +5,12 @@ const BackHomeLink = () => {
     <InternalLink
       href='/'
       underline='none'
-      color='text.primary'
       className='arrow arrow-left'
-      fontSize={16}
       sx={{
+        color: 'text.primary',
+        fontSize: 16,
         display: 'block',
+
         '&:hover': {
           color: 'primary.main'
         }

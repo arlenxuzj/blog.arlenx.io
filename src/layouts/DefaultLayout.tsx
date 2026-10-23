@@ -1,5 +1,4 @@
 import { Stack } from '@mui/material';
-
 import { DefaultSeo } from '@/components/Seo';
 import { ContentWrapper } from '@/components/Wrapper';
 
@@ -13,7 +12,13 @@ const DefaultLayout = ({ headTitle, children }: DefaultLayoutProps) => {
     <>
       <DefaultSeo title={headTitle} />
       <ContentWrapper main>
-        <Stack gridColumn={2} alignItems='flex-start' rowGap={8}>
+        <Stack
+          sx={{
+            gridColumn: 2,
+            alignItems: 'flex-start',
+            rowGap: 8
+          }}
+        >
           {children}
         </Stack>
       </ContentWrapper>

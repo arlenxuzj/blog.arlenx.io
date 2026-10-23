@@ -29,7 +29,14 @@ const TagPage: NextPage<TagPageProps> = ({ tag, posts, snippets }) => {
             width: '100%'
           }}
         >
-          <Text component='h2' fontWeight={700} fontSize={30} sx={{ mb: 5 }}>
+          <Text
+            component='h2'
+            sx={{
+              fontWeight: 700,
+              fontSize: 30,
+              mb: 5
+            }}
+          >
             Posts
           </Text>
           <PostPanel posts={posts} />
@@ -41,7 +48,14 @@ const TagPage: NextPage<TagPageProps> = ({ tag, posts, snippets }) => {
             width: '100%'
           }}
         >
-          <Text component='h2' fontWeight={700} fontSize={30} sx={{ mb: 5 }}>
+          <Text
+            component='h2'
+            sx={{
+              fontWeight: 700,
+              fontSize: 30,
+              mb: 5
+            }}
+          >
             Snippets
           </Text>
           <SnippetPanel snippets={snippets} />

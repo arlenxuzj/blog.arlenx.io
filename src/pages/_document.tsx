@@ -9,7 +9,7 @@ import Document, {
   NextScript
 } from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
-import { getInitColorSchemeScript } from '@mui/material/styles';
+import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
 import siteMeta from '@/configs/siteMeta';
 import createEmotionCache from '@/utils/emotion';
 import { MyAppProps } from './_app';
@@ -103,12 +103,12 @@ const MyDocument = ({ emotionStyleTags }: MyDocumentProps) => {
         {emotionStyleTags}
       </Head>
       <body>
-        {getInitColorSchemeScript({
-          defaultMode: 'dark',
-          modeStorageKey: 'mode',
-          colorSchemeStorageKey: 'color-scheme',
-          attribute: 'color-scheme'
-        })}
+        <InitColorSchemeScript
+          defaultMode='dark'
+          modeStorageKey='mode'
+          colorSchemeStorageKey='color-scheme'
+          attribute='[color-scheme="%s"]'
+        />
         <Main />
         <NextScript />
       </body>

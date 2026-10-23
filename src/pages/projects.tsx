@@ -1,9 +1,6 @@
 import { GetStaticProps } from 'next';
-
 import { Box, Divider } from '@mui/material';
-
 import { Text } from '@/components/Typography';
-
 import { ProjectCard } from '../components/Card';
 import projectsData from '../configs/projectsData';
 import { DEFAULT_CONTENT_WIDTH } from '../constants';
@@ -26,7 +23,14 @@ const ProjectsPage: NextPageWithLayout<ProjectsPageProps> = ({ repos }) => {
         width: '100%'
       }}
     >
-      <Text component='h2' fontWeight={700} fontSize={30} sx={{ mb: 4 }}>
+      <Text
+        component='h2'
+        sx={{
+          fontWeight: 700,
+          fontSize: 30,
+          mb: 4
+        }}
+      >
         Work
       </Text>
       <Box
@@ -50,7 +54,14 @@ const ProjectsPage: NextPageWithLayout<ProjectsPageProps> = ({ repos }) => {
         ))}
       </Box>
       <Divider sx={{ my: 6 }} />
-      <Text component='h2' fontWeight={700} fontSize={30} sx={{ mb: 4 }}>
+      <Text
+        component='h2'
+        sx={{
+          fontWeight: 700,
+          fontSize: 30,
+          mb: 4
+        }}
+      >
         Side Projects
       </Text>
       <Box

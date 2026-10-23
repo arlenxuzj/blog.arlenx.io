@@ -23,55 +23,71 @@ const RecentlyPosts = ({ posts }: RecentlyPostsProps) => {
     >
       <Text
         component='h2'
-        color='text.primary'
         size='3xl'
-        fontWeight={600}
-        sx={{ mb: 7 }}
+        sx={{
+          color: 'text.primary',
+          fontWeight: 600,
+          mb: 7
+        }}
       >
         Recently Posts
       </Text>
-      <Stack gap={3}>
+      <Stack
+        sx={{
+          gap: 3
+        }}
+      >
         {Object.keys(groupedPosts)
           .sort((a, b) => +b - +a)
           .map(year => (
             <Box key={year}>
               <Text
                 size='lg'
-                fontWeight={600}
                 sx={{
+                  fontWeight: 600,
                   mb: 5
                 }}
               >
                 {year}
               </Text>
-              <Stack gap={2}>
+              <Stack
+                sx={{
+                  gap: 2
+                }}
+              >
                 {groupedPosts[year].map(post => (
                   <InternalLink
                     key={post.slug}
                     href={`/posts/${post.slug}`}
                     underline='none'
-                    color='text.primary'
+                    sx={{
+                      color: 'text.primary'
+                    }}
                   >
                     <Stack
                       direction='row'
-                      gap={4}
-                      alignItems='center'
-                      sx={theme => ({
-                        height: { xs: 100, sm: 60 },
-                        padding: theme.spacing(0, 2),
-                        margin: theme.spacing(0, -2),
-                        borderRadius: theme.vars.shape['borderRadius-lg'],
-                        '&:hover': {
-                          color: theme.vars.palette.primary.main,
-                          background: theme.vars.palette.primary.emphasis
-                        }
-                      })}
+                      sx={[
+                        {
+                          gap: 4,
+                          alignItems: 'center'
+                        },
+                        theme => ({
+                          height: { xs: 100, sm: 60 },
+                          padding: theme.spacing(0, 2),
+                          margin: theme.spacing(0, -2),
+                          borderRadius: theme.vars.shape['borderRadius-lg'],
+                          '&:hover': {
+                            color: theme.vars.palette.primary.main,
+                            background: theme.vars.palette.primary.emphasis
+                          }
+                        })
+                      ]}
                     >
                       <Text
                         size='xs'
-                        fontWeight={500}
-                        color='text.secondary'
                         sx={{
+                          fontWeight: 500,
+                          color: 'text.secondary',
                           minWidth: 60
                         }}
                       >
@@ -79,8 +95,8 @@ const RecentlyPosts = ({ posts }: RecentlyPostsProps) => {
                       </Text>
                       <Text
                         size='md'
-                        fontWeight={500}
                         sx={{
+                          fontWeight: 500,
                           flexGrow: 1
                         }}
                       >
@@ -95,18 +111,19 @@ const RecentlyPosts = ({ posts }: RecentlyPostsProps) => {
       </Stack>
       <Stack
         direction='row'
-        justifyContent='flex-end'
         sx={{
+          justifyContent: 'flex-end',
           mt: 6
         }}
       >
         <InternalLink
           href='/posts'
           underline='none'
-          color='text.primary'
           className='arrow arrow-right'
-          fontSize={16}
           sx={{
+            color: 'text.primary',
+            fontSize: 16,
+
             '&:hover': {
               color: 'primary.main'
             }

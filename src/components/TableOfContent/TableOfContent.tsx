@@ -6,7 +6,6 @@ https://github.com/MaximeHeckel/blog.maximeheckel.com/blob/27074d0d3c/gatsby-the
 import { SCROLL_OFFSET } from '@/constants';
 import useProgress from '@/hooks/useProgress';
 import useScrollSpy from '@/hooks/useScrollSpy';
-
 import { InternalLink } from '../Link';
 import ProgressBar from './ProgressBar';
 import {
@@ -54,19 +53,20 @@ const TableOfContent = ({ headings }: TableOfContentProps) => {
             <StyledTocListItem key={heading.id} level={heading.level}>
               <InternalLink
                 href={`#${heading.id}`}
-                color='text.secondary'
                 underline='none'
+                onClick={handleClick(heading.id)}
                 sx={{
                   display: 'block',
                   fontSize: '14px',
+
                   color:
                     activeId === heading.id ? 'primary.main' : 'text.secondary',
+
                   '&:hover': {
                     color:
                       activeId === heading.id ? 'primary.main' : 'text.primary'
                   }
                 }}
-                onClick={handleClick(heading.id)}
               >
                 {heading.title}
               </InternalLink>

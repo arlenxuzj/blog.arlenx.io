@@ -1,5 +1,4 @@
 import { Stack } from '@mui/material';
-
 import { Tag } from '../Tag';
 
 export type BlogTagsProps = {
@@ -8,7 +7,14 @@ export type BlogTagsProps = {
 
 const BlogTags = ({ tags }: BlogTagsProps) => {
   return (
-    <Stack direction='row' rowGap={1} columnGap={2} flexWrap='wrap'>
+    <Stack
+      direction='row'
+      sx={{
+        rowGap: 1,
+        columnGap: 2,
+        flexWrap: 'wrap'
+      }}
+    >
       {tags.map(tag => (
         <Tag key={tag} label={tag} />
       ))}

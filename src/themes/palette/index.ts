@@ -32,6 +32,7 @@ declare module '@mui/material/styles' {
   }
 
   interface Color {
+    0: string;
     50: string;
     100: string;
     150: string;

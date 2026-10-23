@@ -1,16 +1,15 @@
 import { Stack } from '@mui/material';
-
 import navLinks from '@/configs/navLinks';
-
 import { ButtonLink } from '../Link';
 
 const Navbar = () => {
   return (
     <Stack
       direction='row'
-      alignItems='center'
-      gap={2}
       sx={{
+        alignItems: 'center',
+        gap: 2,
+
         display: {
           xs: 'none',
           md: 'flex'

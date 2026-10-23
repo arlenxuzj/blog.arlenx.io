@@ -21,6 +21,7 @@ export type TextProps<C extends React.ElementType, P = {}> = TypographyProps<
 const Text = <C extends React.ElementType>({
   children,
   size = 'sm',
+  sx,
   ...rest
 }: TextProps<C>) => {
   const handleSize = (size: TextSize) => {
@@ -49,8 +50,10 @@ const Text = <C extends React.ElementType>({
   };
 
   return (
-    // @ts-ignore
-    <Typography fontSize={handleSize(size)} {...rest}>
+    <Typography<C>
+      {...(rest as TypographyProps<C>)}
+      sx={[{ fontSize: handleSize(size) }, ...(Array.isArray(sx) ? sx : [sx])]}
+    >
       {children}
     </Typography>
   );
