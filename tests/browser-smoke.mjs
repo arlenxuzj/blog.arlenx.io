@@ -43,7 +43,11 @@ try {
     assert.ok(!text.includes('Application error:'), route);
     if (route.includes('deploy-flask')) {
       assert.ok(await page.$('pre code'));
-      assert.equal(await page.$eval('h1', node => getComputedStyle(node).fontSize), '36px', 'article title retains its configured size');
+      assert.equal(
+        await page.$eval('h1', node => getComputedStyle(node).fontSize),
+        '36px',
+        'article title retains its configured size'
+      );
     }
     console.log(route, 200, 'title:', await page.title());
   }
@@ -68,6 +72,12 @@ try {
     previous => getComputedStyle(document.body).backgroundColor !== previous,
     {},
     darkBackground
+  );
+  // Theme changes animate the body background; compare the settled color.
+  await page.evaluate(() =>
+    Promise.all(
+      document.body.getAnimations().map(animation => animation.finished)
+    )
   );
   const lightBackground = await page.evaluate(
     () => getComputedStyle(document.body).backgroundColor
