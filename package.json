@@ -110,7 +110,7 @@
     "tsx": "4.23.15",
     "typescript": "5.9.3",
     "typescript-eslint": "8.72.0",
-    "@eslint/js": "9.39.5",
+    "@eslint/js": "10.0.1",
     "chokidar": "6.0.0",
     "braces": "3.0.3",
     "puppeteer-core": "25.16.0"
