@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { Box, Stack } from '@mui/material';
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { useWindowScroll } from 'react-use';
 
 import { NAV_HEIGHT } from '@/constants';
@@ -17,7 +17,7 @@ import { ContentWrapper } from '../Wrapper';
 import { StyledHeader } from './Header.styles';
 import HeaderProgressBar from './HeaderProgressBar';
 
-const headerVariants = {
+const headerVariants: Variants = {
   open: {
     height: NAV_HEIGHT * 2, // 128
     transition: { ease: 'easeInOut', duration: 0.3 }

@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import { AppType } from 'next/app';
 import Document, {
   DocumentContext,
