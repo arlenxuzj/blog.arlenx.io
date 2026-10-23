@@ -1,13 +1,9 @@
 import { useEffect, useState } from 'react';
-
 import { useRouter } from 'next/router';
-
 import { Box, Stack } from '@mui/material';
 import { motion, type Variants } from 'framer-motion';
 import { useWindowScroll } from 'react-use';
-
 import { NAV_HEIGHT } from '@/constants';
-
 import { BurgerMenu, ModeSwitcher } from '../Button';
 import { InternalLink } from '../Link';
 import Logo from '../Logo';
@@ -67,8 +63,21 @@ const Header = ({ showProgressBar }: HeaderProps) => {
         })}
       >
         <ContentWrapper>
-          <Stack gridColumn={2} alignItems='center' direction='row'>
-            <Stack direction='row' alignItems='center' gap={2} flexGrow={1}>
+          <Stack
+            direction='row'
+            sx={{
+              gridColumn: 2,
+              alignItems: 'center'
+            }}
+          >
+            <Stack
+              direction='row'
+              sx={{
+                alignItems: 'center',
+                gap: 2,
+                flexGrow: 1
+              }}
+            >
               <InternalLink
                 href='/'
                 sx={{ height: logoSize }}
@@ -77,7 +86,13 @@ const Header = ({ showProgressBar }: HeaderProps) => {
                 <Logo width={logoSize} height={logoSize} />
               </InternalLink>
             </Stack>
-            <Stack direction='row' alignItems='center' gap={2}>
+            <Stack
+              direction='row'
+              sx={{
+                alignItems: 'center',
+                gap: 2
+              }}
+            >
               <Navbar />
               <StyledTooltip title='Activate light mode'>
                 <ModeSwitcher />

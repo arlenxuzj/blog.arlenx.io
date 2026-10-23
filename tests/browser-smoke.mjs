@@ -41,7 +41,14 @@ try {
     const text = await page.evaluate(() => document.body.innerText);
     assert.ok(text.length > 150, route + ' has real rendered content');
     assert.ok(!text.includes('Application error:'), route);
-    if (route.includes('deploy-flask')) assert.ok(await page.$('pre code'));
+    if (route.includes('deploy-flask')) {
+      assert.ok(await page.$('pre code'));
+      assert.equal(
+        await page.$eval('h1', node => getComputedStyle(node).fontSize),
+        '36px',
+        'article title retains its configured size'
+      );
+    }
     console.log(route, 200, 'title:', await page.title());
   }
   await page.goto(baseUrl, { waitUntil: 'networkidle2' });
@@ -51,13 +58,49 @@ try {
   const mode = await page.evaluate(() =>
     document.documentElement.getAttribute('color-scheme')
   );
+  const darkBackground = await page.evaluate(
+    () => getComputedStyle(document.body).backgroundColor
+  );
   await page.click('[aria-label="Activate light mode"]');
   await page.waitForFunction(
     previous =>
-      document.documentElement.getAttribute('color-scheme') !==
-      previous,
+      document.documentElement.getAttribute('color-scheme') !== previous,
     {},
     mode
+  );
+  await page.waitForFunction(
+    previous => getComputedStyle(document.body).backgroundColor !== previous,
+    {},
+    darkBackground
+  );
+  // Theme changes animate the body background; compare the settled color.
+  await page.evaluate(() =>
+    Promise.all(
+      document.body.getAnimations().map(animation => animation.finished)
+    )
+  );
+  const lightBackground = await page.evaluate(
+    () => getComputedStyle(document.body).backgroundColor
+  );
+  await page.reload({ waitUntil: 'networkidle2' });
+  assert.equal(
+    await page.evaluate(() =>
+      document.documentElement.getAttribute('color-scheme')
+    ),
+    'light'
+  );
+  assert.equal(
+    await page.evaluate(() => getComputedStyle(document.body).backgroundColor),
+    lightBackground,
+    'selected theme survives reload'
+  );
+  await page.goto(baseUrl + '/snippets', { waitUntil: 'networkidle2' });
+  assert.equal(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= window.innerWidth
+    ),
+    true,
+    'desktop snippets grid does not overflow'
   );
   await page.setViewport({ width: 390, height: 844 });
   await page.goto(baseUrl, { waitUntil: 'networkidle2' });

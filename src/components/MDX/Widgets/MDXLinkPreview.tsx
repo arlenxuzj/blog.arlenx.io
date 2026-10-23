@@ -1,7 +1,5 @@
 import { Box, Card, CardMedia, Link } from '@mui/material';
-
 import { Text } from '@/components/Typography';
-
 import linkPreviews from '../../../../data/link-preview.json';
 
 export type MDXLinkPreviewProps = {
@@ -43,10 +41,10 @@ const MDXLinkPreview = ({ link }: MDXLinkPreviewProps) => {
         }}
       >
         <Text
-          fontWeight={600}
-          color='text.primary'
-          mb={1}
           sx={{
+            fontWeight: 600,
+            color: 'text.primary',
+            mb: 1,
             display: '-webkit-box',
             overflow: 'hidden',
             WebkitLineClamp: 2,
@@ -56,9 +54,9 @@ const MDXLinkPreview = ({ link }: MDXLinkPreviewProps) => {
           {linkPreview.title}
         </Text>
         <Text
-          color='text.secondary'
-          mb={1.5}
           sx={{
+            color: 'text.secondary',
+            mb: 1.5,
             display: '-webkit-box',
             overflow: 'hidden',
             WebkitLineClamp: 2,
@@ -67,7 +65,12 @@ const MDXLinkPreview = ({ link }: MDXLinkPreviewProps) => {
         >
           {linkPreview.description}
         </Text>
-        <Text color='text.disabled' fontSize='xs'>
+        <Text
+          sx={{
+            color: 'text.disabled',
+            fontSize: 'xs'
+          }}
+        >
           {linkPreview.hostname}
         </Text>
       </Box>

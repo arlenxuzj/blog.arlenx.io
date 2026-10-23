@@ -1,5 +1,4 @@
 import { Box, Stack } from '@mui/material';
-
 import { TypedDescription, WavingHand } from '../Animation';
 import { InlineCode } from '../Code';
 import { InternalLink } from '../Link';
@@ -15,19 +14,23 @@ const Description = () => {
       <Box sx={{ mb: 4 }}>
         <Text
           component='span'
-          color='text.primary'
-          fontWeight={800}
-          sx={theme => ({
-            fontSize: {
-              xs: 36,
-              md: 54
+          sx={[
+            {
+              color: 'text.primary',
+              fontWeight: 800
             },
-            backgroundColor: theme.vars.palette.primary.main,
-            backgroundSize: '100%',
-            backgroundImage: `linear-gradient(to right, ${theme.vars.palette.primary.main}, ${theme.vars.palette.error.main});`,
-            backgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
-          })}
+            theme => ({
+              fontSize: {
+                xs: 36,
+                md: 54
+              },
+              backgroundColor: theme.vars.palette.primary.main,
+              backgroundSize: '100%',
+              backgroundImage: `linear-gradient(to right, ${theme.vars.palette.primary.main}, ${theme.vars.palette.error.main});`,
+              backgroundClip: 'text',
+              WebkitTextFillColor: 'transparent'
+            })
+          ]}
         >
           {'Hello, folks! '}
         </Text>
@@ -45,10 +48,10 @@ const Description = () => {
       </Box>
       <Text
         component='h1'
-        color='text.primary'
         size='md'
-        fontWeight={500}
         sx={{
+          color: 'text.primary',
+          fontWeight: 500,
           lineHeight: '32px'
         }}
       >
@@ -59,9 +62,9 @@ const Description = () => {
       </Text>
       <TypedDescription />
       <Text
-        color='text.secondary'
         size='md'
         sx={{
+          color: 'text.secondary',
           mt: 2,
           mb: 4,
           lineHeight: 1.8
@@ -81,12 +84,20 @@ const Description = () => {
         {' Framework.'}
       </Text>
 
-      <Stack lineHeight={1.8} gap={0.5} alignItems='flex-start'>
+      <Stack
+        sx={{
+          lineHeight: 1.8,
+          gap: 0.5,
+          alignItems: 'flex-start'
+        }}
+      >
         <InternalLink
           href='/posts'
-          color='text.secondary'
           underline='hover'
-          fontSize={18}
+          sx={{
+            color: 'text.secondary',
+            fontSize: 18
+          }}
         >
           <i className='twa twa-lg twa-memo'></i>
           <Box component='span' sx={{ ml: 1 }}>
@@ -95,9 +106,11 @@ const Description = () => {
         </InternalLink>
         <InternalLink
           href='/projects'
-          color='text.secondary'
           underline='hover'
-          fontSize={18}
+          sx={{
+            color: 'text.secondary',
+            fontSize: 18
+          }}
         >
           <i className='twa twa-lg twa-hammer-and-wrench'></i>
           <Box component='span' sx={{ ml: 1 }}>
@@ -106,9 +119,11 @@ const Description = () => {
         </InternalLink>
         <InternalLink
           href='/snippets'
-          color='text.secondary'
           underline='hover'
-          fontSize={18}
+          sx={{
+            color: 'text.secondary',
+            fontSize: 18
+          }}
         >
           <i className='twa twa-lg twa-robot'></i>
           <Box component='span' sx={{ ml: 1 }}>
@@ -117,9 +132,11 @@ const Description = () => {
         </InternalLink>
         <InternalLink
           href='/resume'
-          color='text.secondary'
           underline='hover'
-          fontSize={18}
+          sx={{
+            color: 'text.secondary',
+            fontSize: 18
+          }}
         >
           <i className='twa twa-lg twa-briefcase'></i>
           <Box component='span' sx={{ ml: 1 }}>
@@ -128,9 +145,11 @@ const Description = () => {
         </InternalLink>
         <InternalLink
           href='/about'
-          color='text.secondary'
           underline='hover'
-          fontSize={18}
+          sx={{
+            color: 'text.secondary',
+            fontSize: 18
+          }}
         >
           <i className='twa twa-lg twa-face-with-monocle'></i>
           <Box component='span' sx={{ ml: 1 }}>
@@ -139,7 +158,13 @@ const Description = () => {
         </InternalLink>
       </Stack>
 
-      <Text color='text.secondary' size='md' sx={{ mt: 4 }}>
+      <Text
+        size='md'
+        sx={{
+          color: 'text.secondary',
+          mt: 4
+        }}
+      >
         Happy reading!&nbsp;
         <Box
           component='span'

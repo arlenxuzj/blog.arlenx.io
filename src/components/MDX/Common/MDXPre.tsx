@@ -1,7 +1,5 @@
 import { useRef, useState } from 'react';
-
 import { copyToClipboard } from '@/utils/browser';
-
 import { StyledButton } from '../../Button/Button.styles';
 import { Text } from '../../Typography';
 import {
@@ -44,10 +42,10 @@ const MDXPre = (props: MDXPreProps) => {
       }}
     >
       {title && (
-        <StyledMDXCodeBlockTitle direction='row' alignItems='center'>
+        <StyledMDXCodeBlockTitle direction='row' sx={{ alignItems: 'center' }}>
           <Text
-            fontWeight={500}
             sx={{
+              fontWeight: 500,
               flexGrow: 1
             }}
           >

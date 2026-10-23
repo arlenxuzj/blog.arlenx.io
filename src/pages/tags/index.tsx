@@ -45,13 +45,15 @@ const TagsPage: NextPageWithLayout<TagsPageProps> = ({ tags }) => {
     <Stack
       component={motion.div}
       direction='row'
-      gap={3.5}
-      flexWrap='wrap'
-      justifyContent='center'
-      alignItems='center'
       initial='hidden'
       animate='visible'
       variants={tagsVariants}
+      sx={{
+        gap: 3.5,
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
     >
       {tags.map(tag => (
         <Box key={tag.name} component={motion.div} variants={itemVariants}>

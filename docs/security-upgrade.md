@@ -2,7 +2,7 @@
 
 ## Supported development workflow
 
-Use Node.js **24.22.1** (24 LTS) and npm **11.19.1**. Next.js is **16.4.2** with Pages Router and webpack. React and React DOM are aligned on **19.3.1**, with React/React DOM types on **19.3.0**. Framer Motion **14.6.0** supports React 19; MUI remains on **5.18.0**. Dependabot groups React, React DOM and their types to avoid incompatible partial upgrades. The OG endpoint retains its working Edge runtime, which Next 16 also marks deprecated. These are future migration items, not suppressed warnings.
+Use Node.js **24.22.1** (24 LTS) and npm **11.19.1**. Next.js is **16.4.2** with Pages Router and webpack. React and React DOM are aligned on **19.3.1**, with React/React DOM types on **19.3.0**. Framer Motion **14.6.0** supports React 19; MUI Material and Icons are aligned on **9.5.0**. Layout system props use `sx`, Grid uses `size`, and the theme uses the supported provider and color-scheme initializer while preserving the `color-scheme` attribute and storage keys. Dependabot groups the MUI packages so they upgrade together. Dependabot groups React, React DOM and their types to avoid incompatible partial upgrades. The OG endpoint retains its working Edge runtime, which Next 16 also marks deprecated. These are future migration items, not suppressed warnings.
 
 ```sh
 npm ci

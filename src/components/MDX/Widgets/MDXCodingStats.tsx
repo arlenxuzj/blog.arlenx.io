@@ -1,10 +1,8 @@
 import { Box } from '@mui/material';
-
 import { BarChart } from '@/components/BarChart';
 import { WakatimeAllTimeSinceToday } from '@/services/wakatime/all-time-since-today';
 import { WakatimeStats } from '@/services/wakatime/stats';
 import { parseWakaTimeText } from '@/utils/time';
-
 import { Text } from '../../Typography';
 
 export type MDXCodingStatesProps = {
@@ -32,9 +30,11 @@ const MDXCodingStats = ({
         <Text
           component='span'
           size='lg'
-          color='primary'
-          fontWeight={600}
-          sx={{ mx: 1 }}
+          sx={{
+            color: 'primary',
+            fontWeight: 600,
+            mx: 1
+          }}
         >
           {parseWakaTimeText(
             wakatimeAllTimeSinceToday?.data.text || '',
@@ -44,7 +44,14 @@ const MDXCodingStats = ({
         </Text>
         on coding.
       </Text>
-      <Text component='h3' size='xl' fontWeight={500} sx={{ mb: 3 }}>
+      <Text
+        component='h3'
+        size='xl'
+        sx={{
+          fontWeight: 500,
+          mb: 3
+        }}
+      >
         Last 30 Days
       </Text>
       <Box

@@ -6,6 +6,9 @@ updates:
       interval: weekly
     open-pull-requests-limit: 5
     groups:
+      mui:
+        patterns:
+          - "@mui/*"
       react:
         patterns:
           - react
