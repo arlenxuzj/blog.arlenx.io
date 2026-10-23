@@ -3,17 +3,25 @@ import test from 'node:test';
 import axios from 'axios';
 import { githubRepoFetcher } from '../src/services/github';
 
-test('GitHub metadata failures do not expose authentication headers', async t => {
-  t.mock.method(axios, 'get', async () => {
-    throw new Error('Authorization: Bearer private-github-key');
+for (const status of [401, 403, 404, 429, 500, undefined]) {
+  test(`GitHub failure (${status ?? 'timeout'}) returns serializable unavailable metadata without leaking credentials`, async t => {
+    const warnings: unknown[][] = [];
+    t.mock.method(console, 'warn', (...args: unknown[]) => warnings.push(args));
+    t.mock.method(axios, 'get', async () => {
+      throw Object.assign(
+        new Error('Authorization: Bearer private-github-key'),
+        {
+          response: status ? { status } : undefined
+        }
+      );
+    });
+    const result = await githubRepoFetcher('owner/repository');
+    assert.equal(result, null);
+    assert.equal(JSON.stringify({ repo: result }), '{"repo":null}');
+    assert.ok(warnings.length > 0);
+    assert.ok(!JSON.stringify(warnings).includes('private-github-key'));
   });
-  await assert.rejects(githubRepoFetcher('owner/repository'), error => {
-    assert.ok(error instanceof Error);
-    assert.match(error.message, /Unable to fetch GitHub repository metadata/);
-    assert.ok(!error.message.includes('private-github-key'));
-    return true;
-  });
-});
+}
 
 test('public GitHub metadata does not send a fabricated token when unconfigured', async t => {
   const token = process.env.GITHUB_TOKEN;

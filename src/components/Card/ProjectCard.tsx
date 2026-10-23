@@ -41,7 +41,10 @@ const ProjectCard = ({ project, repo }: ProjectCardProps) => {
     imageDarkUrl,
     url
   } = project;
-  const href = repo?.html_url || url;
+  const href =
+    repo?.html_url ||
+    url ||
+    (project.repo ? `https://github.com/${project.repo}` : undefined);
   const [open, setOpen] = useState(false);
   const { mode } = useColorScheme();
   const [imageUrl, setImageUrl] = useState(TRANSPARENT_BASE_64);
@@ -166,7 +169,7 @@ const ProjectCard = ({ project, repo }: ProjectCardProps) => {
                 alignItems='center'
               >
                 <ExternalLink
-                  href={url}
+                  href={href}
                   noReferrer={false}
                   underline='none'
                   color='text.primary'

@@ -24,7 +24,9 @@ export type GithubRepo = GithubRepoRaw & {
 
 export const githubRepoApiURL = `${GITHUB_API_URL}/repos`;
 
-export const githubRepoFetcher = async (repo: string) => {
+export const githubRepoFetcher = async (
+  repo: string
+): Promise<GithubRepo | null> => {
   const token = process.env.GITHUB_TOKEN;
   const config = {
     timeout: 10000,
@@ -40,7 +42,9 @@ export const githubRepoFetcher = async (repo: string) => {
     ]);
     return { ...repoRaw, languages: repoLanguages };
   } catch {
-    // Do not attach the Axios error: its request headers can contain credentials.
-    throw new Error(`Unable to fetch GitHub repository metadata for ${repo}`);
+    // Optional statistics must not prevent the projects page from rendering.
+    // Never log the Axios error: its request headers can contain credentials.
+    console.warn(`GitHub repository metadata unavailable for ${repo}`);
+    return null;
   }
 };
