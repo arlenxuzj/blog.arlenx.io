@@ -5,6 +5,7 @@ import Head from 'next/head';
 import { CacheProvider, type EmotionCache } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import Analytics from '@/components/Analytics';
 import { DefaultSeo } from '@/components/Seo';
 import { LayoutWrapper } from '@/components/Wrapper';
@@ -42,6 +43,7 @@ const App = (props: MyAppProps) => {
       </Head>
       <DefaultSeo />
       <Analytics />
+      <SpeedInsights />
       <CssVarsProvider
         theme={cssVariableTheme}
         defaultMode='dark'
