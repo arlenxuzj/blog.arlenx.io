@@ -1,22 +1,26 @@
 import { Stack } from '@mui/material';
-
 import siteMeta from '@/configs/siteMeta';
 import analytics from '@/utils/analytics';
-
 import { DevSvgIcon } from '../../Icon';
 import { ExternalLink } from '../../Link';
 
 const MDXFindMe = () => {
   return (
     <Stack
-      color='text.primary'
-      gap={2.5}
       sx={{
+        color: 'text.primary',
+        gap: 2.5,
         mt: 2,
         mb: 5
       }}
     >
-      <Stack direction='row' gap={2} alignItems='center'>
+      <Stack
+        direction='row'
+        sx={{
+          gap: 2,
+          alignItems: 'center'
+        }}
+      >
         <DevSvgIcon
           name='Email'
           sx={{
@@ -33,7 +37,13 @@ const MDXFindMe = () => {
           </span>
         </ExternalLink>
       </Stack>
-      <Stack direction='row' gap={2} alignItems='center'>
+      <Stack
+        direction='row'
+        sx={{
+          gap: 2,
+          alignItems: 'center'
+        }}
+      >
         <DevSvgIcon
           name='GitHub'
           sx={{
@@ -50,7 +60,13 @@ const MDXFindMe = () => {
           </span>
         </ExternalLink>
       </Stack>
-      <Stack direction='row' gap={2} alignItems='center'>
+      <Stack
+        direction='row'
+        sx={{
+          gap: 2,
+          alignItems: 'center'
+        }}
+      >
         <DevSvgIcon
           name='LinkedIn'
           sx={{

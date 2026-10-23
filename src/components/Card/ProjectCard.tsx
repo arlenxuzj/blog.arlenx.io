@@ -1,9 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { useEffect, useState } from 'react';
-
 import Image from 'next/image';
-
 import CloseIcon from '@mui/icons-material/Close';
 import {
   Box,
@@ -13,12 +11,10 @@ import {
   Stack,
   useColorScheme
 } from '@mui/material';
-
 import { Project } from '@/configs/projectsData';
 import { DEFAULT_CONTENT_WIDTH } from '@/constants';
 import { GithubRepo as GithubRepoType } from '@/services/github';
 import analytics from '@/utils/analytics';
-
 import { ExternalLink } from '../Link';
 import { Text } from '../Typography';
 import GithubRepo from './GithubRepo';
@@ -109,22 +105,26 @@ const ProjectCard = ({ project, repo }: ProjectCardProps) => {
             backgroundColor: 'background.default'
           }}
         >
-          <Stack flexGrow={1}>
+          <Stack
+            sx={{
+              flexGrow: 1
+            }}
+          >
             <Text
               component='h3'
-              color='text.primary'
-              fontWeight={600}
               size='2xl'
               sx={{
+                color: 'text.primary',
+                fontWeight: 600,
                 mb: 2
               }}
             >
               {href ? (
                 <ExternalLink
-                  color='inherit'
                   underline='none'
                   href={href}
                   sx={{
+                    color: 'inherit',
                     fontWeight: 600
                   }}
                 >
@@ -141,16 +141,25 @@ const ProjectCard = ({ project, repo }: ProjectCardProps) => {
               )}
             </Text>
             <Text
-              color='text.secondary'
               sx={{
+                color: 'text.secondary',
                 mb: 1
               }}
             >
               {description}
             </Text>
-            <Text color='text.secondary'>
+            <Text
+              sx={{
+                color: 'text.secondary'
+              }}
+            >
               {'Tech Stack: '}
-              <Text component='span' fontWeight={600}>
+              <Text
+                component='span'
+                sx={{
+                  fontWeight: 600
+                }}
+              >
                 {techStack.join(', ')}
               </Text>
             </Text>
@@ -165,18 +174,21 @@ const ProjectCard = ({ project, repo }: ProjectCardProps) => {
             ) : (
               <Stack
                 direction='row'
-                justifyContent='flex-start'
-                alignItems='center'
+                sx={{
+                  justifyContent: 'flex-start',
+                  alignItems: 'center'
+                }}
               >
                 <ExternalLink
                   href={href}
                   noReferrer={false}
                   underline='none'
-                  color='text.primary'
                   className='arrow arrow-right'
-                  fontSize={16}
                   sx={{
+                    color: 'text.primary',
+                    fontSize: 16,
                     ml: 0.5,
+
                     '&:hover': {
                       color: 'primary.main'
                     }

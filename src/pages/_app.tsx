@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { CacheProvider, type EmotionCache } from '@emotion/react';
 import CssBaseline from '@mui/material/CssBaseline';
-import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles';
+import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
 import Analytics from '@/components/Analytics';
 import { DefaultSeo } from '@/components/Seo';
 import { LayoutWrapper } from '@/components/Wrapper';
@@ -42,12 +42,11 @@ const App = (props: MyAppProps) => {
       </Head>
       <DefaultSeo />
       <Analytics />
-      <CssVarsProvider
+      <MuiThemeProvider
         theme={cssVariableTheme}
         defaultMode='dark'
         modeStorageKey='mode'
         colorSchemeStorageKey='color-scheme'
-        attribute='color-scheme'
       >
         <CssBaseline />
         <ThemeProvider>
@@ -55,7 +54,7 @@ const App = (props: MyAppProps) => {
             {getLayout(<Component {...pageProps} />)}
           </LayoutWrapper>
         </ThemeProvider>
-      </CssVarsProvider>
+      </MuiThemeProvider>
     </CacheProvider>
   );
 };

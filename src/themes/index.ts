@@ -1,21 +1,17 @@
 import { createTheme } from '@mui/material';
-import { experimental_extendTheme as extendTheme } from '@mui/material/styles';
-
+import { extendTheme } from '@mui/material/styles';
 import { darkPalette, lightPalette } from './palette';
 import { darkCssVarsPalette } from './palette/darkPalette';
 import { lightCssVarsPalette } from './palette/lightPalette';
 import { typography } from './typography';
 
 declare module '@mui/material/styles' {
-  interface CssVarsThemeOptions {
-    shape: {
-      borderRadius?: number;
-      'borderRadius-xs'?: number;
-      'borderRadius-sm'?: number;
-      'borderRadius-md'?: number;
-      'borderRadius-lg'?: number;
-      'borderRadius-xl'?: number;
-    };
+  interface ShapeOptions {
+    'borderRadius-xs'?: number;
+    'borderRadius-sm'?: number;
+    'borderRadius-md'?: number;
+    'borderRadius-lg'?: number;
+    'borderRadius-xl'?: number;
   }
 
   interface Shape {
@@ -53,6 +49,7 @@ export const darkTheme = createTheme({
 
 export const cssVariableTheme = extendTheme({
   cssVarPrefix: '',
+  colorSchemeSelector: '[color-scheme="%s"]',
   colorSchemes: {
     light: {
       palette: lightCssVarsPalette

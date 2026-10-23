@@ -1,7 +1,5 @@
 import { Box, Stack } from '@mui/material';
-
 import { parseWakaTimeText } from '@/utils/time';
-
 import { Text } from '../Typography';
 
 export type BarProps = {
@@ -21,17 +19,17 @@ export const Bar = ({ color, score, label, value }: BarProps) => {
   return (
     <Stack
       direction='row'
-      gap={2}
-      alignItems='center'
       sx={{
+        gap: 2,
+        alignItems: 'center',
         wordBreak: 'break-word'
       }}
     >
       <Text
         size='sm'
-        color='text.secondary'
-        fontWeight={500}
         sx={{
+          color: 'text.secondary',
+          fontWeight: 500,
           flexBasis: '30%'
         }}
       >
@@ -53,9 +51,9 @@ export const Bar = ({ color, score, label, value }: BarProps) => {
       </Box>
       <Text
         size='xs'
-        color='text.secondary'
-        fontWeight={400}
         sx={{
+          color: 'text.secondary',
+          fontWeight: 400,
           flexBasis: '25%'
         }}
       >
@@ -67,12 +65,17 @@ export const Bar = ({ color, score, label, value }: BarProps) => {
 
 const BarChart = ({ title, color, data }: BarChartProps) => {
   return (
-    <Stack gap={1} justifyContent='center'>
+    <Stack
+      sx={{
+        gap: 1,
+        justifyContent: 'center'
+      }}
+    >
       <Text
         size='sm'
-        color='text.primary'
-        fontWeight={700}
         sx={{
+          color: 'text.primary',
+          fontWeight: 700,
           mb: 2
         }}
       >

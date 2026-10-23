@@ -21,7 +21,11 @@ const PostsPage: NextPageWithLayout<PostsPageProps> = ({ posts }) => {
         width: '100%'
       }}
     >
-      <Stack gap={8}>
+      <Stack
+        sx={{
+          gap: 8
+        }}
+      >
         {posts.map(post => (
           <Box
             component='article'
@@ -35,9 +39,9 @@ const PostsPage: NextPageWithLayout<PostsPageProps> = ({ posts }) => {
             }}
           >
             <Text
-              fontWeight={500}
-              color='text.secondary'
               sx={{
+                fontWeight: 500,
+                color: 'text.secondary',
                 gridColumn: '1 / 2',
                 gridRow: '1 / 2'
               }}
@@ -47,11 +51,11 @@ const PostsPage: NextPageWithLayout<PostsPageProps> = ({ posts }) => {
             <Text
               component={InternalLink}
               href={`/posts/${post.slug}`}
-              color='text.primary'
               underline='none'
               size='2xl'
-              fontWeight={600}
               sx={{
+                color: 'text.primary',
+                fontWeight: 600,
                 gridColumn: { xs: '1 / 2', md: '2 / 5' },
                 gridRow: { xs: '2 / 3', md: '1 / 2' }
               }}
@@ -59,30 +63,46 @@ const PostsPage: NextPageWithLayout<PostsPageProps> = ({ posts }) => {
               {post.title}
             </Text>
             <Stack
-              gap={2}
               sx={{
+                gap: 2,
                 gridColumn: { xs: '1 / 2', md: '2 / 5' },
                 gridRow: { xs: '3 / 4', md: '2 / 3' }
               }}
             >
-              <Stack direction='row' rowGap={1} columnGap={2} flexWrap='wrap'>
+              <Stack
+                direction='row'
+                sx={{
+                  rowGap: 1,
+                  columnGap: 2,
+                  flexWrap: 'wrap'
+                }}
+              >
                 {post.tags.map(tag => (
                   <Tag key={tag} label={tag} />
                 ))}
               </Stack>
-              <Text color='text.disabled'>{post.description}</Text>
+              <Text
+                sx={{
+                  color: 'text.disabled'
+                }}
+              >
+                {post.description}
+              </Text>
               <Stack
                 direction='row'
-                justifyContent='flex-start'
-                alignItems='center'
+                sx={{
+                  justifyContent: 'flex-start',
+                  alignItems: 'center'
+                }}
               >
                 <InternalLink
                   href={`/posts/${post.slug}`}
                   underline='none'
-                  color='text.primary'
                   className='arrow arrow-right'
-                  fontSize={16}
                   sx={{
+                    color: 'text.primary',
+                    fontSize: 16,
+
                     '&:hover': {
                       color: 'primary.main'
                     }

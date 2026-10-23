@@ -7,7 +7,14 @@ export type BlogTitleProps = {
 
 const BlogTitle = ({ id, title }: BlogTitleProps) => {
   return (
-    <Text component='h1' fontWeight={800} size='5xl' id={id}>
+    <Text
+      component='h1'
+      size='5xl'
+      id={id}
+      sx={{
+        fontWeight: 800
+      }}
+    >
       {title}
     </Text>
   );

@@ -1,8 +1,6 @@
 import { NextPage } from 'next';
 import Image from 'next/image';
-
 import { Stack } from '@mui/material';
-
 import { InternalLink } from '@/components/Link';
 import { DefaultSeo } from '@/components/Seo';
 import { Text } from '@/components/Typography';
@@ -27,10 +25,20 @@ const NotFoundPage: NextPage = () => {
           height={500}
           style={{ maxWidth: '100%', height: 'auto' }}
         />
-        <Text size='2xl' color='text.primary' sx={{ pb: 2 }}>
+        <Text
+          size='2xl'
+          sx={{
+            color: 'text.primary',
+            pb: 2
+          }}
+        >
           Oops... looks like you got lost
         </Text>
-        <Text color='text.secondary'>
+        <Text
+          sx={{
+            color: 'text.secondary'
+          }}
+        >
           Something went wrong. Looks like this page doesn&apos;t exist anymore.
         </Text>
         <InternalLink

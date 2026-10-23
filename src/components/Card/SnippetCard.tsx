@@ -39,17 +39,24 @@ const SnippetCard = ({ snippet }: SnippetCardProps) => {
           />
         </Box>
         <Stack
-          gap={1}
           sx={{
+            gap: 1,
             p: 2
           }}
         >
-          <Text component='h3' color='text.primary' fontWeight={600} size='2xl'>
+          <Text
+            component='h3'
+            size='2xl'
+            sx={{
+              color: 'text.primary',
+              fontWeight: 600
+            }}
+          >
             {snippet.title}
           </Text>
           <Text
-            color='text.secondary'
             sx={{
+              color: 'text.secondary',
               mb: 1
             }}
           >

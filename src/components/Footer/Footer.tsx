@@ -1,9 +1,7 @@
 import { Box, Divider, Stack } from '@mui/material';
-
 import navLinks from '@/configs/navLinks';
 import siteMeta from '@/configs/siteMeta';
 import analytics from '@/utils/analytics';
-
 import { DevSvgIcon } from '../Icon';
 import { ExternalLink, InternalLink } from '../Link';
 import Logo from '../Logo';
@@ -17,17 +15,18 @@ const Footer = () => {
       <Divider />
       <ContentWrapper>
         <Stack
-          gridColumn={2}
           sx={{
+            gridColumn: 2,
             pt: 8,
             pb: 10
           }}
         >
           <Stack
-            alignItems='flex-start'
-            justifyContent='space-between'
-            gap={4}
             sx={{
+              alignItems: 'flex-start',
+              justifyContent: 'space-between',
+              gap: 4,
+
               flexDirection: {
                 xs: 'column',
                 lg: 'row'
@@ -35,86 +34,131 @@ const Footer = () => {
             }}
           >
             <Stack
-              gap={2.5}
-              alignItems='flex-start'
               sx={{
+                gap: 2.5,
+                alignItems: 'flex-start',
                 minWidth: 360
               }}
             >
               <Stack
                 direction='row'
-                alignItems='center'
                 component={InternalLink}
-                color='text.primary'
                 underline='none'
                 href='/'
                 sx={{
+                  alignItems: 'center',
+                  color: 'text.primary',
                   textDecoration: 'none'
                 }}
               >
                 <Logo width={20} height={20} />
                 <Text
-                  fontWeight={500}
                   sx={{
+                    fontWeight: 500,
                     ml: 1.5
                   }}
                 >
                   {siteMeta.title}
                 </Text>
               </Stack>
-              <Stack color='text.disabled' gap={1.5}>
+              <Stack
+                sx={{
+                  color: 'text.disabled',
+                  gap: 1.5
+                }}
+              >
                 <Stack
                   direction='row'
-                  alignItems='center'
-                  gap={1}
-                  flexWrap='wrap'
+                  sx={{
+                    alignItems: 'center',
+                    gap: 1,
+                    flexWrap: 'wrap'
+                  }}
                 >
-                  <Text size='xs' fontWeight={500}>
+                  <Text
+                    size='xs'
+                    sx={{
+                      fontWeight: 500
+                    }}
+                  >
                     Build with
                   </Text>
                   <Stack
                     direction='row'
-                    alignItems='center'
-                    gap={1}
-                    color='text.primary'
                     sx={{
+                      alignItems: 'center',
+                      gap: 1,
+                      color: 'text.primary',
                       lineHeight: 0
                     }}
                   >
-                    <ExternalLink href='https://nextjs.org' color='inherit'>
+                    <ExternalLink
+                      href='https://nextjs.org'
+                      sx={{
+                        color: 'inherit'
+                      }}
+                    >
                       <DevSvgIcon name='NextJs' fontSize='small' />
                     </ExternalLink>
-                    <ExternalLink href='https://reactjs.org' color='inherit'>
+                    <ExternalLink
+                      href='https://reactjs.org'
+                      sx={{
+                        color: 'inherit'
+                      }}
+                    >
                       <DevSvgIcon name='React' fontSize='small' />
                     </ExternalLink>
-                    <ExternalLink href='https://mui.com' color='inherit'>
+                    <ExternalLink
+                      href='https://mui.com'
+                      sx={{
+                        color: 'inherit'
+                      }}
+                    >
                       <DevSvgIcon name='Mui' fontSize='small' />
                     </ExternalLink>
-                    <ExternalLink href='https://www.prisma.io' color='inherit'>
+                    <ExternalLink
+                      href='https://www.prisma.io'
+                      sx={{
+                        color: 'inherit'
+                      }}
+                    >
                       <DevSvgIcon name='Prisma' fontSize='small' />
                     </ExternalLink>
                     <ExternalLink
                       href='https://www.typescriptlang.org'
-                      color='inherit'
+                      sx={{
+                        color: 'inherit'
+                      }}
                     >
                       <DevSvgIcon name='TypeScript' fontSize='small' />
                     </ExternalLink>
-                    <ExternalLink href='https://vercel.com' color='inherit'>
+                    <ExternalLink
+                      href='https://vercel.com'
+                      sx={{
+                        color: 'inherit'
+                      }}
+                    >
                       <DevSvgIcon name='Vercel' fontSize='small' />
                     </ExternalLink>
                   </Stack>
-                  <Text size='xs' fontWeight={500}>
+                  <Text
+                    size='xs'
+                    sx={{
+                      fontWeight: 500
+                    }}
+                  >
                     -
                   </Text>
                   <Text
                     size='xs'
-                    color='text.disabled'
                     component={ExternalLink}
                     underline='none'
                     href={siteMeta.repo}
                     sx={{
+                      color: 'text.disabled',
                       borderBottom: '1px solid',
                       borderColor: 'text.disabled',
+
                       '&:hover': {
                         color: 'text.primary',
                         borderColor: 'text.primary'
@@ -132,8 +176,8 @@ const Footer = () => {
                 </Stack>
                 <Text
                   size='xs'
-                  fontWeight={500}
                   sx={{
+                    fontWeight: 500,
                     display: 'flex',
                     alignItems: 'center',
                     gap: 1
@@ -146,9 +190,10 @@ const Footer = () => {
               </Stack>
             </Stack>
             <Stack
-              rowGap={4}
-              columnGap={8}
               sx={{
+                rowGap: 4,
+                columnGap: 8,
+
                 flexDirection: {
                   xs: 'column',
                   md: 'row'
@@ -156,7 +201,12 @@ const Footer = () => {
               }}
             >
               <Box>
-                <Text size='xs' fontWeight={500}>
+                <Text
+                  size='xs'
+                  sx={{
+                    fontWeight: 500
+                  }}
+                >
                   Sitemap
                 </Text>
                 <Box
@@ -181,9 +231,10 @@ const Footer = () => {
                       href={nav.href}
                       size='xs'
                       underline='none'
-                      color='text.secondary'
-                      fontWeight={500}
                       sx={{
+                        color: 'text.secondary',
+                        fontWeight: 500,
+
                         '&:hover': {
                           color: 'text.primary'
                         }
@@ -195,12 +246,17 @@ const Footer = () => {
                 </Box>
               </Box>
               <Box>
-                <Text size='xs' fontWeight={500}>
+                <Text
+                  size='xs'
+                  sx={{
+                    fontWeight: 500
+                  }}
+                >
                   Design
                 </Text>
                 <Stack
-                  gap={1}
                   sx={{
+                    gap: 1,
                     mt: 2
                   }}
                 >
@@ -225,9 +281,10 @@ const Footer = () => {
                     href='/mdx-components'
                     size='xs'
                     underline='none'
-                    color='text.secondary'
-                    fontWeight={500}
                     sx={{
+                      color: 'text.secondary',
+                      fontWeight: 500,
+
                       '&:hover': {
                         color: 'text.primary'
                       }
@@ -238,12 +295,17 @@ const Footer = () => {
                 </Stack>
               </Box>
               <Box>
-                <Text size='xs' fontWeight={500}>
+                <Text
+                  size='xs'
+                  sx={{
+                    fontWeight: 500
+                  }}
+                >
                   Find Me
                 </Text>
                 <Stack
-                  gap={1}
                   sx={{
+                    gap: 1,
                     mt: 2
                   }}
                 >
@@ -252,9 +314,10 @@ const Footer = () => {
                     href={`mailto:${siteMeta.findMe.email}`}
                     size='xs'
                     underline='none'
-                    color='text.secondary'
-                    fontWeight={500}
                     sx={{
+                      color: 'text.secondary',
+                      fontWeight: 500,
+
                       '&:hover': {
                         color: 'text.primary'
                       }
@@ -273,9 +336,10 @@ const Footer = () => {
                     href={siteMeta.findMe.github}
                     size='xs'
                     underline='none'
-                    color='text.secondary'
-                    fontWeight={500}
                     sx={{
+                      color: 'text.secondary',
+                      fontWeight: 500,
+
                       '&:hover': {
                         color: 'text.primary'
                       }
@@ -294,9 +358,10 @@ const Footer = () => {
                     href={siteMeta.findMe.linkedin}
                     size='xs'
                     underline='none'
-                    color='text.secondary'
-                    fontWeight={500}
                     sx={{
+                      color: 'text.secondary',
+                      fontWeight: 500,
+
                       '&:hover': {
                         color: 'text.primary'
                       }

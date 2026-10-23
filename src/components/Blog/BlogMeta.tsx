@@ -28,18 +28,32 @@ const BlogMeta = ({ createdAt, readingTime, type, slug }: BlogMetaProps) => {
   return (
     <Stack
       direction='row'
-      justifyContent='space-between'
-      rowGap={1.5}
       sx={{
+        justifyContent: 'space-between',
+        rowGap: 1.5,
         flexDirection: { xs: 'column', sm: 'row' }
       }}
     >
-      <Stack direction='row' gap={0.8} color='text.secondary' flexWrap='wrap'>
+      <Stack
+        direction='row'
+        sx={{
+          gap: 0.8,
+          color: 'text.secondary',
+          flexWrap: 'wrap'
+        }}
+      >
         <Text>{formatDate(parseISO(createdAt))}</Text>
         <Text>/</Text>
         <Text>{readingTime}</Text>
       </Stack>
-      <Stack direction='row' gap={0.8} color='text.secondary' flexWrap='wrap'>
+      <Stack
+        direction='row'
+        sx={{
+          gap: 0.8,
+          color: 'text.secondary',
+          flexWrap: 'wrap'
+        }}
+      >
         <Text>
           {data === undefined
             ? '--- views'
